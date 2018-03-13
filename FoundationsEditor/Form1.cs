@@ -1167,7 +1167,7 @@ namespace FoundationsEditor
                     txtPriIP1.Text= primaryIP.segment0.ToString() + "." + primaryIP.segment1.ToString() + ".0.0/25";
                     txtPriIP2.Text = primaryIP.segment0.ToString() + "." + primaryIP.segment1.ToString() + ".0.128/26";
                     txtPriIP3.Text = primaryIP.segment0.ToString() + "." + primaryIP.segment1.ToString() + ".0.192/27";
-                    txtPriIP4.Text = primaryIP.segment0.ToString() + "." + primaryIP.segment1.ToString() + ".1.0/24";
+                    txtPriIP4.Text = primaryIP.segment0.ToString() + "." + primaryIP.segment1.ToString() + ".1.0/25";
                     txtPriIP5.Text = primaryIP.segment0.ToString() + "." + primaryIP.segment1.ToString() + ".2.0/23";
                     txtPriIP6.Text = primaryIP.segment0.ToString() + "." + primaryIP.segment1.ToString() + ".4.0/23";
                     txtPriIP7.Text = primaryIP.segment0.ToString() + "." + primaryIP.segment1.ToString() + ".6.0/23";
@@ -1177,7 +1177,7 @@ namespace FoundationsEditor
                         txtSecIP1.Text = secondaryIP.segment0.ToString() + "." + secondaryIP.segment1.ToString() + "." + secondaryIP.segment2.ToString() + ".0/25";
                         txtSecIP2.Text = secondaryIP.segment0.ToString() + "." + secondaryIP.segment1.ToString() + "." + secondaryIP.segment2.ToString() + ".128/26";
                         txtSecIP3.Text = secondaryIP.segment0.ToString() + "." + secondaryIP.segment1.ToString() + "." + secondaryIP.segment2.ToString() + ".192/27";
-                        txtSecIP4.Text = secondaryIP.segment0.ToString() + "." + secondaryIP.segment1.ToString() + "." + (secondaryIP.segment2 + 1).ToString() + ".0/24";
+                        txtSecIP4.Text = secondaryIP.segment0.ToString() + "." + secondaryIP.segment1.ToString() + "." + (secondaryIP.segment2 + 1).ToString() + ".0/25";
                         txtSecIP5.Text = secondaryIP.segment0.ToString() + "." + secondaryIP.segment1.ToString() + "." + (secondaryIP.segment2 + 2).ToString() + ".0/23";
                         txtSecIP6.Text = secondaryIP.segment0.ToString() + "." + secondaryIP.segment1.ToString() + "." + (secondaryIP.segment2 + 4).ToString() + ".0/23";
                         txtSecIP7.Text = secondaryIP.segment0.ToString() + "." + secondaryIP.segment1.ToString() + "." + (secondaryIP.segment2 + 6).ToString() + ".0/23";
@@ -1190,7 +1190,7 @@ namespace FoundationsEditor
                     txtPriIP1.Text = primaryIP.segment0.ToString() + "." + primaryIP.segment1.ToString() + ".1.0/24";
                     txtPriIP2.Text = primaryIP.segment0.ToString() + "." + primaryIP.segment1.ToString() + ".2.0/25";
                     txtPriIP3.Text = primaryIP.segment0.ToString() + "." + primaryIP.segment1.ToString() + ".2.128/25";
-                    txtPriIP4.Text = primaryIP.segment0.ToString() + "." + primaryIP.segment1.ToString() + ".3.0/24";
+                    txtPriIP4.Text = primaryIP.segment0.ToString() + "." + primaryIP.segment1.ToString() + ".3.0/25";
                     txtPriIP5.Text = primaryIP.segment0.ToString() + "." + primaryIP.segment1.ToString() + ".4.0/22";
                     txtPriIP6.Text = primaryIP.segment0.ToString() + "." + primaryIP.segment1.ToString() + ".8.0/22";
                     txtPriIP7.Text = primaryIP.segment0.ToString() + "." + primaryIP.segment1.ToString() + ".12.0/22";
@@ -1200,7 +1200,7 @@ namespace FoundationsEditor
                         txtSecIP1.Text = secondaryIP.segment0.ToString() + "." + secondaryIP.segment1.ToString() + "." + (secondaryIP.segment2 + 1).ToString() + ".0/24";
                         txtSecIP2.Text = secondaryIP.segment0.ToString() + "." + secondaryIP.segment1.ToString() + "." + (secondaryIP.segment2 + 2).ToString() + ".0/25";
                         txtSecIP3.Text = secondaryIP.segment0.ToString() + "." + secondaryIP.segment1.ToString() + "." + (secondaryIP.segment2 + 2).ToString() + ".128/25";
-                        txtSecIP4.Text = secondaryIP.segment0.ToString() + "." + secondaryIP.segment1.ToString() + "." + (secondaryIP.segment2 + 3).ToString() + ".0/24";
+                        txtSecIP4.Text = secondaryIP.segment0.ToString() + "." + secondaryIP.segment1.ToString() + "." + (secondaryIP.segment2 + 3).ToString() + ".0/25";
                         txtSecIP5.Text = secondaryIP.segment0.ToString() + "." + secondaryIP.segment1.ToString() + "." + (secondaryIP.segment2 + 4).ToString() + ".0/22";
                         txtSecIP6.Text = secondaryIP.segment0.ToString() + "." + secondaryIP.segment1.ToString() + "." + (secondaryIP.segment2 + 8).ToString() + ".0/22";
                         txtSecIP7.Text = secondaryIP.segment0.ToString() + "." + secondaryIP.segment1.ToString() + "." + (secondaryIP.segment2 + 12).ToString() + ".0/22";
