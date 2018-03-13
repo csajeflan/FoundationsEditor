@@ -29,7 +29,7 @@ namespace FoundationsEditor
             lblBuild.Text = "Build: " + buildNumber + Environment.NewLine + "06-MAR-2018";
             this.Text = "Azure Foundations Editor - " + buildNumber;
         }
-        public static string buildNumber = " 1.0.4.0";
+        public static string buildNumber = "1.0.4.0";
         public static Subscription currentSubscription = new Subscription();
         List<AzureSubnet> subnets = new List<AzureSubnet>();
         List<AzureLocation> locations = new List<AzureLocation>();
