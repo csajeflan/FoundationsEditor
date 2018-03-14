@@ -303,6 +303,7 @@ namespace FoundationsEditor
                     ps.Append("   $prg=Get-AzureRmResourceGroup -Name " + currentSubscription.primaryResourceGroup + " -ErrorAction Ignore" + cr);
                     ps.Append("}" + cr);
                     ps.Append("if ($prg) {Write-Host 'WARNING: Resource Group Already Exists--Skipping Creation'}" + cr);
+                    ps.Append("else" + cr);
                     ps.Append("{" + cr);
                     ps.Append("   Write-Host 'Resource Group Does Not Exist'" + cr);
                     ps.Append("   Write-Host 'Creating Primary Resouce Group: ' -NoNewLine" + cr);
@@ -314,7 +315,6 @@ namespace FoundationsEditor
                     ps.Append("      $global:script_error = $true" + cr);
                     ps.Append("   }" + cr);
                     ps.Append("}" + cr);
-                    ps.Append("else {Write-Host 'SUCCESS'}" + cr);
                     //Create Primary Virtual Network
                     ps.Append("################################################" + cr);
                     ps.Append("# Create Primary Virtual Network" + cr);
