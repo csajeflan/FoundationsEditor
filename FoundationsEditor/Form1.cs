@@ -29,7 +29,7 @@ namespace FoundationsEditor
             lblBuild.Text = "Build: " + buildNumber + Environment.NewLine + "14-MAR-2018";
             this.Text = "Azure Foundations Editor - " + buildNumber;
         }
-        public static string buildNumber = "1.0.5.0";
+        public static string buildNumber = "1.1.0.0";
         public static Subscription currentSubscription = new Subscription();
         List<AzureSubnet> subnets = new List<AzureSubnet>();
         List<AzureLocation> locations = new List<AzureLocation>();
@@ -281,6 +281,8 @@ namespace FoundationsEditor
                     ps.Append("################################################" + cr);
                     ps.Append("# Select Desired Azure Subscription" + cr);
                     ps.Append("################################################" + cr);
+                    ps.Append("Write-Host" + cr);
+                    ps.Append("Read-Host '*** Press any key to continue ***' | Out-Null" + cr);
                     ps.Append("Write-Host 'Selecting Subscription: ' -NoNewLine" + cr);
                     ps.Append("$sub=Get-AzureRmSubscription -SubscriptionID " + currentSubscription.subscriptionID + " -ErrorAction Ignore" + cr);
                     ps.Append("if($sub)" + cr);
@@ -326,8 +328,8 @@ namespace FoundationsEditor
                     ps.Append("   if($pvn) {Write-Host 'WARNING: VNet already exists--skipping creation'}" + cr);
                     ps.Append("   else" + cr);
                     ps.Append("   {" + cr);
-                    ps.Append("      New-AzureRmVirtualNetwork -ResourceGroupName " + currentSubscription.primaryResourceGroup + " -Name " + currentSubscription.primaryVnetName + " -AddressPrefix " + currentSubscription.primaryIPSegment + " -Location " + currentSubscription.primaryLocation + " -ErrorAction Ignore | Out-Null" + cr);
-                    ps.Append("      Write-Host 'Creating Primary Virtual Network: ' -NoNewLine" + cr);
+                    ps.Append("      New-AzureRmVirtualNetwork -ResourceGroupName " + currentSubscription.primaryResourceGroup + " -Name " + currentSubscription.primaryVnetName + " -AddressPrefix " + currentSubscription.primaryIPSegment + " -Location " + currentSubscription.primaryLocation + " -ErrorAction Ignore -WarningAction SilentlyContinue | Out-Null" + cr);
+                    //ps.Append("      Write-Host 'Creating Primary Virtual Network: ' -NoNewLine" + cr);
                     ps.Append("      $pvn=Get-AzureRmVirtualNetwork -Name " + currentSubscription.primaryVnetName + " -ResourceGroupName " + currentSubscription.primaryResourceGroup + " -ErrorAction Ignore" + cr);
                     ps.Append("      if($pvn) {Write-Host 'SUCCESS' -ForegroundColor Green}" + cr);
                     ps.Append("      else" + cr);
@@ -344,7 +346,8 @@ namespace FoundationsEditor
                     ps.Append("if($global:script_error -eq $false)" + cr);
                     ps.Append("{" + cr);
                     ps.Append("   Write-Host 'Creating Subnets: ' -NoNewLine" + cr);
-                    ps.Append("   if($pvnExists) {Write-Host 'WARNING: Subnets already exist--skipping creation'}" + cr);
+                    ps.Append("   $psn=Get-AzureRmVirtualNetworkSubnetConfig -VirtualNetwork $pvn -ErrorAction Ignore" + cr);
+                    ps.Append("   if($psn) {Write-Host 'WARNING: Subnets already exist--skipping creation'}" + cr);
                     ps.Append("   else" + cr);
                     ps.Append("   {" + cr);
                     for (int ctr = 0; ctr < 8; ctr++)
@@ -400,8 +403,8 @@ namespace FoundationsEditor
                         ps.Append("   }" + cr);
                         ps.Append("   else" + cr);
                         ps.Append("   {" + cr);
-                        ps.Append("      New-AzureRmVirtualNetwork -ResourceGroupName " + currentSubscription.secondaryResourceGroup + " -Name " + currentSubscription.secondaryVnetName + " -AddressPrefix " + currentSubscription.secondaryIPSegment + " -Location " + currentSubscription.secondaryLocation + " -ErrorAction Ignore | Out-Null" + cr);
-                        ps.Append("      Write-Host 'Creating Secondary Virtual Network: ' -NoNewLine" + cr);
+                        ps.Append("      New-AzureRmVirtualNetwork -ResourceGroupName " + currentSubscription.secondaryResourceGroup + " -Name " + currentSubscription.secondaryVnetName + " -AddressPrefix " + currentSubscription.secondaryIPSegment + " -Location " + currentSubscription.secondaryLocation + " -ErrorAction Ignore -WarningAction SilentlyContinue | Out-Null" + cr);
+                        //ps.Append("      Write-Host 'Creating Secondary Virtual Network: ' -NoNewLine" + cr);
                         ps.Append("      $svn=Get-AzureRmVirtualNetwork -Name " + currentSubscription.secondaryVnetName + " -ResourceGroupName " + currentSubscription.secondaryResourceGroup + " -ErrorAction Ignore" + cr);
                         ps.Append("      if($svn) {Write-Host 'SUCCESS' -ForegroundColor Green}" + cr);
                         ps.Append("      else" + cr);
@@ -418,7 +421,8 @@ namespace FoundationsEditor
                         ps.Append("if($global:script_error -eq $false)" + cr);
                         ps.Append("{" + cr);
                         ps.Append("   Write-Host 'Creating Secondary Subnets: ' -NoNewLine" + cr);
-                        ps.Append("   if($svnExists) {Write-Host 'WARNING: Subnets already exist--skipping creation'}" + cr);
+                        ps.Append("   $ssn=Get-AzureRmVirtualNetworkSubnetConfig -VirtualNetwork $svn -ErrorAction Ignore" + cr);
+                        ps.Append("   if($ssn) {Write-Host 'WARNING: Subnets already exist--skipping creation'}" + cr);
                         ps.Append("   else" + cr);
                         ps.Append("   {" + cr);
                         for (int ctr = 0; ctr < 8; ctr++)
@@ -446,8 +450,8 @@ namespace FoundationsEditor
                     ps.Append("   if($lgw) {Write-Host 'WARNING: Local gateway already exists--skipping creation'}" + cr);
                     ps.Append("   else" + cr);
                     ps.Append("   {" + cr);
-                    ps.Append("      New-AzureRmLocalNetworkGateway -Name " + currentSubscription.localGatewayName + "-" + currentSubscription.primaryLocation + " -ResourceGroupName " + currentSubscription.primaryResourceGroup + " -Location " + currentSubscription.primaryLocation + " -GatewayIpAddress " + currentSubscription.edgeIP + " -AddressPrefix " + currentSubscription.localAddressSpace + " -ErrorAction Ignore | Out-Null" + cr);
-                    ps.Append("      Write-Host 'Creating Primary Local Network Gateway: ' -NoNewLine" + cr);
+                    ps.Append("      New-AzureRmLocalNetworkGateway -Name " + currentSubscription.localGatewayName + "-" + currentSubscription.primaryLocation + " -ResourceGroupName " + currentSubscription.primaryResourceGroup + " -Location " + currentSubscription.primaryLocation + " -GatewayIpAddress " + currentSubscription.edgeIP + " -AddressPrefix " + currentSubscription.localAddressSpace + " -ErrorAction Ignore -WarningAction SilentlyContinue | Out-Null" + cr);
+                    //ps.Append("      Write-Host 'Creating Primary Local Network Gateway: ' -NoNewLine" + cr);
                     ps.Append("      $lgw=Get-AzureRmLocalNetworkGateway -Name " + currentSubscription.localGatewayName + "-" + currentSubscription.primaryLocation + " -ResourceGroupName " + currentSubscription.primaryResourceGroup + " -ErrorAction Ignore" + cr);
                     ps.Append("      if($lgw) {Write-Host 'SUCCESS' -ForegroundColor Green}" + cr);
                     ps.Append("      else" + cr);
@@ -468,8 +472,8 @@ namespace FoundationsEditor
                     ps.Append("   if($pgwip) {Write-Host 'WARNING: Public IP already exists--skipping creation'}" + cr);
                     ps.Append("   else" + cr);
                     ps.Append("   {" + cr);
-                    ps.Append("      New-AzureRmPublicIpAddress -Name " + currentSubscription.primaryVnetName + "-gw-ip -ResourceGroupName " + currentSubscription.primaryResourceGroup + " -Location " + currentSubscription.primaryLocation + " -AllocationMethod Dynamic -ErrorAction Ignore | Out-Null" + cr);
-                    ps.Append("      Write-Host 'Requesting Primary Gateway IP Address: ' -NoNewLine" + cr);
+                    ps.Append("      New-AzureRmPublicIpAddress -Name " + currentSubscription.primaryVnetName + "-gw-ip -ResourceGroupName " + currentSubscription.primaryResourceGroup + " -Location " + currentSubscription.primaryLocation + " -AllocationMethod Dynamic -ErrorAction Ignore -WarningAction SilentlyContinue | Out-Null" + cr);
+                    //ps.Append("      Write-Host 'Requesting Primary Gateway IP Address: ' -NoNewLine" + cr);
                     ps.Append("      $pgwip=Get-AzureRmPublicIpAddress -Name " + currentSubscription.primaryVnetName + "-gw-ip -ResourceGroupName " + currentSubscription.primaryResourceGroup + " -ErrorAction Ignore" + cr);
                     ps.Append("      if($pgwip) {Write-Host 'SUCCESS' -ForegroundColor Green}" + cr);
                     ps.Append("      else" + cr);
@@ -485,16 +489,16 @@ namespace FoundationsEditor
                     ps.Append("################################################" + cr);
                     ps.Append("if($global:script_error -eq $false)" + cr);
                     ps.Append("{" + cr);
-                    ps.Append("   Write-Host 'NOTE: Azure Gateway Creation Takes Approximately 20 Minutes!'" + cr);
+                    ps.Append("   Write-Host '==> NOTE: Azure Gateway Creation Takes Approximately 20 Minutes! <=='" + cr);
                     ps.Append("   Write-Host 'Creating Primary Azure Gateway: ' -NoNewLine" + cr);
-                    ps.Append("   $pgw=Get-AzureRmPublicIpAddress -Name " + currentSubscription.primaryVnetName + "-gw-ip -ResourceGroupName " + currentSubscription.primaryResourceGroup + " -ErrorAction Ignore" + cr);
-                    ps.Append("   if($pgwip) {Write-Host 'WARNING: Vnet gateway already exists--skipping creation'}" + cr);
+                    ps.Append("   $pgw=Get-AzureRmVirtualNetworkGateway -Name " + currentSubscription.primaryVnetName + "-gw -ResourceGroupName " + currentSubscription.primaryResourceGroup + " -ErrorAction Ignore" + cr);
+                    ps.Append("   if($pgw) {Write-Host 'WARNING: Vnet gateway already exists--skipping creation'}" + cr);
                     ps.Append("   else" + cr);
                     ps.Append("   {" + cr);
                     ps.Append("      $psn=Get-AzureRmVirtualNetworkSubnetConfig -Name 'GatewaySubnet' -VirtualNetwork $pvn" + cr);
                     ps.Append("      $pgwipcfg=New-AzureRmVirtualNetworkGatewayIpConfig -Name pgwipconfig1 -SubnetId $psn.Id -PublicIpAddressId $pgwip.Id" + cr);
-                    ps.Append("      $pgw=New-AzureRmVirtualNetworkGateway -Name " + currentSubscription.primaryVnetName + "-gw -ResourceGroupName " + currentSubscription.primaryResourceGroup + " -Location " + currentSubscription.primaryLocation + " -IpConfigurations $pgwipcfg -GatewayType Vpn -VpnType RouteBased -GatewaySku VpnGw1 -ErrorAction Ignore" + cr);
-                    ps.Append("      Write-Host 'Creating Primary Azure Gateway: ' -NoNewLine" + cr);
+                    ps.Append("      $pgw=New-AzureRmVirtualNetworkGateway -Name " + currentSubscription.primaryVnetName + "-gw -ResourceGroupName " + currentSubscription.primaryResourceGroup + " -Location " + currentSubscription.primaryLocation + " -IpConfigurations $pgwipcfg -GatewayType Vpn -VpnType RouteBased -GatewaySku VpnGw1 -ErrorAction Ignore -WarningAction SilentlyContinue" + cr);
+                    //ps.Append("      Write-Host 'Creating Primary Azure Gateway: ' -NoNewLine" + cr);
                     ps.Append("      if($pgw) {Write-Host 'SUCCESS' -ForegroundColor Green}" + cr);
                     ps.Append("      else" + cr);
                     ps.Append("      {" + cr);
@@ -516,8 +520,8 @@ namespace FoundationsEditor
                         ps.Append("   if($lgw) {Write-Host 'WARNING: Local gateway already exists--skipping creation'}" + cr);
                         ps.Append("   else" + cr);
                         ps.Append("   {" + cr);
-                        ps.Append("      New-AzureRmLocalNetworkGateway -Name " + currentSubscription.localGatewayName + "-" + currentSubscription.secondaryLocation + " -ResourceGroupName " + currentSubscription.secondaryResourceGroup + " -Location " + currentSubscription.secondaryLocation + " -GatewayIpAddress " + currentSubscription.edgeIP + " -AddressPrefix " + currentSubscription.localAddressSpace + " -ErrorAction Ignore | Out-Null" + cr);
-                        ps.Append("      Write-Host 'Creating Secondary Local Network Gateway: ' -NoNewLine" + cr);
+                        ps.Append("      New-AzureRmLocalNetworkGateway -Name " + currentSubscription.localGatewayName + "-" + currentSubscription.secondaryLocation + " -ResourceGroupName " + currentSubscription.secondaryResourceGroup + " -Location " + currentSubscription.secondaryLocation + " -GatewayIpAddress " + currentSubscription.edgeIP + " -AddressPrefix " + currentSubscription.localAddressSpace + " -ErrorAction Ignore -WarningAction SilentlyContinue | Out-Null" + cr);
+                        //ps.Append("      Write-Host 'Creating Secondary Local Network Gateway: ' -NoNewLine" + cr);
                         ps.Append("      $lgw=Get-AzureRmLocalNetworkGateway -Name " + currentSubscription.localGatewayName + "-" + currentSubscription.secondaryLocation + " -ResourceGroupName " + currentSubscription.secondaryResourceGroup + " -ErrorAction Ignore" + cr);
                         ps.Append("      if($lgw) {Write-Host 'SUCCESS' -ForegroundColor Green}" + cr);
                         ps.Append("      else" + cr);
@@ -538,8 +542,8 @@ namespace FoundationsEditor
                         ps.Append("   if($sgwip) {Write-Host 'WARNING: Public IP address already exists--skipping creation'}" + cr);
                         ps.Append("   else" + cr);
                         ps.Append("   {" + cr);
-                        ps.Append("      New-AzureRmPublicIpAddress -Name " + currentSubscription.secondaryVnetName + "-gw-ip -ResourceGroupName " + currentSubscription.secondaryResourceGroup + " -Location " + currentSubscription.secondaryLocation + " -AllocationMethod Dynamic -ErrorAction Ignore | Out-Null" + cr);
-                        ps.Append("      Write-Host 'Requesting Secondary Gateway IP Address: ' -NoNewLine" + cr);
+                        ps.Append("      New-AzureRmPublicIpAddress -Name " + currentSubscription.secondaryVnetName + "-gw-ip -ResourceGroupName " + currentSubscription.secondaryResourceGroup + " -Location " + currentSubscription.secondaryLocation + " -AllocationMethod Dynamic -ErrorAction Ignore -WarningAction SilentlyContinue | Out-Null" + cr);
+                        //ps.Append("      Write-Host 'Requesting Secondary Gateway IP Address: ' -NoNewLine" + cr);
                         ps.Append("      $sgwip=Get-AzureRmPublicIpAddress -Name " + currentSubscription.secondaryVnetName + "-gw-ip -ResourceGroupName " + currentSubscription.secondaryResourceGroup + " -ErrorAction Ignore" + cr);
                         ps.Append("      if($sgwip) {Write-Host 'SUCCESS' -ForegroundColor Green}" + cr);
                         ps.Append("      else" + cr);
@@ -555,16 +559,16 @@ namespace FoundationsEditor
                         ps.Append("################################################" + cr);
                         ps.Append("if($global:script_error -eq $false)" + cr);
                         ps.Append("{" + cr);
-                        ps.Append("   Write-Host 'NOTE: Azure Gateway Creation Takes Approximately 20 Minutes!'" + cr);
+                        ps.Append("   Write-Host '==> NOTE: Azure Gateway Creation Takes Approximately 20 Minutes! <=='" + cr);
                         ps.Append("   Write-Host 'Creating Secondary Azure Gateway: ' -NoNewLine" + cr);
-                        ps.Append("   $sgw=Get-AzureRmPublicIpAddress -Name " + currentSubscription.secondaryVnetName + "-gw-ip -ResourceGroupName " + currentSubscription.secondaryResourceGroup + " -ErrorAction Ignore" + cr);
+                        ps.Append("   $sgw=Get-AzureRmVirtualNetworkGateway -Name " + currentSubscription.secondaryVnetName + "-gw -ResourceGroupName " + currentSubscription.secondaryResourceGroup + " -ErrorAction Ignore" + cr);
                         ps.Append("   if($sgw) {Write-Host 'WARNING: Vnet gateway already exists--skipping creation'}" + cr);
                         ps.Append("   else" + cr);
                         ps.Append("   {" + cr);
                         ps.Append("      $ssn=Get-AzureRmVirtualNetworkSubnetConfig -Name 'GatewaySubnet' -VirtualNetwork $svn" + cr);
                         ps.Append("      $sgwipcfg=New-AzureRmVirtualNetworkGatewayIpConfig -Name sgwipconfig1 -SubnetId $ssn.Id -PublicIpAddressId $sgwip.Id" + cr);
-                        ps.Append("      $sgw=New-AzureRmVirtualNetworkGateway -Name " + currentSubscription.secondaryVnetName + "-gw -ResourceGroupName " + currentSubscription.secondaryResourceGroup + " -Location " + currentSubscription.secondaryLocation + " -IpConfigurations $sgwipcfg -GatewayType Vpn -VpnType RouteBased -GatewaySku VpnGw1 -ErrorAction Ignore" + cr);
-                        ps.Append("      Write-Host 'Creating Secondary Azure Gateway: ' -NoNewLine" + cr);
+                        ps.Append("      $sgw=New-AzureRmVirtualNetworkGateway -Name " + currentSubscription.secondaryVnetName + "-gw -ResourceGroupName " + currentSubscription.secondaryResourceGroup + " -Location " + currentSubscription.secondaryLocation + " -IpConfigurations $sgwipcfg -GatewayType Vpn -VpnType RouteBased -GatewaySku VpnGw1 -ErrorAction Ignore -WarningAction SilentlyContinue" + cr);
+                        //ps.Append("      Write-Host 'Creating Secondary Azure Gateway: ' -NoNewLine" + cr);
                         ps.Append("      if($sgw) {Write-Host 'SUCCESS' -ForegroundColor Green}" + cr);
                         ps.Append("      else" + cr);
                         ps.Append("      {" + cr);
@@ -646,8 +650,8 @@ namespace FoundationsEditor
                         ps.Append("   else" + cr);
                         ps.Append("   {" + cr);
                         string secSkey = CreateSharedKey();
-                        ps.Append("      $scn=New-AzureRmVirtualNetworkGatewayConnection -Name cn-local-" + currentSubscription.primaryLocation + " -ResourceGroupName " + currentSubscription.secondaryResourceGroup + " -Location " + currentSubscription.secondaryLocation + " -VirtualNetworkGateway1 $pgw -LocalNetworkGateway2 $lgw -ConnectionType IPsec -RoutingWeight 10 -SharedKey '" + secSkey + "'" + cr);
-                        ps.Append("      Write-Host 'Creating Secondary Connection: ' -NoNewLine" + cr);
+                        ps.Append("      $scn=New-AzureRmVirtualNetworkGatewayConnection -Name cn-local-" + currentSubscription.primaryLocation + " -ResourceGroupName " + currentSubscription.secondaryResourceGroup + " -Location " + currentSubscription.secondaryLocation + " -VirtualNetworkGateway1 $pgw -LocalNetworkGateway2 $lgw -ConnectionType IPsec -RoutingWeight 10 -SharedKey '" + secSkey + "' -ErrorAction Ignore -WarningAction SilentlyContinue" + cr);
+                        //ps.Append("      Write-Host 'Creating Secondary Connection: ' -NoNewLine" + cr);
                         ps.Append("      if($scn) {Write-Host 'SUCCESS' -ForegroundColor Green}" + cr);
                         ps.Append("      else" + cr);
                         ps.Append("      {" + cr);
@@ -668,8 +672,8 @@ namespace FoundationsEditor
                         ps.Append("   else" + cr);
                         ps.Append("   {" + cr);
                         string v2vSkey = CreateSharedKey();
-                        ps.Append("      $pvcn=New-AzureRmVirtualNetworkGatewayConnection -Name cn-" + currentSubscription.primaryVnetName + "-" + currentSubscription.secondaryVnetName + " -ResourceGroupName " + currentSubscription.primaryResourceGroup + " -Location " + currentSubscription.primaryLocation + " -VirtualNetworkGateway1 $pgw -VirtualNetworkGateway2 $sgw -ConnectionType Vnet2Vnet -SharedKey '" + v2vSkey + "'" + cr);
-                        ps.Append("      Write-Host 'Creating VNet-to-VNet Connection (Primary to Secondary): ' -NoNewLine" + cr);
+                        ps.Append("      $pvcn=New-AzureRmVirtualNetworkGatewayConnection -Name cn-" + currentSubscription.primaryVnetName + "-" + currentSubscription.secondaryVnetName + " -ResourceGroupName " + currentSubscription.primaryResourceGroup + " -Location " + currentSubscription.primaryLocation + " -VirtualNetworkGateway1 $pgw -VirtualNetworkGateway2 $sgw -ConnectionType Vnet2Vnet -SharedKey '" + v2vSkey + "' -ErrorAction Ignore -WarningAction SilentlyContinue" + cr);
+                        //ps.Append("      Write-Host 'Creating VNet-to-VNet Connection (Primary to Secondary): ' -NoNewLine" + cr);
                         ps.Append("      if($pvcn) {Write-Host 'SUCCESS' -ForegroundColor Green}" + cr);
                         ps.Append("      else" + cr);
                         ps.Append("      {" + cr);
@@ -689,8 +693,8 @@ namespace FoundationsEditor
                         ps.Append("   if($svcn) {Write-Host 'WARNING: Connection already exists--skipping creation'}" + cr);
                         ps.Append("   else" + cr);
                         ps.Append("   {" + cr);
-                        ps.Append("      $svcn=New-AzureRmVirtualNetworkGatewayConnection -Name cn-" + currentSubscription.secondaryVnetName + "-" + currentSubscription.primaryVnetName + " -ResourceGroupName " + currentSubscription.secondaryResourceGroup + " -Location " + currentSubscription.secondaryLocation + " -VirtualNetworkGateway1 $sgw -VirtualNetworkGateway2 $pgw -ConnectionType Vnet2Vnet -SharedKey '" + v2vSkey + "'" + cr);
-                        ps.Append("      Write-Host 'Creating VNet-to-VNet Connection (Secondary to Primary): ' -NoNewLine" + cr);
+                        ps.Append("      $svcn=New-AzureRmVirtualNetworkGatewayConnection -Name cn-" + currentSubscription.secondaryVnetName + "-" + currentSubscription.primaryVnetName + " -ResourceGroupName " + currentSubscription.secondaryResourceGroup + " -Location " + currentSubscription.secondaryLocation + " -VirtualNetworkGateway1 $sgw -VirtualNetworkGateway2 $pgw -ConnectionType Vnet2Vnet -SharedKey '" + v2vSkey + "' -ErrorAction Ignore -WarningAction SilentlyContinue" + cr);
+                        //ps.Append("      Write-Host 'Creating VNet-to-VNet Connection (Secondary to Primary): ' -NoNewLine" + cr);
                         ps.Append("      if($svcn) {Write-Host 'SUCCESS' -ForegroundColor Green}" + cr);
                         ps.Append("      else" + cr);
                         ps.Append("      {" + cr);
@@ -949,9 +953,12 @@ namespace FoundationsEditor
                     string psScript = CreatePowerShellScript(1);
                     string savePs = currentSubscription.fileName + "-vnets.ps1";
                     File.WriteAllText(savePs, psScript);
-                    string psScript2 = CreatePowerShellScript(2);
-                    string savePs2 = currentSubscription.fileName + "-connections.ps1";
-                    File.WriteAllText(savePs2, psScript2);
+                    if (ckbCreateConnection.Checked)
+                    {
+                        string psScript2 = CreatePowerShellScript(2);
+                        string savePs2 = currentSubscription.fileName + "-connections.ps1";
+                        File.WriteAllText(savePs2, psScript2);
+                    }
                     string armTemplate = CreateARMTemplate(1);
                     string saveArm = currentSubscription.fileName + "-azuredeploy1.json";
                     File.WriteAllText(saveArm, armTemplate);
@@ -1135,22 +1142,10 @@ namespace FoundationsEditor
         {
             if (ckbCreateConnection.Checked)
             {
-                lblEdgeIP.Visible = true;
-                lblLocalGWName.Visible = true;
-                lblOPAddress.Visible = true;
-                txtEdgeIP.Visible = true;
-                txtLocalGWName.Visible = true;
-                txtOPAddress.Visible = true;
                 currentSubscription.createConnection = true;
             }
             else
             {
-                lblEdgeIP.Visible = false;
-                lblLocalGWName.Visible = false;
-                lblOPAddress.Visible = false;
-                txtEdgeIP.Visible = false;
-                txtLocalGWName.Visible = false;
-                txtOPAddress.Visible = false;
                 currentSubscription.createConnection = false;
             }
         }
@@ -1236,20 +1231,38 @@ namespace FoundationsEditor
 
         private void cboPrimaryLocation_SelectedIndexChanged(object sender, EventArgs e)
         {
-            int idx = cboPrimaryLocation.SelectedIndex;
-            currentSubscription.primaryLocation = locations[idx].location;
+            var loc = locations.FirstOrDefault(l => l.displayName == cboPrimaryLocation.Text);
+            currentSubscription.primaryLocation = loc.location;
         }
 
         private void cboSecondaryLocation_SelectedIndexChanged(object sender, EventArgs e)
         {
-            int idx = cboSecondaryLocation.SelectedIndex;
-            currentSubscription.secondaryLocation = locations[idx].location;
+            var loc = locations.FirstOrDefault(l => l.displayName == cboSecondaryLocation.Text);
+            currentSubscription.secondaryLocation = loc.location;
         }
 
         private void ckbCreateGateway_CheckedChanged(object sender, EventArgs e)
         {
-            if (ckbCreateGateway.Checked) { currentSubscription.createGateway = true; }
-            else { currentSubscription.createGateway = false; }
+            if (ckbCreateGateway.Checked)
+            {
+                lblEdgeIP.Visible = true;
+                lblLocalGWName.Visible = true;
+                lblOPAddress.Visible = true;
+                txtEdgeIP.Visible = true;
+                txtLocalGWName.Visible = true;
+                txtOPAddress.Visible = true;
+                currentSubscription.createGateway = true;
+            }
+            else
+            {
+                lblEdgeIP.Visible = false;
+                lblLocalGWName.Visible = false;
+                lblOPAddress.Visible = false;
+                txtEdgeIP.Visible = false;
+                txtLocalGWName.Visible = false;
+                txtOPAddress.Visible = false;
+                currentSubscription.createGateway = false;
+            }
         }
 
     }
