@@ -98,6 +98,8 @@
             this.lblOPAddress = new System.Windows.Forms.Label();
             this.picAzure = new System.Windows.Forms.PictureBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.ckbPS = new System.Windows.Forms.CheckBox();
+            this.lblPS = new System.Windows.Forms.Label();
             this.pnlDeployment.SuspendLayout();
             this.pnlEnvironment.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picAzure)).BeginInit();
@@ -792,12 +794,36 @@
             this.picAzure.Size = new System.Drawing.Size(78, 78);
             this.picAzure.TabIndex = 87;
             this.picAzure.TabStop = false;
+            this.picAzure.Click += new System.EventHandler(this.picAzure_Click);
+            // 
+            // ckbPS
+            // 
+            this.ckbPS.AutoSize = true;
+            this.ckbPS.Location = new System.Drawing.Point(410, 424);
+            this.ckbPS.Name = "ckbPS";
+            this.ckbPS.Size = new System.Drawing.Size(15, 14);
+            this.ckbPS.TabIndex = 88;
+            this.ckbPS.UseVisualStyleBackColor = true;
+            this.ckbPS.Visible = false;
+            this.ckbPS.CheckedChanged += new System.EventHandler(this.ckbPS_CheckedChanged);
+            // 
+            // lblPS
+            // 
+            this.lblPS.Location = new System.Drawing.Point(381, 441);
+            this.lblPS.Name = "lblPS";
+            this.lblPS.Size = new System.Drawing.Size(75, 23);
+            this.lblPS.TabIndex = 89;
+            this.lblPS.Text = "PowerShell";
+            this.lblPS.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.lblPS.Visible = false;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(464, 601);
+            this.Controls.Add(this.lblPS);
+            this.Controls.Add(this.ckbPS);
             this.Controls.Add(this.picAzure);
             this.Controls.Add(this.txtOPAddress);
             this.Controls.Add(this.lblOPAddress);
@@ -940,6 +966,8 @@
         private System.Windows.Forms.Label lblOPAddress;
         private System.Windows.Forms.PictureBox picAzure;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.CheckBox ckbPS;
+        private System.Windows.Forms.Label lblPS;
     }
 }
 

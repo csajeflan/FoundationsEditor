@@ -58,6 +58,7 @@ namespace FoundationsEditor
         public string environment { get; set; }
         public bool primaryOnly { get; set; }
         public bool autoIPRange { get; set; }
+        public bool generatePS { get; set; }
         public string fileName { get; set; }
         public string primaryLocation { get; set; }
         public string primaryResourceGroup { get; set; }
