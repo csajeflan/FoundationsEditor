@@ -27,10 +27,10 @@ namespace FoundationsEditor
             txtMessages.ForeColor = Color.Blue;
             txtMessages.BackColor = SystemColors.Control;
             txtMessages.Text = "Enter your Subscription ID or select LOAD to begin.";
-            lblBuild.Text = "Build: " + buildNumber + Environment.NewLine + "21-MAR-2018";
+            lblBuild.Text = "Build: " + buildNumber + Environment.NewLine + "22-MAR-2018";
             this.Text = "Azure Foundations Editor - " + buildNumber;
         }
-        public static string buildNumber = "1.0.0.0";
+        public static string buildNumber = "1.0.1.0";
         public static Subscription currentSubscription = new Subscription();
         List<AzureSubnet> subnets = new List<AzureSubnet>();
         List<AzureLocation> locations = new List<AzureLocation>();
@@ -752,463 +752,6 @@ namespace FoundationsEditor
             armTemplate = at.ToString();
             return armTemplate;
         }
-        private string CreateConnectionTemplate(int _scr)
-        {
-            string cr = Environment.NewLine;
-            string cnTemplate = string.Empty;
-            StringBuilder cn = new StringBuilder();
-            currentSubscription.localConnectionName = "cn-" + currentSubscription.localGatewayName;
-            switch (_scr)
-            {
-                case 1:
-                    // Create Primary Location VPN Connections
-                    cn.Append(jLine(0, "OpenBrace", null, ""));
-                    cn.Append(jLine(1, "$schema", "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#", ","));
-                    cn.Append(jLine(1, "contentVersion", "1.0.0.0", ","));
-                    cn.Append(jLine(1, "parameters", null, "{ },"));
-                    cn.Append(jLine(1, "variables", null, "{"));
-                    cn.Append(jLine(2, "vnetID1", "[resourceId('Microsoft.Network/virtualNetworks','" + currentSubscription.primaryVnetName + "')]", ","));
-                    cn.Append(jLine(2, "vnetID2", "[resourceId('Microsoft.Network/virtualNetworks','" + currentSubscription.secondaryVnetName + "')]", ","));
-                    cn.Append(jLine(2, "gatewaySubnetRef1", "[concat(variables('vnetID1'),'/subnets/','GatewaySubnet')]", ","));
-                    cn.Append(jLine(2, "gatewaySubnetRef2", "[concat(variables('vnetID2'),'/subnets/','GatewaySubnet')]", ","));
-                    cn.Append(jLine(2, "gatewayName1", currentSubscription.primaryVnetName + "-gw", ","));
-                    cn.Append(jLine(2, "gatewayName2", currentSubscription.secondaryVnetName + "-gw", ","));
-                    cn.Append(jLine(2, "gatewayPublicIP1", currentSubscription.primaryVnetName + "-gw-ip", ","));
-                    cn.Append(jLine(2, "gatewayPublicIP2", currentSubscription.secondaryVnetName + "-gw-ip", ""));
-                    cn.Append(jLine(1, "CloseBrace", null, ","));
-                    cn.Append(jLine(1, "resources", null, "["));
-                    // Define Primary Virtual Network
-                    //cn.Append(jLine(2, "OpenBrace", null, ""));
-                    //cn.Append(jLine(3, "name", currentSubscription.primaryVnetName, ","));
-                    //cn.Append(jLine(3, "type", "Microsoft.Network/virtualNetworks", ","));
-                    //cn.Append(jLine(3, "apiVersion", "2018-01-01", ","));
-                    //cn.Append(jLine(3, "location", "[resourceGroup().location]", ","));
-                    //cn.Append(jLine(3, "properties", null, "{"));
-                    //cn.Append(jLine(4, "addressSpace", null, "{"));
-                    //cn.Append(jLine(5, "addressPrefixes", null, "["));
-                    //cn.Append(jLine(6, null, null, "\"" + currentSubscription.primaryIPSegment + "\""));
-                    //cn.Append(jLine(5, null, null, "]"));
-                    //cn.Append(jLine(4, "CloseBrace", null, ","));
-                    //cn.Append(jLine(4, "subnets", null, "["));
-                    //for (int ctr = 0; ctr < 8; ctr++)
-                    //{
-                    //    if (currentSubscription.primarySubnets[ctr].ipSegment != string.Empty)
-                    //    {
-                    //        cn.Append(jLine(5, "OpenBrace", null, ""));
-                    //        cn.Append(jLine(6, "name", currentSubscription.primarySubnets[ctr].name, ","));
-                    //        cn.Append(jLine(6, "properties", null, "{"));
-                    //        cn.Append(jLine(7, "addressPrefix", currentSubscription.primarySubnets[ctr].ipSegment, ""));
-                    //        cn.Append(jLine(6, "CloseBrace", null, ""));
-                    //        if (ctr == 7) { cn.Append(jLine(5, "CloseBrace", null, "")); }
-                    //        else { cn.Append(jLine(5, "CloseBrace", null, ",")); }
-                    //    }
-                    //}
-                    //cn.Append(jLine(4, null, null, "]"));
-                    //cn.Append(jLine(3, "CloseBrace", null, ""));
-                    //cn.Append(jLine(2, "CloseBrace", null, ","));
-                    //Define Secondary Virtual Network
-                    //cn.Append(jLine(2, "OpenBrace", null, ""));
-                    //cn.Append(jLine(3, "name", currentSubscription.secondaryVnetName, ","));
-                    //cn.Append(jLine(3, "type", "Microsoft.Network/virtualNetworks", ","));
-                    //cn.Append(jLine(3, "apiVersion", "2018-01-01", ","));
-                    //cn.Append(jLine(3, "location", currentSubscription.secondaryLocation, ","));
-                    //cn.Append(jLine(3, "properties", null, "{"));
-                    //cn.Append(jLine(4, "addressSpace", null, "{"));
-                    //cn.Append(jLine(5, "addressPrefixes", null, "["));
-                    //cn.Append(jLine(6, null, null, "\"" + currentSubscription.secondaryIPSegment + "\""));
-                    //cn.Append(jLine(5, null, null, "]"));
-                    //cn.Append(jLine(4, "CloseBrace", null, ","));
-                    //cn.Append(jLine(4, "subnets", null, "["));
-                    //for (int ctr = 0; ctr < 8; ctr++)
-                    //{
-                    //    if (currentSubscription.secondarySubnets[ctr].ipSegment != string.Empty)
-                    //    {
-                    //        cn.Append(jLine(5, "OpenBrace", null, ""));
-                    //        cn.Append(jLine(6, "name", currentSubscription.secondarySubnets[ctr].name, ","));
-                    //        cn.Append(jLine(6, "properties", null, "{"));
-                    //        cn.Append(jLine(7, "addressPrefix", currentSubscription.secondarySubnets[ctr].ipSegment, ""));
-                    //        cn.Append(jLine(6, "CloseBrace", null, ""));
-                    //        if (ctr == 7) { cn.Append(jLine(5, "CloseBrace", null, "")); }
-                    //        else { cn.Append(jLine(5, "CloseBrace", null, ",")); }
-                    //    }
-                    //}
-                    //cn.Append(jLine(4, null, null, "]"));
-                    //cn.Append(jLine(3, "CloseBrace", null, ""));
-                    //cn.Append(jLine(2, "CloseBrace", null, ","));
-                    // Define Local Gateway
-                    //cn.Append(jLine(2, "OpenBrace", null, ""));
-                    //cn.Append(jLine(3, "name", currentSubscription.localGatewayName + "-" + currentSubscription.primaryLocation, ","));
-                    //cn.Append(jLine(3, "type", "Microsoft.Network/localNetworkGateways", ","));
-                    //cn.Append(jLine(3, "apiVersion", "2018-01-01", ","));
-                    //cn.Append(jLine(3, "location", "[resourceGroup().location]", ","));
-                    //cn.Append(jLine(3, "properties", null, "{"));
-                    //cn.Append(jLine(4, "localNetworkAddressSpace", null, "{"));
-                    //cn.Append(jLine(5, "addressPrefixes", null, "["));
-                    //cn.Append(jLine(6, null, currentSubscription.localAddressSpace, ""));
-                    //cn.Append(jLine(5, null, null, "]"));
-                    //cn.Append(jLine(4, "CloseBrace", null, ","));
-                    //cn.Append(jLine(4, "gatewayIpAddress", currentSubscription.edgeIP, ""));
-                    //cn.Append(jLine(3, "CloseBrace", null, ""));
-                    //cn.Append(jLine(2, "CloseBrace", null, ","));
-                    // Define Primary Public IP Address
-                    cn.Append(jLine(2, "OpenBrace", null, ""));
-                    cn.Append(jLine(3, "name", currentSubscription.primaryVnetName + "-gw-ip", ","));
-                    cn.Append(jLine(3, "type", "Microsoft.Network/publicIPAddresses", ","));
-                    cn.Append(jLine(3, "apiVersion", "2018-01-01", ","));
-                    cn.Append(jLine(3, "location", "[resourceGroup().location]", ","));
-                    cn.Append(jLine(3, "properties", null, "{"));
-                    cn.Append(jLine(4, "publicIPAllocationMethod", "Dynamic", ""));
-                    cn.Append(jLine(3, "CloseBrace", null, ""));
-                    cn.Append(jLine(2, "CloseBrace", null, ","));
-                    // Define Secondary Public IP Address
-                    cn.Append(jLine(2, "OpenBrace", null, ""));
-                    cn.Append(jLine(3, "name", currentSubscription.secondaryVnetName + "-gw-ip", ","));
-                    cn.Append(jLine(3, "type", "Microsoft.Network/publicIPAddresses", ","));
-                    cn.Append(jLine(3, "apiVersion", "2018-01-01", ","));
-                    cn.Append(jLine(3, "location", currentSubscription.secondaryLocation, ","));
-                    cn.Append(jLine(3, "properties", null, "{"));
-                    cn.Append(jLine(4, "publicIPAllocationMethod", "Dynamic", ""));
-                    cn.Append(jLine(3, "CloseBrace", null, ""));
-                    cn.Append(jLine(2, "CloseBrace", null, ","));
-                    // Define Primary Virtual Network Gateway
-                    cn.Append(jLine(2, "OpenBrace", null, ""));
-                    cn.Append(jLine(3, "name", "[variables('gatewayName1')]", ","));
-                    cn.Append(jLine(3, "type", "Microsoft.Network/virtualNetworkGateways", ","));
-                    cn.Append(jLine(3, "apiVersion", "2018-01-01", ","));
-                    cn.Append(jLine(3, "location", "[resourceGroup().location]", ","));
-                    cn.Append(jLine(3, "dependsOn", null, "["));
-                    cn.Append(jLine(4, null, null, "\"[concat('Microsoft.Network/publicIpAddresses/',variables('gatewayPublicIP1'))]" + "\""));
-                    cn.Append(jLine(3, null, null, "],"));
-                    cn.Append(jLine(3, "properties", null, "{"));
-                    cn.Append(jLine(4, "ipConfigurations", null, "["));
-                    cn.Append(jLine(5, "OpenBrace", null, ""));
-                    cn.Append(jLine(6, "properties", null, "{"));
-                    cn.Append(jLine(7, "privateIPAllocationMethod", "Dynamic", ","));
-                    cn.Append(jLine(7, "subnet", null, "{"));
-                    cn.Append(jLine(8, "id", "[variables('gatewaySubnetRef1')]", ""));
-                    cn.Append(jLine(7, "CloseBrace", null, ","));
-                    cn.Append(jLine(7, "publicIPAddress", null, "{"));
-                    cn.Append(jLine(8, "id", "[resourceId('Microsoft.Network/publicIPAddresses',variables('gatewayPublicIP1'))]", ""));
-                    cn.Append(jLine(7, "CloseBrace", null, ""));
-                    cn.Append(jLine(6, "CloseBrace", null, ","));
-                    cn.Append(jLine(6, "name", "vnetGatewayConfig1", ""));
-                    cn.Append(jLine(5, "CloseBrace", null, ""));
-                    cn.Append(jLine(4, null, null, "],"));
-                    cn.Append(jLine(4, "gatewayType", "Vpn", ","));
-                    cn.Append(jLine(4, "vpnType", "RouteBased", ","));
-                    cn.Append(jLine(4, "enableBgp", null, "false"));
-                    //cn.Append(jLine(5, "sku", null, "{"));
-                    //cn.Append(jLine(6, "name", "VpnGw1", ","));
-                    //cn.Append(jLine(6, "tier", "VpnGw1", ""));
-                    cn.Append(jLine(3, "CloseBrace", null, ""));
-                    cn.Append(jLine(2, "CloseBrace", null, ","));
-                    // Define Secondary Virtual Network Gateway
-                    cn.Append(jLine(2, "OpenBrace", null, ""));
-                    cn.Append(jLine(3, "name", "[variables('gatewayName2')]", ","));
-                    cn.Append(jLine(3, "type", "Microsoft.Network/virtualNetworkGateways", ","));
-                    cn.Append(jLine(3, "apiVersion", "2018-01-01", ","));
-                    cn.Append(jLine(3, "location", currentSubscription.secondaryLocation, ","));
-                    cn.Append(jLine(3, "dependsOn", null, "["));
-                    cn.Append(jLine(4, null, null, "\"[concat('Microsoft.Network/publicIpAddresses/',variables('gatewayPublicIP2'))]" + "\","));
-                    cn.Append(jLine(4, null, null, "\"[concat('Microsoft.Network/virtualNetworks/',variables('vnetID2'))]" + "\""));
-                    cn.Append(jLine(3, null, null, "],"));
-                    cn.Append(jLine(3, "properties", null, "{"));
-                    cn.Append(jLine(4, "ipConfigurations", null, "["));
-                    cn.Append(jLine(5, "OpenBrace", null, ""));
-                    cn.Append(jLine(6, "properties", null, "{"));
-                    cn.Append(jLine(7, "privateIPAllocationMethod", "Dynamic", ","));
-                    cn.Append(jLine(7, "subnet", null, "{"));
-                    cn.Append(jLine(8, "id", "[variables('gatewaySubnetRef2')]", ""));
-                    cn.Append(jLine(7, "CloseBrace", null, ","));
-                    cn.Append(jLine(7, "publicIPAddress", null, "{"));
-                    cn.Append(jLine(8, "id", "[resourceId('Microsoft.Network/publicIPAddresses',variables('gatewayPublicIP2'))]", ""));
-                    cn.Append(jLine(7, "CloseBrace", null, ""));
-                    cn.Append(jLine(6, "CloseBrace", null, ","));
-                    cn.Append(jLine(6, "name", "vnetGatewayConfig2", ""));
-                    cn.Append(jLine(5, "CloseBrace", null, ""));
-                    cn.Append(jLine(4, null, null, "],"));
-                    cn.Append(jLine(4, "gatewayType", "Vpn", ","));
-                    cn.Append(jLine(4, "vpnType", "RouteBased", ","));
-                    cn.Append(jLine(4, "enableBgp", null, "false"));
-                    //cn.Append(jLine(5, "sku", null, "{"));
-                    //cn.Append(jLine(6, "name", "VpnGw1", ","));
-                    //cn.Append(jLine(6, "tier", "VpnGw1", ""));
-                    cn.Append(jLine(3, "CloseBrace", null, ""));
-                    cn.Append(jLine(2, "CloseBrace", null, ","));
-                    // Primary Location Local Network Gateway to VNET
-                    cn.Append(jLine(2, "OpenBrace", null, ""));
-                    cn.Append(jLine(3, "name", currentSubscription.localConnectionName + "-" + currentSubscription.primaryLocation, ","));
-                    cn.Append(jLine(3, "type", "Microsoft.Network/connections", ","));
-                    cn.Append(jLine(3, "apiVersion", "2017-10-01", ","));
-                    cn.Append(jLine(3, "location", "[resourceGroup().location]", ","));
-                    cn.Append(jLine(3, "dependsOn", null, "["));
-                    cn.Append(jLine(4, null, null, "\"[concat('Microsoft.Network/virtualNetworkGateways/', variables('gatewayName1'))]\","));
-                    cn.Append(jLine(4, null, null, "\"[concat('Microsoft.Network/localNetworkGateways/', '" + currentSubscription.localGatewayName + "-" + currentSubscription.primaryLocation + "')]\""));
-                    cn.Append(jLine(3, null, null, "],"));
-                    cn.Append(jLine(3, "properties", null, "{"));
-                    cn.Append(jLine(4, "virtualNetworkGateway1", null, "{"));
-                    cn.Append(jLine(5, "id", "[resourceId('Microsoft.Network/virtualNetworkGateways', variables('gatewayName1'))]", ""));
-                    cn.Append(jLine(4, "CloseBrace", null, ","));
-                    cn.Append(jLine(4, "localNetworkGateway2", null, "{"));
-                    cn.Append(jLine(5, "id", "[resourceId('Microsoft.Network/localNetworkGateways', '" + currentSubscription.localGatewayName + "-" + currentSubscription.primaryLocation + "')]", ""));
-                    cn.Append(jLine(4, "CloseBrace", null, ","));
-                    cn.Append(jLine(4, "connectionType", "IPsec", ","));
-                    cn.Append(jLine(4, "routingWeight", null, "10,"));
-                    string pVpnKey = CreateSharedKey();
-                    cn.Append(jLine(4, "sharedKey", pVpnKey, ""));
-                    cn.Append(jLine(3, "CloseBrace", null, ""));
-                    if (currentSubscription.primaryOnly) { cn.Append(jLine(2, "CloseBrace", null, "")); }
-                    else { cn.Append(jLine(2, "CloseBrace", null, ",")); }
-                    if (currentSubscription.primaryOnly == false)
-                    {
-                        // Primary Location to Secondary Location Vnet-to-Vnet
-                        cn.Append(jLine(2, "OpenBrace", null, ""));
-                        cn.Append(jLine(3, "name", "cn-" + currentSubscription.primaryLocation + "-" + currentSubscription.secondaryLocation, ","));
-                        cn.Append(jLine(3, "type", "Microsoft.Network/connections", ","));
-                        cn.Append(jLine(3, "apiVersion", "2017-10-01", ","));
-                        cn.Append(jLine(3, "location", "[resourceGroup().location]", ","));
-                        cn.Append(jLine(3, "dependsOn", null, "["));
-                        cn.Append(jLine(4, null, null, "\"[concat('Microsoft.Network/virtualNetworkGateways/',variables('gatewayName1'))]\","));
-                        cn.Append(jLine(4, null, null, "\"[concat('Microsoft.Network/virtualNetworkGateways/',variables('gatewayName2'))]\""));
-                        cn.Append(jLine(3, null, null, "],"));
-                        cn.Append(jLine(3, "properties", null, "{"));
-                        cn.Append(jLine(4, "virtualNetworkGateway1", null, "{"));
-                        cn.Append(jLine(5, "id", "[resourceId('Microsoft.Network/virtualNetworkGateways',variables('gatewayName1'))]", ""));
-                        cn.Append(jLine(4, "CloseBrace", null, ","));
-                        cn.Append(jLine(4, "virtualNetworkGateway2", null, "{"));
-                        cn.Append(jLine(5, "id", "[resourceId('Microsoft.Network/virtualNetworkGateways',variables('gatewayName2'))]", ""));
-                        cn.Append(jLine(4, "CloseBrace", null, ","));
-                        cn.Append(jLine(4, "connectionType", "Vnet2Vnet", ","));
-                        cn.Append(jLine(4, "routingWeight", null, "3,"));
-                        cn.Append(jLine(4, "sharedKey", vVpnKey, ""));
-                        cn.Append(jLine(3, "CloseBrace", null, ""));
-                        cn.Append(jLine(2, "CloseBrace", null, ""));
-                    }
-                        break;
-                case 2:
-                    // Create Primary Secondary VPN Connections
-                    cn.Append(jLine(0, "OpenBrace", null, ""));
-                    cn.Append(jLine(1, "$schema", "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#", ","));
-                    cn.Append(jLine(1, "contentVersion", "1.0.0.0", ","));
-                    cn.Append(jLine(1, "parameters", null, "{ },"));
-                    cn.Append(jLine(1, "variables", null, "{"));
-                    cn.Append(jLine(2, "vnetID", "[resourceId('Microsoft.Network/virtualNetworks','" + currentSubscription.secondaryVnetName + "')]", ","));
-                    cn.Append(jLine(2, "gatewaySubnetRef", "[concat(variables('vnetID'),'/subnets/','GatewaySubnet')]", ""));
-                    cn.Append(jLine(1, "CloseBrace", null, ","));
-                    cn.Append(jLine(1, "resources", null, "["));
-                    // Define Secondary Virtual Network
-                    cn.Append(jLine(2, "OpenBrace", null, ""));
-                    cn.Append(jLine(3, "name", currentSubscription.secondaryVnetName, ","));
-                    cn.Append(jLine(3, "type", "Microsoft.Network/virtualNetworks", ","));
-                    cn.Append(jLine(3, "apiVersion", "2018-01-01", ","));
-                    cn.Append(jLine(3, "location", "[resourceGroup().location]", ","));
-                    cn.Append(jLine(3, "properties", null, "{"));
-                    cn.Append(jLine(4, "addressSpace", null, "{"));
-                    cn.Append(jLine(5, "addressPrefixes", null, "["));
-                    cn.Append(jLine(6, null, null, "\"" + currentSubscription.secondaryIPSegment + "\""));
-                    cn.Append(jLine(5, null, null, "]"));
-                    cn.Append(jLine(4, "CloseBrace", null, ","));
-                    cn.Append(jLine(4, "subnets", null, "["));
-                    for (int ctr = 0; ctr < 8; ctr++)
-                    {
-                        if (currentSubscription.secondarySubnets[ctr].ipSegment != string.Empty)
-                        {
-                            cn.Append(jLine(5, "OpenBrace", null, ""));
-                            cn.Append(jLine(6, "name", currentSubscription.secondarySubnets[ctr].name, ","));
-                            cn.Append(jLine(6, "properties", null, "{"));
-                            cn.Append(jLine(7, "addressPrefix", currentSubscription.secondarySubnets[ctr].ipSegment, ""));
-                            cn.Append(jLine(6, "CloseBrace", null, ""));
-                            if (ctr == 7) { cn.Append(jLine(5, "CloseBrace", null, "")); }
-                            else { cn.Append(jLine(5, "CloseBrace", null, ",")); }
-                        }
-                    }
-                    cn.Append(jLine(4, null, null, "]"));
-                    cn.Append(jLine(3, "CloseBrace", null, ""));
-                    cn.Append(jLine(2, "CloseBrace", null, ","));
-                    // Define Primary Virtual Network
-                    cn.Append(jLine(2, "OpenBrace", null, ""));
-                    cn.Append(jLine(3, "name", currentSubscription.primaryVnetName, ","));
-                    cn.Append(jLine(3, "type", "Microsoft.Network/virtualNetworks", ","));
-                    cn.Append(jLine(3, "apiVersion", "2018-01-01", ","));
-                    cn.Append(jLine(3, "location", currentSubscription.primaryLocation, ","));
-                    cn.Append(jLine(3, "properties", null, "{"));
-                    cn.Append(jLine(4, "addressSpace", null, "{"));
-                    cn.Append(jLine(5, "addressPrefixes", null, "["));
-                    cn.Append(jLine(6, null, null, "\"" + currentSubscription.primaryIPSegment + "\""));
-                    cn.Append(jLine(5, null, null, "]"));
-                    cn.Append(jLine(4, "CloseBrace", null, ","));
-                    cn.Append(jLine(4, "subnets", null, "["));
-                    for (int ctr = 0; ctr < 8; ctr++)
-                    {
-                        if (currentSubscription.primarySubnets[ctr].ipSegment != string.Empty)
-                        {
-                            cn.Append(jLine(5, "OpenBrace", null, ""));
-                            cn.Append(jLine(6, "name", currentSubscription.primarySubnets[ctr].name, ","));
-                            cn.Append(jLine(6, "properties", null, "{"));
-                            cn.Append(jLine(7, "addressPrefix", currentSubscription.primarySubnets[ctr].ipSegment, ""));
-                            cn.Append(jLine(6, "CloseBrace", null, ""));
-                            if (ctr == 7) { cn.Append(jLine(5, "CloseBrace", null, "")); }
-                            else { cn.Append(jLine(5, "CloseBrace", null, ",")); }
-                        }
-                    }
-                    cn.Append(jLine(4, null, null, "]"));
-                    cn.Append(jLine(3, "CloseBrace", null, ""));
-                    cn.Append(jLine(2, "CloseBrace", null, ","));
-                    // Define Local Gateway
-                    cn.Append(jLine(2, "OpenBrace", null, ""));
-                    cn.Append(jLine(3, "name", currentSubscription.localGatewayName + "-" + currentSubscription.secondaryLocation, ","));
-                    cn.Append(jLine(3, "type", "Microsoft.Network/localNetworkGateways", ","));
-                    cn.Append(jLine(3, "apiVersion", "2018-01-01", ","));
-                    cn.Append(jLine(3, "location", "[resourceGroup().location]", ","));
-                    cn.Append(jLine(3, "properties", null, "{"));
-                    cn.Append(jLine(4, "localNetworkAddressSpace", null, "{"));
-                    cn.Append(jLine(5, "addressPrefixes", null, "["));
-                    cn.Append(jLine(6, null, currentSubscription.localAddressSpace, ""));
-                    cn.Append(jLine(5, null, null, "]"));
-                    cn.Append(jLine(4, "CloseBrace", null, ","));
-                    cn.Append(jLine(4, "gatewayIpAddress", currentSubscription.edgeIP, ""));
-                    cn.Append(jLine(3, "CloseBrace", null, ""));
-                    cn.Append(jLine(2, "CloseBrace", null, ","));
-                    // Define Secondary Public IP Address
-                    cn.Append(jLine(2, "OpenBrace", null, ""));
-                    cn.Append(jLine(3, "name", currentSubscription.secondaryVnetName + "-gw-ip", ","));
-                    cn.Append(jLine(3, "type", "Microsoft.Network/publicIPAddresses", ","));
-                    cn.Append(jLine(3, "apiVersion", "2018-01-01", ","));
-                    cn.Append(jLine(3, "location", "[resourceGroup().location]", ","));
-                    cn.Append(jLine(3, "properties", null, "{"));
-                    cn.Append(jLine(4, "publicIPAllocationMethod", "Dynamic", ""));
-                    cn.Append(jLine(3, "CloseBrace", null, ""));
-                    cn.Append(jLine(3, "CloseBrace", null, ","));
-                    // Define Primary Public IP Address
-                    cn.Append(jLine(2, "OpenBrace", null, ""));
-                    cn.Append(jLine(3, "name", currentSubscription.primaryVnetName + "-gw-ip", ","));
-                    cn.Append(jLine(3, "type", "Microsoft.Network/publicIPAddresses", ","));
-                    cn.Append(jLine(3, "apiVersion", "2018-01-01", ","));
-                    cn.Append(jLine(3, "location", currentSubscription.primaryLocation, ","));
-                    cn.Append(jLine(3, "properties", null, "{"));
-                    cn.Append(jLine(4, "publicIPAllocationMethod", "Dynamic", ""));
-                    cn.Append(jLine(3, "CloseBrace", null, ""));
-                    cn.Append(jLine(3, "CloseBrace", null, ","));
-                    // Define Secondary Virtual Network Gateway
-                    cn.Append(jLine(3, "OpenBrace", null, ""));
-                    cn.Append(jLine(4, "name", currentSubscription.secondaryVnetName + "-gw", ","));
-                    cn.Append(jLine(4, "type", "Microsoft.Network/virtualNetworkGateways", ","));
-                    cn.Append(jLine(4, "apiVersion", "2018-01-01", ","));
-                    cn.Append(jLine(4, "location", "[resourceGroup().location]", ","));
-                    cn.Append(jLine(4, "dependsOn", null, "["));
-                    cn.Append(jLine(5, null, null, "\"[concat('Microsoft.Network/publicIpAddresses/','" + currentSubscription.secondaryVnetName + "-gw-ip')]" + "\","));
-                    cn.Append(jLine(5, null, null, "\"[concat('Microsoft.Network/virtualNetworks/','" + currentSubscription.secondaryVnetName + "')]" + "\""));
-                    cn.Append(jLine(4, null, null, "],"));
-                    cn.Append(jLine(4, "properties", null, "{"));
-                    cn.Append(jLine(5, "ipConfigurations", null, "["));
-                    cn.Append(jLine(6, "OpenBrace", null, ""));
-                    cn.Append(jLine(7, "properties", null, "{"));
-                    cn.Append(jLine(8, "privateIPAllocationMethod", "Dynamic", ","));
-                    cn.Append(jLine(8, "subnet", null, "{"));
-                    cn.Append(jLine(9, "id", "[variables('gatewaySubnetRef')]", ""));
-                    cn.Append(jLine(8, "CloseBrace", null, ","));
-                    cn.Append(jLine(8, "publicIPAddress", null, "{"));
-                    cn.Append(jLine(9, "id", "[resourceId('Microsoft.Network/publicIPAddresses','" + currentSubscription.secondaryVnetName + "-gw-ip')]", ""));
-                    cn.Append(jLine(8, "CloseBrace", null, ""));
-                    cn.Append(jLine(7, "CloseBrace", null, ","));
-                    cn.Append(jLine(7, "name", "vnetGatewayConfig", ""));
-                    cn.Append(jLine(6, "CloseBrace", null, ""));
-                    cn.Append(jLine(5, null, null, "],"));
-                    cn.Append(jLine(5, "gatewayType", "Vpn", ","));
-                    cn.Append(jLine(5, "vpnType", "RouteBased", ","));
-                    cn.Append(jLine(5, "enableBgp", null, "false,"));
-                    cn.Append(jLine(5, "sku", null, "{"));
-                    cn.Append(jLine(6, "name", "VpnGw1", ","));
-                    cn.Append(jLine(6, "tier", "VpnGw1", ""));
-                    cn.Append(jLine(5, "CloseBrace", null, ""));
-                    cn.Append(jLine(4, "CloseBrace", null, ""));
-                    cn.Append(jLine(3, "CloseBrace", null, ","));
-                    // Define Primary Virtual Network Gateway
-                    cn.Append(jLine(3, "OpenBrace", null, ""));
-                    cn.Append(jLine(4, "name", currentSubscription.primaryVnetName + "-gw", ","));
-                    cn.Append(jLine(4, "type", "Microsoft.Network/virtualNetworkGateways", ","));
-                    cn.Append(jLine(4, "apiVersion", "2018-01-01", ","));
-                    cn.Append(jLine(4, "location", currentSubscription.primaryLocation, ","));
-                    cn.Append(jLine(4, "dependsOn", null, "["));
-                    cn.Append(jLine(5, null, null, "\"[concat('Microsoft.Network/publicIpAddresses/','" + currentSubscription.primaryVnetName + "-gw-ip')]" + "\","));
-                    cn.Append(jLine(5, null, null, "\"[concat('Microsoft.Network/virtualNetworks/','" + currentSubscription.primaryVnetName + "')]" + "\""));
-                    cn.Append(jLine(4, null, null, "],"));
-                    cn.Append(jLine(4, "properties", null, "{"));
-                    cn.Append(jLine(5, "ipConfigurations", null, "["));
-                    cn.Append(jLine(6, "OpenBrace", null, ""));
-                    cn.Append(jLine(7, "properties", null, "{"));
-                    cn.Append(jLine(8, "privateIPAllocationMethod", "Dynamic", ","));
-                    cn.Append(jLine(8, "subnet", null, "{"));
-                    cn.Append(jLine(9, "id", "[variables('gatewaySubnetRef')]", ""));
-                    cn.Append(jLine(8, "CloseBrace", null, ","));
-                    cn.Append(jLine(8, "publicIPAddress", null, "{"));
-                    cn.Append(jLine(9, "id", "[resourceId('Microsoft.Network/publicIPAddresses','" + currentSubscription.primaryVnetName + "-gw-ip')]", ""));
-                    cn.Append(jLine(8, "CloseBrace", null, ""));
-                    cn.Append(jLine(7, "CloseBrace", null, ","));
-                    cn.Append(jLine(7, "name", "vnetGatewayConfig", ""));
-                    cn.Append(jLine(6, "CloseBrace", null, ""));
-                    cn.Append(jLine(5, null, null, "],"));
-                    cn.Append(jLine(5, "gatewayType", "Vpn", ","));
-                    cn.Append(jLine(5, "vpnType", "RouteBased", ","));
-                    cn.Append(jLine(5, "enableBgp", null, "false,"));
-                    cn.Append(jLine(5, "sku", null, "{"));
-                    cn.Append(jLine(6, "name", "VpnGw1", ","));
-                    cn.Append(jLine(6, "tier", "VpnGw1", ""));
-                    cn.Append(jLine(5, "CloseBrace", null, ""));
-                    cn.Append(jLine(4, "CloseBrace", null, ""));
-                    cn.Append(jLine(3, "CloseBrace", null, ","));
-                    // Secondary Location Local Network Gateway to VNET
-                    cn.Append(jLine(2, "OpenBrace", null, ""));
-                    cn.Append(jLine(3, "name", currentSubscription.localConnectionName + "-" + currentSubscription.secondaryLocation, ","));
-                    cn.Append(jLine(3, "type", "Microsoft.Network/connections", ","));
-                    cn.Append(jLine(3, "apiVersion", "2017-10-01", ","));
-                    cn.Append(jLine(3, "location", "[resourceGroup().location]", ","));
-                    cn.Append(jLine(3, "dependsOn", null, "["));
-                    cn.Append(jLine(4, null, null, "\"[concat('Microsoft.Network/virtualNetworkGateways/', '" + currentSubscription.secondaryVnetName + "-gw" + "')]\","));
-                    cn.Append(jLine(4, null, null, "\"[concat('Microsoft.Network/localNetworkGateways/', '" + currentSubscription.localGatewayName + "-" + currentSubscription.secondaryLocation + "')]\""));
-                    cn.Append(jLine(3, null, null, "],"));
-                    cn.Append(jLine(3, "properties", null, "{"));
-                    cn.Append(jLine(4, "virtualNetworkGateway1", null, "{"));
-                    cn.Append(jLine(5, "id", "[resourceId('Microsoft.Network/virtualNetworkGateways', '" + currentSubscription.secondaryVnetName + "-gw')]", ""));
-                    cn.Append(jLine(4, "CloseBrace", null, ","));
-                    cn.Append(jLine(4, "localNetworkGateway2", null, "{"));
-                    cn.Append(jLine(5, "id", "[resourceId('Microsoft.Network/localNetworkGateways', '" + currentSubscription.localGatewayName + "-" + currentSubscription.secondaryLocation + "')]", ""));
-                    cn.Append(jLine(4, "CloseBrace", null, ","));
-                    cn.Append(jLine(4, "connectionType", "IPsec", ","));
-                    cn.Append(jLine(4, "routingWeight", null, "10,"));
-                    string sVpnKey = CreateSharedKey();
-                    cn.Append(jLine(4, "sharedKey", sVpnKey, ""));
-                    cn.Append(jLine(3, "CloseBrace", null, ""));
-                    cn.Append(jLine(2, "CloseBrace", null, ","));
-                    // Secondary Location to Primary Location Vnet-to-Vnet
-                    cn.Append(jLine(2, "OpenBrace", null, ""));
-                    cn.Append(jLine(3, "name", "cn-" + currentSubscription.secondaryLocation + "-" + currentSubscription.primaryLocation, ","));
-                    cn.Append(jLine(3, "type", "Microsoft.Network/connections", ","));
-                    cn.Append(jLine(3, "apiVersion", "2017-10-01", ","));
-                    cn.Append(jLine(3, "location", "[resourceGroup().location]", ","));
-                    cn.Append(jLine(3, "dependsOn", null, "["));
-                    cn.Append(jLine(4, null, null, "\"[concat('Microsoft.Network/virtualNetworkGateways/', '" + currentSubscription.secondaryVnetName + "-gw" + "')]\","));
-                    cn.Append(jLine(4, null, null, "\"[concat('Microsoft.Network/virtualNetworkGateways/', '" + currentSubscription.primaryVnetName + "-gw" + "')]\""));
-                    cn.Append(jLine(3, null, null, "],"));
-                    cn.Append(jLine(3, "properties", null, "{"));
-                    cn.Append(jLine(4, "virtualNetworkGateway1", null, "{"));
-                    cn.Append(jLine(5, "id", "[resourceId('Microsoft.Network/virtualNetworkGateways', '" + currentSubscription.secondaryVnetName + "-gw')]", ""));
-                    cn.Append(jLine(4, "CloseBrace", null, ","));
-                    cn.Append(jLine(4, "virtualNetworkGateway2", null, "{"));
-                    cn.Append(jLine(5, "id", "[resourceId('Microsoft.Network/virtualNetworkGateways', '" + currentSubscription.primaryVnetName + "-gw')]", ""));
-                    cn.Append(jLine(4, "CloseBrace", null, ","));
-                    cn.Append(jLine(4, "connectionType", "Vnet2Vnet", ","));
-                    cn.Append(jLine(4, "routingWeight", null, "10,"));
-                    cn.Append(jLine(4, "sharedKey", vVpnKey, ""));
-                    cn.Append(jLine(3, "CloseBrace", null, ""));
-                    cn.Append(jLine(2, "CloseBrace", null, ""));
-                    break;
-            }
-            cn.Append(jLine(1, null, null, "]"));
-            cn.Append(jLine(0, "CloseBrace", null, ""));
-            cnTemplate = cn.ToString();
-            return cnTemplate;
-        }
         private string CreateARMDeploymentScript()
         {
             string cr = Environment.NewLine;
@@ -1365,51 +908,32 @@ namespace FoundationsEditor
                 armPS.Append("   }" + cr);
                 armPS.Append("}" + cr);
             }
-            armPS.Append("####################################################" + cr);
-            armPS.Append("# Create Connections Between Locations and Local" + cr);
-            armPS.Append("####################################################" + cr);
-            //Set Gateway Variables
-            armPS.Append("$plgw=Get-AzureRmLocalNetworkGateway -Name " + currentSubscription.localGatewayName + "-" + currentSubscription.primaryLocation + " -ResourceGroupName " + currentSubscription.primaryResourceGroup + " -ErrorAction Ignore -WarningAction SilentlyContinue" + cr);
-            armPS.Append("$slgw=Get-AzureRmLocalNetworkGateway -Name " + currentSubscription.localGatewayName + "-" + currentSubscription.secondaryLocation + " -ResourceGroupName " + currentSubscription.secondaryResourceGroup + " -ErrorAction Ignore -WarningAction SilentlyContinue" + cr);
-            armPS.Append("$pgw=Get-AzureRmVirtualNetworkGateway -Name " + currentSubscription.primaryVnetName + "-gw -ResourceGroupName " + currentSubscription.primaryResourceGroup + " -ErrorAction Ignore -WarningAction SilentlyContinue" + cr);
-            armPS.Append("$sgw=Get-AzureRmVirtualNetworkGateway -Name " + currentSubscription.secondaryVnetName + "-gw -ResourceGroupName " + currentSubscription.secondaryResourceGroup + " -ErrorAction Ignore -WarningAction SilentlyContinue" + cr);
-            //Create Primary Gateway Connection to Local Gateway
-            armPS.Append("####################################################" + cr);
-            armPS.Append("# Create Primary Gateway Connection to Local Gateway" + cr);
-            armPS.Append("####################################################" + cr);
-            armPS.Append("if($global:script_error -eq $false)" + cr);
-            armPS.Append("{" + cr);
-            armPS.Append("   Write-Host 'Creating Primary Connection: ' -NoNewLine" + cr);
-            armPS.Append("   $pcn=Get-AzureRmVirtualNetworkGatewayConnection -Name cn-local-" + currentSubscription.primaryLocation + " -ResourceGroupName " + currentSubscription.primaryResourceGroup + " -ErrorAction Ignore -WarningAction SilentlyContinue" + cr);
-            armPS.Append("   if($pcn) {Write-Host 'WARNING: Connection already exists--skipping creation'}" + cr);
-            armPS.Append("   else" + cr);
-            armPS.Append("   {" + cr);
-            string priSkey = CreateSharedKey();
-            armPS.Append("      $pcn=New-AzureRmVirtualNetworkGatewayConnection -Name cn-local-" + currentSubscription.primaryLocation + " -ResourceGroupName " + currentSubscription.primaryResourceGroup + " -Location " + currentSubscription.primaryLocation + " -VirtualNetworkGateway1 $pgw -LocalNetworkGateway2 $plgw -ConnectionType IPsec -RoutingWeight 10 -SharedKey '" + priSkey + "' -WarningAction SilentlyContinue" + cr);
-            armPS.Append("      if($pcn) {Write-Host 'SUCCESS' -ForegroundColor Green}" + cr);
-            armPS.Append("      else" + cr);
-            armPS.Append("      {" + cr);
-            armPS.Append("         Write-Host 'FAILED- Unable to create connection' -ForegroundColor Red" + cr);
-            armPS.Append("         $global:script_error = $true" + cr);
-            armPS.Append("      }" + cr);
-            armPS.Append("   }" + cr);
-            armPS.Append("}" + cr);
-            if (currentSubscription.primaryOnly == false)
+            if (currentSubscription.createConnection)
             {
-                //Create Secondary Gateway Connection to Local Gateway
-                armPS.Append("######################################################" + cr);
-                armPS.Append("# Create Secondary Gateway Connection to Local Gateway" + cr);
-                armPS.Append("######################################################" + cr);
+                armPS.Append("   Write-Host" + cr);
+                armPS.Append("   Write-Host 'Creating VPN Connections'" + cr);
+                armPS.Append("####################################################" + cr);
+                armPS.Append("# Create Connections Between Locations and Local" + cr);
+                armPS.Append("####################################################" + cr);
+                //Set Gateway Variables
+                armPS.Append("$plgw=Get-AzureRmLocalNetworkGateway -Name " + currentSubscription.localGatewayName + "-" + currentSubscription.primaryLocation + " -ResourceGroupName " + currentSubscription.primaryResourceGroup + " -ErrorAction Ignore -WarningAction SilentlyContinue" + cr);
+                armPS.Append("$slgw=Get-AzureRmLocalNetworkGateway -Name " + currentSubscription.localGatewayName + "-" + currentSubscription.secondaryLocation + " -ResourceGroupName " + currentSubscription.secondaryResourceGroup + " -ErrorAction Ignore -WarningAction SilentlyContinue" + cr);
+                armPS.Append("$pgw=Get-AzureRmVirtualNetworkGateway -Name " + currentSubscription.primaryVnetName + "-gw -ResourceGroupName " + currentSubscription.primaryResourceGroup + " -ErrorAction Ignore -WarningAction SilentlyContinue" + cr);
+                armPS.Append("$sgw=Get-AzureRmVirtualNetworkGateway -Name " + currentSubscription.secondaryVnetName + "-gw -ResourceGroupName " + currentSubscription.secondaryResourceGroup + " -ErrorAction Ignore -WarningAction SilentlyContinue" + cr);
+                //Create Primary Gateway Connection to Local Gateway
+                armPS.Append("####################################################" + cr);
+                armPS.Append("# Create Primary Gateway Connection to Local Gateway" + cr);
+                armPS.Append("####################################################" + cr);
                 armPS.Append("if($global:script_error -eq $false)" + cr);
                 armPS.Append("{" + cr);
-                armPS.Append("   Write-Host 'Creating Secondary Connection: ' -NoNewLine" + cr);
-                armPS.Append("   $scn=Get-AzureRmVirtualNetworkGatewayConnection -Name cn-local-" + currentSubscription.secondaryLocation + " -ResourceGroupName " + currentSubscription.secondaryResourceGroup + " -ErrorAction Ignore -WarningAction SilentlyContinue" + cr);
-                armPS.Append("   if($scn) {Write-Host 'WARNING: Connection already exists--skipping creation'}" + cr);
+                armPS.Append("   Write-Host 'Creating Primary Connection: ' -NoNewLine" + cr);
+                armPS.Append("   $pcn=Get-AzureRmVirtualNetworkGatewayConnection -Name cn-local-" + currentSubscription.primaryLocation + " -ResourceGroupName " + currentSubscription.primaryResourceGroup + " -ErrorAction Ignore -WarningAction SilentlyContinue" + cr);
+                armPS.Append("   if($pcn) {Write-Host 'WARNING: Connection already exists--skipping creation'}" + cr);
                 armPS.Append("   else" + cr);
                 armPS.Append("   {" + cr);
-                string secSkey = CreateSharedKey();
-                armPS.Append("      $scn=New-AzureRmVirtualNetworkGatewayConnection -Name cn-local-" + currentSubscription.secondaryLocation + " -ResourceGroupName " + currentSubscription.secondaryResourceGroup + " -Location " + currentSubscription.secondaryLocation + " -VirtualNetworkGateway1 $sgw -LocalNetworkGateway2 $slgw -ConnectionType IPsec -RoutingWeight 10 -SharedKey '" + secSkey + "' -ErrorAction Ignore -WarningAction SilentlyContinue" + cr);
-                armPS.Append("      if($scn) {Write-Host 'SUCCESS' -ForegroundColor Green}" + cr);
+                string priSkey = CreateSharedKey();
+                armPS.Append("      $pcn=New-AzureRmVirtualNetworkGatewayConnection -Name cn-local-" + currentSubscription.primaryLocation + " -ResourceGroupName " + currentSubscription.primaryResourceGroup + " -Location " + currentSubscription.primaryLocation + " -VirtualNetworkGateway1 $pgw -LocalNetworkGateway2 $plgw -ConnectionType IPsec -RoutingWeight 10 -SharedKey '" + priSkey + "' -WarningAction SilentlyContinue" + cr);
+                armPS.Append("      if($pcn) {Write-Host 'SUCCESS' -ForegroundColor Green}" + cr);
                 armPS.Append("      else" + cr);
                 armPS.Append("      {" + cr);
                 armPS.Append("         Write-Host 'FAILED- Unable to create connection' -ForegroundColor Red" + cr);
@@ -1417,47 +941,71 @@ namespace FoundationsEditor
                 armPS.Append("      }" + cr);
                 armPS.Append("   }" + cr);
                 armPS.Append("}" + cr);
-                //Create VNet-to-VNet Connection (Primary to Secondary)
-                armPS.Append("#######################################################" + cr);
-                armPS.Append("# Create VNet-to-VNet Connection (Primary to Secondary)" + cr);
-                armPS.Append("#######################################################" + cr);
-                armPS.Append("if($global:script_error -eq $false)" + cr);
-                armPS.Append("{" + cr);
-                armPS.Append("   Write-Host 'Creating VNet-to-VNet Connection (Primary to Secondary): ' -NoNewLine" + cr);
-                armPS.Append("   $pvcn=Get-AzureRmVirtualNetworkGatewayConnection -Name cn-" + currentSubscription.primaryVnetName + "-" + currentSubscription.secondaryVnetName + " -ResourceGroupName " + currentSubscription.primaryResourceGroup + " -ErrorAction Ignore -WarningAction SilentlyContinue" + cr);
-                armPS.Append("   if($pvcn) {Write-Host 'WARNING: Connection already exists--skipping creation'}" + cr);
-                armPS.Append("   else" + cr);
-                armPS.Append("   {" + cr);
-                string v2vSkey = CreateSharedKey();
-                armPS.Append("      $pvcn=New-AzureRmVirtualNetworkGatewayConnection -Name cn-" + currentSubscription.primaryVnetName + "-" + currentSubscription.secondaryVnetName + " -ResourceGroupName " + currentSubscription.primaryResourceGroup + " -Location " + currentSubscription.primaryLocation + " -VirtualNetworkGateway1 $pgw -VirtualNetworkGateway2 $sgw -ConnectionType Vnet2Vnet -SharedKey '" + v2vSkey + "' -ErrorAction Ignore -WarningAction SilentlyContinue" + cr);
-                armPS.Append("      if($pvcn) {Write-Host 'SUCCESS' -ForegroundColor Green}" + cr);
-                armPS.Append("      else" + cr);
-                armPS.Append("      {" + cr);
-                armPS.Append("         Write-Host 'FAILED- Unable to create connection' -ForegroundColor Red" + cr);
-                armPS.Append("         $global:script_error = $true" + cr);
-                armPS.Append("      }" + cr);
-                armPS.Append("   }" + cr);
-                armPS.Append("}" + cr);
-                //Create VNet-to-VNet Connection (Secondary to Primary)
-                armPS.Append("#######################################################" + cr);
-                armPS.Append("# Create VNet-to-VNet Connection (Secondary to Primary)" + cr);
-                armPS.Append("#######################################################" + cr);
-                armPS.Append("if($global:script_error -eq $false)" + cr);
-                armPS.Append("{" + cr);
-                armPS.Append("   Write-Host 'Creating VNet-to-VNet Connection (Secondary to Primary): ' -NoNewLine" + cr);
-                armPS.Append("   $svcn=Get-AzureRmVirtualNetworkGatewayConnection -Name cn-" + currentSubscription.secondaryVnetName + "-" + currentSubscription.primaryVnetName + " -ResourceGroupName " + currentSubscription.secondaryResourceGroup + " -ErrorAction Ignore -WarningAction SilentlyContinue" + cr);
-                armPS.Append("   if($svcn) {Write-Host 'WARNING: Connection already exists--skipping creation'}" + cr);
-                armPS.Append("   else" + cr);
-                armPS.Append("   {" + cr);
-                armPS.Append("      $svcn=New-AzureRmVirtualNetworkGatewayConnection -Name cn-" + currentSubscription.secondaryVnetName + "-" + currentSubscription.primaryVnetName + " -ResourceGroupName " + currentSubscription.secondaryResourceGroup + " -Location " + currentSubscription.secondaryLocation + " -VirtualNetworkGateway1 $sgw -VirtualNetworkGateway2 $pgw -ConnectionType Vnet2Vnet -SharedKey '" + v2vSkey + "' -ErrorAction Ignore -WarningAction SilentlyContinue" + cr);
-                armPS.Append("      if($svcn) {Write-Host 'SUCCESS' -ForegroundColor Green}" + cr);
-                armPS.Append("      else" + cr);
-                armPS.Append("      {" + cr);
-                armPS.Append("         Write-Host 'FAILED- Unable to create connection' -ForegroundColor Red" + cr);
-                armPS.Append("         $global:script_error = $true" + cr);
-                armPS.Append("      }" + cr);
-                armPS.Append("   }" + cr);
-                armPS.Append("}" + cr);
+                if (currentSubscription.primaryOnly == false)
+                {
+                    //Create Secondary Gateway Connection to Local Gateway
+                    armPS.Append("######################################################" + cr);
+                    armPS.Append("# Create Secondary Gateway Connection to Local Gateway" + cr);
+                    armPS.Append("######################################################" + cr);
+                    armPS.Append("if($global:script_error -eq $false)" + cr);
+                    armPS.Append("{" + cr);
+                    armPS.Append("   Write-Host 'Creating Secondary Connection: ' -NoNewLine" + cr);
+                    armPS.Append("   $scn=Get-AzureRmVirtualNetworkGatewayConnection -Name cn-local-" + currentSubscription.secondaryLocation + " -ResourceGroupName " + currentSubscription.secondaryResourceGroup + " -ErrorAction Ignore -WarningAction SilentlyContinue" + cr);
+                    armPS.Append("   if($scn) {Write-Host 'WARNING: Connection already exists--skipping creation'}" + cr);
+                    armPS.Append("   else" + cr);
+                    armPS.Append("   {" + cr);
+                    string secSkey = CreateSharedKey();
+                    armPS.Append("      $scn=New-AzureRmVirtualNetworkGatewayConnection -Name cn-local-" + currentSubscription.secondaryLocation + " -ResourceGroupName " + currentSubscription.secondaryResourceGroup + " -Location " + currentSubscription.secondaryLocation + " -VirtualNetworkGateway1 $sgw -LocalNetworkGateway2 $slgw -ConnectionType IPsec -RoutingWeight 10 -SharedKey '" + secSkey + "' -ErrorAction Ignore -WarningAction SilentlyContinue" + cr);
+                    armPS.Append("      if($scn) {Write-Host 'SUCCESS' -ForegroundColor Green}" + cr);
+                    armPS.Append("      else" + cr);
+                    armPS.Append("      {" + cr);
+                    armPS.Append("         Write-Host 'FAILED- Unable to create connection' -ForegroundColor Red" + cr);
+                    armPS.Append("         $global:script_error = $true" + cr);
+                    armPS.Append("      }" + cr);
+                    armPS.Append("   }" + cr);
+                    armPS.Append("}" + cr);
+                    //Create VNet-to-VNet Connection (Primary to Secondary)
+                    armPS.Append("#######################################################" + cr);
+                    armPS.Append("# Create VNet-to-VNet Connection (Primary to Secondary)" + cr);
+                    armPS.Append("#######################################################" + cr);
+                    armPS.Append("if($global:script_error -eq $false)" + cr);
+                    armPS.Append("{" + cr);
+                    armPS.Append("   Write-Host 'Creating VNet-to-VNet Connection (Primary to Secondary): ' -NoNewLine" + cr);
+                    armPS.Append("   $pvcn=Get-AzureRmVirtualNetworkGatewayConnection -Name cn-" + currentSubscription.primaryVnetName + "-" + currentSubscription.secondaryVnetName + " -ResourceGroupName " + currentSubscription.primaryResourceGroup + " -ErrorAction Ignore -WarningAction SilentlyContinue" + cr);
+                    armPS.Append("   if($pvcn) {Write-Host 'WARNING: Connection already exists--skipping creation'}" + cr);
+                    armPS.Append("   else" + cr);
+                    armPS.Append("   {" + cr);
+                    string v2vSkey = CreateSharedKey();
+                    armPS.Append("      $pvcn=New-AzureRmVirtualNetworkGatewayConnection -Name cn-" + currentSubscription.primaryVnetName + "-" + currentSubscription.secondaryVnetName + " -ResourceGroupName " + currentSubscription.primaryResourceGroup + " -Location " + currentSubscription.primaryLocation + " -VirtualNetworkGateway1 $pgw -VirtualNetworkGateway2 $sgw -ConnectionType Vnet2Vnet -SharedKey '" + v2vSkey + "' -ErrorAction Ignore -WarningAction SilentlyContinue" + cr);
+                    armPS.Append("      if($pvcn) {Write-Host 'SUCCESS' -ForegroundColor Green}" + cr);
+                    armPS.Append("      else" + cr);
+                    armPS.Append("      {" + cr);
+                    armPS.Append("         Write-Host 'FAILED- Unable to create connection' -ForegroundColor Red" + cr);
+                    armPS.Append("         $global:script_error = $true" + cr);
+                    armPS.Append("      }" + cr);
+                    armPS.Append("   }" + cr);
+                    armPS.Append("}" + cr);
+                    //Create VNet-to-VNet Connection (Secondary to Primary)
+                    armPS.Append("#######################################################" + cr);
+                    armPS.Append("# Create VNet-to-VNet Connection (Secondary to Primary)" + cr);
+                    armPS.Append("#######################################################" + cr);
+                    armPS.Append("if($global:script_error -eq $false)" + cr);
+                    armPS.Append("{" + cr);
+                    armPS.Append("   Write-Host 'Creating VNet-to-VNet Connection (Secondary to Primary): ' -NoNewLine" + cr);
+                    armPS.Append("   $svcn=Get-AzureRmVirtualNetworkGatewayConnection -Name cn-" + currentSubscription.secondaryVnetName + "-" + currentSubscription.primaryVnetName + " -ResourceGroupName " + currentSubscription.secondaryResourceGroup + " -ErrorAction Ignore -WarningAction SilentlyContinue" + cr);
+                    armPS.Append("   if($svcn) {Write-Host 'WARNING: Connection already exists--skipping creation'}" + cr);
+                    armPS.Append("   else" + cr);
+                    armPS.Append("   {" + cr);
+                    armPS.Append("      $svcn=New-AzureRmVirtualNetworkGatewayConnection -Name cn-" + currentSubscription.secondaryVnetName + "-" + currentSubscription.primaryVnetName + " -ResourceGroupName " + currentSubscription.secondaryResourceGroup + " -Location " + currentSubscription.secondaryLocation + " -VirtualNetworkGateway1 $sgw -VirtualNetworkGateway2 $pgw -ConnectionType Vnet2Vnet -SharedKey '" + v2vSkey + "' -ErrorAction Ignore -WarningAction SilentlyContinue" + cr);
+                    armPS.Append("      if($svcn) {Write-Host 'SUCCESS' -ForegroundColor Green}" + cr);
+                    armPS.Append("      else" + cr);
+                    armPS.Append("      {" + cr);
+                    armPS.Append("         Write-Host 'FAILED- Unable to create connection' -ForegroundColor Red" + cr);
+                    armPS.Append("         $global:script_error = $true" + cr);
+                    armPS.Append("      }" + cr);
+                    armPS.Append("   }" + cr);
+                    armPS.Append("}" + cr);
+                }
             }
             //Report Script Success or Failure
             armPS.Append("Write-Host" + cr);
@@ -2170,9 +1718,6 @@ namespace FoundationsEditor
                     string primaryNSG = CreateNSG(1);
                     string savePrimaryNSG = currentSubscription.fileName + "-primarynsg.json";
                     File.WriteAllText(savePrimaryNSG, primaryNSG);
-                    //string primaryConn = CreateConnectionTemplate(1);
-                    //string savePrimaryConn = currentSubscription.fileName + "-primaryconn.json";
-                    //File.WriteAllText(savePrimaryConn, primaryConn);
                     if (currentSubscription.primaryOnly == false)
                     {
                         string secondaryVnet = CreateARMTemplate(2);
@@ -2181,9 +1726,6 @@ namespace FoundationsEditor
                         string secondaryNSG = CreateNSG(2);
                         string saveSecondaryNSG = currentSubscription.fileName + "-secondarynsg.json";
                         File.WriteAllText(saveSecondaryNSG, secondaryNSG);
-                        //string secondaryConn = CreateConnectionTemplate(2);
-                        //string saveSecondaryConn = currentSubscription.fileName + "-secondaryconn.json";
-                        //File.WriteAllText(saveSecondaryConn, secondaryConn);
                     }
                     string primaryARMPS = CreateARMDeploymentScript();
                     string savePrimaryARMPS = currentSubscription.fileName + "-deployARM.ps1";

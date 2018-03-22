@@ -113,7 +113,7 @@
             this.txtPrimaryIP.Name = "txtPrimaryIP";
             this.txtPrimaryIP.Size = new System.Drawing.Size(144, 18);
             this.txtPrimaryIP.TabIndex = 11;
-            this.toolTip1.SetToolTip(this.txtPrimaryIP, "10.128.0.0/21");
+            this.toolTip1.SetToolTip(this.txtPrimaryIP, "10.128.0.0/20");
             // 
             // lblIPSegment
             // 
@@ -374,6 +374,7 @@
             this.ckbAutoIP.TabIndex = 59;
             this.ckbAutoIP.Text = "Automatic IP Range";
             this.ckbAutoIP.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.toolTip1.SetToolTip(this.ckbAutoIP, "Automatically Calculate CIDR");
             this.ckbAutoIP.UseVisualStyleBackColor = true;
             this.ckbAutoIP.CheckedChanged += new System.EventHandler(this.ckbAutoIP_CheckedChanged);
             // 
@@ -450,7 +451,7 @@
             this.cboPrimaryLocation.Name = "cboPrimaryLocation";
             this.cboPrimaryLocation.Size = new System.Drawing.Size(144, 19);
             this.cboPrimaryLocation.TabIndex = 5;
-            this.toolTip1.SetToolTip(this.cboPrimaryLocation, "Select the Azure Region");
+            this.toolTip1.SetToolTip(this.cboPrimaryLocation, "Select the Primary Azure Region");
             this.cboPrimaryLocation.SelectedIndexChanged += new System.EventHandler(this.cboPrimaryLocation_SelectedIndexChanged);
             // 
             // cboSecondaryLocation
@@ -463,7 +464,7 @@
             this.cboSecondaryLocation.Name = "cboSecondaryLocation";
             this.cboSecondaryLocation.Size = new System.Drawing.Size(144, 19);
             this.cboSecondaryLocation.TabIndex = 6;
-            this.toolTip1.SetToolTip(this.cboSecondaryLocation, "Select the Azure Region");
+            this.toolTip1.SetToolTip(this.cboSecondaryLocation, "Select the Secondary Azure Region");
             this.cboSecondaryLocation.SelectedIndexChanged += new System.EventHandler(this.cboSecondaryLocation_SelectedIndexChanged);
             // 
             // txtSecondaryVnet
@@ -616,6 +617,7 @@
             this.ckbCreateGateway.Size = new System.Drawing.Size(137, 23);
             this.ckbCreateGateway.TabIndex = 29;
             this.ckbCreateGateway.Text = "Create Gateway(s)";
+            this.toolTip1.SetToolTip(this.ckbCreateGateway, "Create VNet Gateways");
             this.ckbCreateGateway.UseVisualStyleBackColor = true;
             this.ckbCreateGateway.CheckedChanged += new System.EventHandler(this.ckbCreateGateway_CheckedChanged);
             // 
@@ -627,6 +629,7 @@
             this.ckbCreateConnection.Size = new System.Drawing.Size(143, 23);
             this.ckbCreateConnection.TabIndex = 30;
             this.ckbCreateConnection.Text = "Create Connection(s)";
+            this.toolTip1.SetToolTip(this.ckbCreateConnection, "Create VPN Connections");
             this.ckbCreateConnection.UseVisualStyleBackColor = true;
             this.ckbCreateConnection.CheckedChanged += new System.EventHandler(this.ckbCreateConnection_CheckedChanged);
             // 
@@ -682,6 +685,7 @@
             this.btnSave.Size = new System.Drawing.Size(96, 39);
             this.btnSave.TabIndex = 33;
             this.btnSave.Text = "SAVE";
+            this.toolTip1.SetToolTip(this.btnSave, "Save Configuration and Create Script");
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
@@ -693,6 +697,7 @@
             this.btnLoad.Size = new System.Drawing.Size(96, 39);
             this.btnLoad.TabIndex = 80;
             this.btnLoad.Text = "LOAD";
+            this.toolTip1.SetToolTip(this.btnLoad, "Load Existing Configuration");
             this.btnLoad.UseVisualStyleBackColor = true;
             this.btnLoad.Click += new System.EventHandler(this.btnLoad_Click);
             // 
@@ -728,7 +733,7 @@
             this.radMAG.Size = new System.Drawing.Size(49, 17);
             this.radMAG.TabIndex = 2;
             this.radMAG.Text = "MAG";
-            this.toolTip1.SetToolTip(this.radMAG, "Microsoft Azure Commercial");
+            this.toolTip1.SetToolTip(this.radMAG, "Microsoft Azure Government");
             this.radMAG.UseVisualStyleBackColor = true;
             this.radMAG.CheckedChanged += new System.EventHandler(this.radMAG_CheckedChanged);
             // 
@@ -742,7 +747,7 @@
             this.radMAC.TabIndex = 1;
             this.radMAC.TabStop = true;
             this.radMAC.Text = "MAC";
-            this.toolTip1.SetToolTip(this.radMAC, "Microsoft Azure Government");
+            this.toolTip1.SetToolTip(this.radMAC, "Microsoft Azure Commercial");
             this.radMAC.UseVisualStyleBackColor = true;
             this.radMAC.CheckedChanged += new System.EventHandler(this.radMAC_CheckedChanged_1);
             // 
@@ -803,6 +808,7 @@
             this.ckbPS.Name = "ckbPS";
             this.ckbPS.Size = new System.Drawing.Size(15, 14);
             this.ckbPS.TabIndex = 88;
+            this.toolTip1.SetToolTip(this.ckbPS, "Check to Create PowerShell Only");
             this.ckbPS.UseVisualStyleBackColor = true;
             this.ckbPS.Visible = false;
             this.ckbPS.CheckedChanged += new System.EventHandler(this.ckbPS_CheckedChanged);
