@@ -42,15 +42,17 @@ namespace FoundationsEditor
     }
     public class AzureLocation
     {
-        public AzureLocation(string _displayName,string _location,string _environment)
+        public AzureLocation(string _displayName,string _location,string _environment,string _geoPair)
         {
             displayName = _displayName;
             location = _location;
             environment = _environment;
+            geoPair = _geoPair;
         }
         public string displayName { get; set; }
         public string location { get; set; }
         public string environment { get; set; }
+        public string geoPair { get; set; }
     }
     public class Subscription
     {

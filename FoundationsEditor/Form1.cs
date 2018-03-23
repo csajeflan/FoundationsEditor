@@ -27,10 +27,10 @@ namespace FoundationsEditor
             txtMessages.ForeColor = Color.Blue;
             txtMessages.BackColor = SystemColors.Control;
             txtMessages.Text = "Enter your Subscription ID or select LOAD to begin.";
-            lblBuild.Text = "Build: " + buildNumber + Environment.NewLine + "22-MAR-2018";
+            lblBuild.Text = "Build: " + buildNumber + Environment.NewLine + "23-MAR-2018";
             this.Text = "Azure Foundations Editor - " + buildNumber;
         }
-        public static string buildNumber = "1.0.1.0";
+        public static string buildNumber = "1.0.2.0";
         public static Subscription currentSubscription = new Subscription();
         List<AzureSubnet> subnets = new List<AzureSubnet>();
         List<AzureLocation> locations = new List<AzureLocation>();
@@ -1998,6 +1998,8 @@ namespace FoundationsEditor
         {
             var loc = locations.FirstOrDefault(l => l.displayName == cboPrimaryLocation.Text);
             currentSubscription.primaryLocation = loc.location;
+            var locPair = locations.FirstOrDefault(p => p.location == loc.geoPair);
+            cboSecondaryLocation.SelectedIndex = cboSecondaryLocation.FindStringExact(locPair.displayName);
         }
 
         private void cboSecondaryLocation_SelectedIndexChanged(object sender, EventArgs e)
