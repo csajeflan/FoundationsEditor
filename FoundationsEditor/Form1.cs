@@ -27,10 +27,10 @@ namespace FoundationsEditor
             txtMessages.ForeColor = Color.Blue;
             txtMessages.BackColor = SystemColors.Control;
             txtMessages.Text = "Enter your Subscription ID or select LOAD to begin.";
-            lblBuild.Text = "Build: " + buildNumber + Environment.NewLine + "23-MAR-2018";
+            lblBuild.Text = "Build: " + buildNumber + Environment.NewLine + "27-MAR-2018";
             this.Text = "Azure Foundations Editor - " + buildNumber;
         }
-        public static string buildNumber = "1.0.2.0";
+        public static string buildNumber = "1.0.2.1";
         public static Subscription currentSubscription = new Subscription();
         List<AzureSubnet> subnets = new List<AzureSubnet>();
         List<AzureLocation> locations = new List<AzureLocation>();
@@ -570,9 +570,9 @@ namespace FoundationsEditor
                     }
                     at.Append(jLine(4, null, null, "]"));
                     at.Append(jLine(3, "CloseBrace", null, ""));
-                    at.Append(jLine(2, "CloseBrace", null, ","));
                     if (currentSubscription.createGateway)
                     {
+                        at.Append(jLine(2, "CloseBrace", null, ","));
                         // Create Local Gateway
                         at.Append(jLine(2, "OpenBrace", null, ""));
                         at.Append(jLine(3, "name", currentSubscription.localGatewayName + "-" + currentSubscription.primaryLocation, ","));
@@ -597,41 +597,41 @@ namespace FoundationsEditor
                         at.Append(jLine(3, "properties", null, "{"));
                         at.Append(jLine(4, "publicIPAllocationMethod", "Dynamic", ""));
                         at.Append(jLine(3, "CloseBrace", null, ""));
-                        at.Append(jLine(3, "CloseBrace", null, ","));
+                        at.Append(jLine(2, "CloseBrace", null, ","));
                         // Create Virtual Network Gateway
-                        at.Append(jLine(3, "OpenBrace", null, ""));
-                        at.Append(jLine(4, "name", currentSubscription.primaryVnetName + "-gw", ","));
-                        at.Append(jLine(4, "type", "Microsoft.Network/virtualNetworkGateways", ","));
-                        at.Append(jLine(4, "apiVersion", "2018-01-01", ","));
-                        at.Append(jLine(4, "location", "[resourceGroup().location]", ","));
-                        at.Append(jLine(4, "dependsOn", null, "["));
-                        at.Append(jLine(5, null, null, "\"[concat('Microsoft.Network/publicIpAddresses/','" + currentSubscription.primaryVnetName + "-gw-ip')]" + "\","));
-                        at.Append(jLine(5, null, null, "\"[concat('Microsoft.Network/virtualNetworks/','" + currentSubscription.primaryVnetName + "')]" + "\""));
-                        at.Append(jLine(4, null, null, "],"));
-                        at.Append(jLine(4, "properties", null, "{"));
-                        at.Append(jLine(5, "ipConfigurations", null, "["));
-                        at.Append(jLine(6, "OpenBrace", null, ""));
-                        at.Append(jLine(7, "properties", null, "{"));
-                        at.Append(jLine(8, "privateIPAllocationMethod", "Dynamic", ","));
-                        at.Append(jLine(8, "subnet", null, "{"));
-                        at.Append(jLine(9, "id", "[variables('gatewaySubnetRef')]", ""));
-                        at.Append(jLine(8, "CloseBrace", null, ","));
-                        at.Append(jLine(8, "publicIPAddress", null, "{"));
-                        at.Append(jLine(9, "id", "[resourceId('Microsoft.Network/publicIPAddresses','" + currentSubscription.primaryVnetName + "-gw-ip')]", ""));
-                        at.Append(jLine(8, "CloseBrace", null, ""));
+                        at.Append(jLine(2, "OpenBrace", null, ""));
+                        at.Append(jLine(3, "name", currentSubscription.primaryVnetName + "-gw", ","));
+                        at.Append(jLine(3, "type", "Microsoft.Network/virtualNetworkGateways", ","));
+                        at.Append(jLine(3, "apiVersion", "2018-01-01", ","));
+                        at.Append(jLine(3, "location", "[resourceGroup().location]", ","));
+                        at.Append(jLine(3, "dependsOn", null, "["));
+                        at.Append(jLine(4, null, null, "\"[concat('Microsoft.Network/publicIpAddresses/','" + currentSubscription.primaryVnetName + "-gw-ip')]" + "\","));
+                        at.Append(jLine(4, null, null, "\"[concat('Microsoft.Network/virtualNetworks/','" + currentSubscription.primaryVnetName + "')]" + "\""));
+                        at.Append(jLine(3, null, null, "],"));
+                        at.Append(jLine(3, "properties", null, "{"));
+                        at.Append(jLine(4, "ipConfigurations", null, "["));
+                        at.Append(jLine(5, "OpenBrace", null, ""));
+                        at.Append(jLine(6, "properties", null, "{"));
+                        at.Append(jLine(7, "privateIPAllocationMethod", "Dynamic", ","));
+                        at.Append(jLine(7, "subnet", null, "{"));
+                        at.Append(jLine(8, "id", "[variables('gatewaySubnetRef')]", ""));
                         at.Append(jLine(7, "CloseBrace", null, ","));
-                        at.Append(jLine(7, "name", "vnetGatewayConfig", ""));
-                        at.Append(jLine(6, "CloseBrace", null, ""));
-                        at.Append(jLine(5, null, null, "],"));
-                        at.Append(jLine(5, "gatewayType", "Vpn", ","));
-                        at.Append(jLine(5, "vpnType", "RouteBased", ","));
-                        at.Append(jLine(5, "enableBgp", null, "false,"));
-                        at.Append(jLine(5, "sku", null, "{"));
-                        at.Append(jLine(6, "name", "VpnGw1", ","));
-                        at.Append(jLine(6, "tier", "VpnGw1", ""));
+                        at.Append(jLine(7, "publicIPAddress", null, "{"));
+                        at.Append(jLine(8, "id", "[resourceId('Microsoft.Network/publicIPAddresses','" + currentSubscription.primaryVnetName + "-gw-ip')]", ""));
+                        at.Append(jLine(7, "CloseBrace", null, ""));
+                        at.Append(jLine(6, "CloseBrace", null, ","));
+                        at.Append(jLine(6, "name", "vnetGatewayConfig", ""));
                         at.Append(jLine(5, "CloseBrace", null, ""));
+                        at.Append(jLine(4, null, null, "],"));
+                        at.Append(jLine(4, "gatewayType", "Vpn", ","));
+                        at.Append(jLine(4, "vpnType", "RouteBased", ","));
+                        at.Append(jLine(4, "enableBgp", null, "false,"));
+                        at.Append(jLine(4, "sku", null, "{"));
+                        at.Append(jLine(5, "name", "VpnGw1", ","));
+                        at.Append(jLine(5, "tier", "VpnGw1", ""));
                         at.Append(jLine(4, "CloseBrace", null, ""));
                         at.Append(jLine(3, "CloseBrace", null, ""));
+                        at.Append(jLine(2, "CloseBrace", null, ""));
                     }
                     else
                     {
@@ -678,9 +678,9 @@ namespace FoundationsEditor
                     }
                     at.Append(jLine(4, null, null, "]"));
                     at.Append(jLine(3, "CloseBrace", null, ""));
-                    at.Append(jLine(2, "CloseBrace", null, ","));
                     if (currentSubscription.createGateway)
                     {
+                        at.Append(jLine(2, "CloseBrace", null, ","));
                         // Create Local Gateway
                         at.Append(jLine(2, "OpenBrace", null, ""));
                         at.Append(jLine(3, "name", currentSubscription.localGatewayName + "-" + currentSubscription.secondaryLocation, ","));
@@ -705,41 +705,41 @@ namespace FoundationsEditor
                         at.Append(jLine(3, "properties", null, "{"));
                         at.Append(jLine(4, "publicIPAllocationMethod", "Dynamic", ""));
                         at.Append(jLine(3, "CloseBrace", null, ""));
-                        at.Append(jLine(3, "CloseBrace", null, ","));
+                        at.Append(jLine(2, "CloseBrace", null, ","));
                         // Create Virtual Network Gateway
-                        at.Append(jLine(3, "OpenBrace", null, ""));
-                        at.Append(jLine(4, "name", currentSubscription.secondaryVnetName + "-gw", ","));
-                        at.Append(jLine(4, "type", "Microsoft.Network/virtualNetworkGateways", ","));
-                        at.Append(jLine(4, "apiVersion", "2018-01-01", ","));
-                        at.Append(jLine(4, "location", "[resourceGroup().location]", ","));
-                        at.Append(jLine(4, "dependsOn", null, "["));
-                        at.Append(jLine(5, null, null, "\"[concat('Microsoft.Network/publicIpAddresses/','" + currentSubscription.secondaryVnetName + "-gw-ip')]" + "\","));
-                        at.Append(jLine(5, null, null, "\"[concat('Microsoft.Network/virtualNetworks/','" + currentSubscription.secondaryVnetName + "')]" + "\""));
-                        at.Append(jLine(4, null, null, "],"));
-                        at.Append(jLine(4, "properties", null, "{"));
-                        at.Append(jLine(5, "ipConfigurations", null, "["));
-                        at.Append(jLine(6, "OpenBrace", null, ""));
-                        at.Append(jLine(7, "properties", null, "{"));
-                        at.Append(jLine(8, "privateIPAllocationMethod", "Dynamic", ","));
-                        at.Append(jLine(8, "subnet", null, "{"));
-                        at.Append(jLine(9, "id", "[variables('gatewaySubnetRef')]", ""));
-                        at.Append(jLine(8, "CloseBrace", null, ","));
-                        at.Append(jLine(8, "publicIPAddress", null, "{"));
-                        at.Append(jLine(9, "id", "[resourceId('Microsoft.Network/publicIPAddresses','" + currentSubscription.secondaryVnetName + "-gw-ip')]", ""));
-                        at.Append(jLine(8, "CloseBrace", null, ""));
+                        at.Append(jLine(2, "OpenBrace", null, ""));
+                        at.Append(jLine(3, "name", currentSubscription.secondaryVnetName + "-gw", ","));
+                        at.Append(jLine(3, "type", "Microsoft.Network/virtualNetworkGateways", ","));
+                        at.Append(jLine(3, "apiVersion", "2018-01-01", ","));
+                        at.Append(jLine(3, "location", "[resourceGroup().location]", ","));
+                        at.Append(jLine(3, "dependsOn", null, "["));
+                        at.Append(jLine(4, null, null, "\"[concat('Microsoft.Network/publicIpAddresses/','" + currentSubscription.secondaryVnetName + "-gw-ip')]" + "\","));
+                        at.Append(jLine(4, null, null, "\"[concat('Microsoft.Network/virtualNetworks/','" + currentSubscription.secondaryVnetName + "')]" + "\""));
+                        at.Append(jLine(3, null, null, "],"));
+                        at.Append(jLine(3, "properties", null, "{"));
+                        at.Append(jLine(4, "ipConfigurations", null, "["));
+                        at.Append(jLine(5, "OpenBrace", null, ""));
+                        at.Append(jLine(6, "properties", null, "{"));
+                        at.Append(jLine(7, "privateIPAllocationMethod", "Dynamic", ","));
+                        at.Append(jLine(7, "subnet", null, "{"));
+                        at.Append(jLine(8, "id", "[variables('gatewaySubnetRef')]", ""));
                         at.Append(jLine(7, "CloseBrace", null, ","));
-                        at.Append(jLine(7, "name", "vnetGatewayConfig", ""));
-                        at.Append(jLine(6, "CloseBrace", null, ""));
-                        at.Append(jLine(5, null, null, "],"));
-                        at.Append(jLine(5, "gatewayType", "Vpn", ","));
-                        at.Append(jLine(5, "vpnType", "RouteBased", ","));
-                        at.Append(jLine(5, "enableBgp", null, "false,"));
-                        at.Append(jLine(5, "sku", null, "{"));
-                        at.Append(jLine(6, "name", "VpnGw1", ","));
-                        at.Append(jLine(6, "tier", "VpnGw1", ""));
+                        at.Append(jLine(7, "publicIPAddress", null, "{"));
+                        at.Append(jLine(8, "id", "[resourceId('Microsoft.Network/publicIPAddresses','" + currentSubscription.secondaryVnetName + "-gw-ip')]", ""));
+                        at.Append(jLine(7, "CloseBrace", null, ""));
+                        at.Append(jLine(6, "CloseBrace", null, ","));
+                        at.Append(jLine(6, "name", "vnetGatewayConfig", ""));
                         at.Append(jLine(5, "CloseBrace", null, ""));
+                        at.Append(jLine(4, null, null, "],"));
+                        at.Append(jLine(4, "gatewayType", "Vpn", ","));
+                        at.Append(jLine(4, "vpnType", "RouteBased", ","));
+                        at.Append(jLine(4, "enableBgp", null, "false,"));
+                        at.Append(jLine(4, "sku", null, "{"));
+                        at.Append(jLine(5, "name", "VpnGw1", ","));
+                        at.Append(jLine(5, "tier", "VpnGw1", ""));
                         at.Append(jLine(4, "CloseBrace", null, ""));
                         at.Append(jLine(3, "CloseBrace", null, ""));
+                        at.Append(jLine(2, "CloseBrace", null, ""));
                     }
                     else
                     {
@@ -1561,7 +1561,7 @@ namespace FoundationsEditor
             using (var selectFileDiaglog = new OpenFileDialog())
             {
                 selectFileDiaglog.DefaultExt = ".json";
-                selectFileDiaglog.Filter = "JSON files|*.json";
+                selectFileDiaglog.Filter = "JSON files|*foundationseditor.json";
                 if (selectFileDiaglog.ShowDialog() == DialogResult.OK)
                 {
                     currentSubscription.fileName = selectFileDiaglog.FileName;
@@ -1580,25 +1580,16 @@ namespace FoundationsEditor
             if (currentSubscription.generatePS) { ckbPS.Checked = true; }
             else { ckbPS.Checked = false; }
             var priLoc = locations.Find(l => l.location == currentSubscription.primaryLocation);
-            var secLoc = locations.Find(l => l.location == currentSubscription.secondaryLocation);
             cboPrimaryLocation.SelectedIndex = cboPrimaryLocation.FindStringExact(priLoc.displayName);
-            cboSecondaryLocation.SelectedIndex = cboSecondaryLocation.FindStringExact(secLoc.displayName);
             txtPrimaryRG.Text = currentSubscription.primaryResourceGroup;
-            txtSecondaryRG.Text = currentSubscription.secondaryResourceGroup;
             txtPrimaryVnet.Text = currentSubscription.primaryVnetName;
-            txtSecondaryVnet.Text = currentSubscription.secondaryVnetName;
             txtPrimaryIP.Text = currentSubscription.primaryIPSegment;
-            txtSecondaryIP.Text = currentSubscription.secondaryIPSegment;
             List<AzureSubnet> priSubs = new List<AzureSubnet>();
-            List<AzureSubnet> secSubs = new List<AzureSubnet>();
             for (int ctr = 0; ctr < 8; ctr++)
             {
                 AzureSubnet Psub = (AzureSubnet)currentSubscription.primarySubnets[ctr];
-                AzureSubnet Ssub = (AzureSubnet)currentSubscription.secondarySubnets[ctr];
                 priSubs.Add(Psub);
-                secSubs.Add(Ssub);
             }
-            //if(currentSubscription.autoIPRange == true) { ckbAutoIP.Checked = true; }
             txtPriIP0.Text = priSubs[0].ipSegment;
             txtPriIP1.Text = priSubs[1].ipSegment;
             txtPriIP2.Text = priSubs[2].ipSegment;
@@ -1615,14 +1606,29 @@ namespace FoundationsEditor
             txtSubnetName5.Text = priSubs[5].name;
             txtSubnetName6.Text = priSubs[6].name;
             txtSubnetName7.Text = priSubs[7].name;
-            txtSecIP0.Text = secSubs[0].ipSegment;
-            txtSecIP1.Text = secSubs[1].ipSegment;
-            txtSecIP2.Text = secSubs[2].ipSegment;
-            txtSecIP3.Text = secSubs[3].ipSegment;
-            txtSecIP4.Text = secSubs[4].ipSegment;
-            txtSecIP5.Text = secSubs[5].ipSegment;
-            txtSecIP6.Text = secSubs[6].ipSegment;
-            txtSecIP7.Text = secSubs[7].ipSegment;
+            if (currentSubscription.primaryOnly == false)
+            {
+                var secLoc = locations.Find(l => l.location == currentSubscription.secondaryLocation);
+                cboSecondaryLocation.SelectedIndex = cboSecondaryLocation.FindStringExact(secLoc.displayName);
+                txtSecondaryRG.Text = currentSubscription.secondaryResourceGroup;
+                txtSecondaryVnet.Text = currentSubscription.secondaryVnetName;
+                txtSecondaryIP.Text = currentSubscription.secondaryIPSegment;
+                List<AzureSubnet> secSubs = new List<AzureSubnet>();
+                for (int ctr = 0; ctr < 8; ctr++)
+                {
+                    AzureSubnet Ssub = (AzureSubnet)currentSubscription.secondarySubnets[ctr];
+                    secSubs.Add(Ssub);
+                }
+                txtSecIP0.Text = secSubs[0].ipSegment;
+                txtSecIP1.Text = secSubs[1].ipSegment;
+                txtSecIP2.Text = secSubs[2].ipSegment;
+                txtSecIP3.Text = secSubs[3].ipSegment;
+                txtSecIP4.Text = secSubs[4].ipSegment;
+                txtSecIP5.Text = secSubs[5].ipSegment;
+                txtSecIP6.Text = secSubs[6].ipSegment;
+                txtSecIP7.Text = secSubs[7].ipSegment;
+            }
+            //if(currentSubscription.autoIPRange == true) { ckbAutoIP.Checked = true; }
             if(currentSubscription.createGateway) { ckbCreateGateway.Checked = true; }
             else { ckbCreateGateway.Checked = false; }
             if (currentSubscription.createConnection) { ckbCreateConnection.Checked = true; }
@@ -1645,15 +1651,10 @@ namespace FoundationsEditor
                 currentSubscription.localGatewayName = txtLocalGWName.Text;
                 currentSubscription.localAddressSpace = txtOPAddress.Text;
                 currentSubscription.primaryResourceGroup = txtPrimaryRG.Text;
-                currentSubscription.secondaryResourceGroup = txtSecondaryRG.Text;
                 currentSubscription.primaryVnetName = txtPrimaryVnet.Text;
-                currentSubscription.secondaryVnetName = txtSecondaryVnet.Text;
                 currentSubscription.primaryIPSegment = txtPrimaryIP.Text;
-                currentSubscription.secondaryIPSegment = txtSecondaryIP.Text;
                 string[] priCidr = txtPrimaryIP.Text.Split('/');
                 currentSubscription.primaryCIDR = "/" + priCidr[1];
-                string[] secCidr = txtSecondaryIP.Text.Split('/');
-                currentSubscription.secondaryCIDR = "/" + secCidr[1];
                 List<AzureSubnet> priSubs = new List<AzureSubnet>();
                 AzureSubnet priSub0 = new AzureSubnet(txtSubnetName0.Text, txtPriIP0.Text);
                 priSubs.Add(priSub0);
@@ -1671,26 +1672,34 @@ namespace FoundationsEditor
                 priSubs.Add(priSub6);
                 AzureSubnet priSub7 = new AzureSubnet(txtSubnetName7.Text, txtPriIP7.Text);
                 priSubs.Add(priSub7);
-                List<AzureSubnet> secSubs = new List<AzureSubnet>();
-                AzureSubnet secSub0 = new AzureSubnet(txtSubnetName0.Text, txtSecIP0.Text);
-                secSubs.Add(secSub0);
-                AzureSubnet secSub1 = new AzureSubnet(txtSubnetName1.Text, txtSecIP1.Text);
-                secSubs.Add(secSub1);
-                AzureSubnet secSub2 = new AzureSubnet(txtSubnetName2.Text, txtSecIP2.Text);
-                secSubs.Add(secSub2);
-                AzureSubnet secSub3 = new AzureSubnet(txtSubnetName3.Text, txtSecIP3.Text);
-                secSubs.Add(secSub3);
-                AzureSubnet secSub4 = new AzureSubnet(txtSubnetName4.Text, txtSecIP4.Text);
-                secSubs.Add(secSub4);
-                AzureSubnet secSub5 = new AzureSubnet(txtSubnetName5.Text, txtSecIP5.Text);
-                secSubs.Add(secSub5);
-                AzureSubnet secSub6 = new AzureSubnet(txtSubnetName6.Text, txtSecIP6.Text);
-                secSubs.Add(secSub6);
-                AzureSubnet secSub7 = new AzureSubnet(txtSubnetName7.Text, txtSecIP7.Text);
-                secSubs.Add(secSub7);
                 currentSubscription.primarySubnets = priSubs;
-                currentSubscription.secondarySubnets = secSubs;
-                if (currentSubscription.primaryOnly == false) { vVpnKey = CreateSharedKey(); }
+                if (currentSubscription.primaryOnly == false)
+                {
+                    currentSubscription.secondaryResourceGroup = txtSecondaryRG.Text;
+                    currentSubscription.secondaryVnetName = txtSecondaryVnet.Text;
+                    currentSubscription.secondaryIPSegment = txtSecondaryIP.Text;
+                    string[] secCidr = txtSecondaryIP.Text.Split('/');
+                    currentSubscription.secondaryCIDR = "/" + secCidr[1];
+                    List<AzureSubnet> secSubs = new List<AzureSubnet>();
+                    AzureSubnet secSub0 = new AzureSubnet(txtSubnetName0.Text, txtSecIP0.Text);
+                    secSubs.Add(secSub0);
+                    AzureSubnet secSub1 = new AzureSubnet(txtSubnetName1.Text, txtSecIP1.Text);
+                    secSubs.Add(secSub1);
+                    AzureSubnet secSub2 = new AzureSubnet(txtSubnetName2.Text, txtSecIP2.Text);
+                    secSubs.Add(secSub2);
+                    AzureSubnet secSub3 = new AzureSubnet(txtSubnetName3.Text, txtSecIP3.Text);
+                    secSubs.Add(secSub3);
+                    AzureSubnet secSub4 = new AzureSubnet(txtSubnetName4.Text, txtSecIP4.Text);
+                    secSubs.Add(secSub4);
+                    AzureSubnet secSub5 = new AzureSubnet(txtSubnetName5.Text, txtSecIP5.Text);
+                    secSubs.Add(secSub5);
+                    AzureSubnet secSub6 = new AzureSubnet(txtSubnetName6.Text, txtSecIP6.Text);
+                    secSubs.Add(secSub6);
+                    AzureSubnet secSub7 = new AzureSubnet(txtSubnetName7.Text, txtSecIP7.Text);
+                    secSubs.Add(secSub7);
+                    currentSubscription.secondarySubnets = secSubs;
+                }
+                if (currentSubscription.primaryOnly == false && currentSubscription.createConnection) { vVpnKey = CreateSharedKey(); }
                 using (var selectFileDialog = new SaveFileDialog())
                 {
                     if (selectFileDialog.ShowDialog() == DialogResult.OK) { currentSubscription.fileName = selectFileDialog.FileName; }
@@ -1747,7 +1756,6 @@ namespace FoundationsEditor
                 txtMessages.BackColor = Color.Black;
                 txtMessages.Text = validation;
             }
-
         }
         public bool ValidateIPv4(string ipString)
         {
@@ -1762,7 +1770,7 @@ namespace FoundationsEditor
             string[] ipCidr = _cidr.Split('/');
             if (ValidateIPv4(ipCidr[0]))
             {
-                primaryIP.ipSegment = ipCidr[0];
+                primaryIP.ipSegment = ipCidr[0].Trim();
                 primaryIP.cidr = "/" + ipCidr[1];
                 if (primaryIP.cidr == "/20") { currentSubscription.ipSeparation = 32; }
                 else { currentSubscription.ipSeparation = 16; }
@@ -2019,6 +2027,7 @@ namespace FoundationsEditor
                 txtLocalGWName.Visible = true;
                 txtOPAddress.Visible = true;
                 currentSubscription.createGateway = true;
+                ckbCreateConnection.Visible = true;
             }
             else
             {
@@ -2029,6 +2038,8 @@ namespace FoundationsEditor
                 txtLocalGWName.Visible = false;
                 txtOPAddress.Visible = false;
                 currentSubscription.createGateway = false;
+                currentSubscription.createConnection = false;
+                ckbCreateConnection.Visible = false;
             }
         }
 

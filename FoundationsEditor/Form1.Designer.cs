@@ -108,10 +108,10 @@
             // txtPrimaryIP
             // 
             this.txtPrimaryIP.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPrimaryIP.Location = new System.Drawing.Point(9, 163);
-            this.txtPrimaryIP.Margin = new System.Windows.Forms.Padding(2);
+            this.txtPrimaryIP.Location = new System.Drawing.Point(18, 313);
+            this.txtPrimaryIP.Margin = new System.Windows.Forms.Padding(4);
             this.txtPrimaryIP.Name = "txtPrimaryIP";
-            this.txtPrimaryIP.Size = new System.Drawing.Size(144, 18);
+            this.txtPrimaryIP.Size = new System.Drawing.Size(284, 29);
             this.txtPrimaryIP.TabIndex = 11;
             this.toolTip1.SetToolTip(this.txtPrimaryIP, "10.128.0.0/20");
             // 
@@ -119,10 +119,10 @@
             // 
             this.lblIPSegment.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblIPSegment.ForeColor = System.Drawing.Color.Blue;
-            this.lblIPSegment.Location = new System.Drawing.Point(157, 162);
-            this.lblIPSegment.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblIPSegment.Location = new System.Drawing.Point(314, 312);
+            this.lblIPSegment.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblIPSegment.Name = "lblIPSegment";
-            this.lblIPSegment.Size = new System.Drawing.Size(152, 18);
+            this.lblIPSegment.Size = new System.Drawing.Size(304, 35);
             this.lblIPSegment.TabIndex = 58;
             this.lblIPSegment.Text = "IP Segment";
             this.lblIPSegment.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -131,10 +131,10 @@
             // 
             this.lblRegion.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblRegion.ForeColor = System.Drawing.Color.Blue;
-            this.lblRegion.Location = new System.Drawing.Point(157, 91);
-            this.lblRegion.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblRegion.Location = new System.Drawing.Point(314, 175);
+            this.lblRegion.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblRegion.Name = "lblRegion";
-            this.lblRegion.Size = new System.Drawing.Size(152, 18);
+            this.lblRegion.Size = new System.Drawing.Size(304, 35);
             this.lblRegion.TabIndex = 55;
             this.lblRegion.Text = "Region";
             this.lblRegion.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -142,10 +142,10 @@
             // txtPrimaryRG
             // 
             this.txtPrimaryRG.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPrimaryRG.Location = new System.Drawing.Point(9, 115);
-            this.txtPrimaryRG.Margin = new System.Windows.Forms.Padding(2);
+            this.txtPrimaryRG.Location = new System.Drawing.Point(18, 221);
+            this.txtPrimaryRG.Margin = new System.Windows.Forms.Padding(4);
             this.txtPrimaryRG.Name = "txtPrimaryRG";
-            this.txtPrimaryRG.Size = new System.Drawing.Size(144, 18);
+            this.txtPrimaryRG.Size = new System.Drawing.Size(284, 29);
             this.txtPrimaryRG.TabIndex = 7;
             this.toolTip1.SetToolTip(this.txtPrimaryRG, "rg-vnet-prod-{region}");
             // 
@@ -153,10 +153,10 @@
             // 
             this.lblResourceGrp.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblResourceGrp.ForeColor = System.Drawing.Color.Blue;
-            this.lblResourceGrp.Location = new System.Drawing.Point(157, 114);
-            this.lblResourceGrp.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblResourceGrp.Location = new System.Drawing.Point(314, 219);
+            this.lblResourceGrp.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblResourceGrp.Name = "lblResourceGrp";
-            this.lblResourceGrp.Size = new System.Drawing.Size(152, 18);
+            this.lblResourceGrp.Size = new System.Drawing.Size(304, 35);
             this.lblResourceGrp.TabIndex = 56;
             this.lblResourceGrp.Text = "Resource Group";
             this.lblResourceGrp.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -164,10 +164,10 @@
             // txtPrimaryVnet
             // 
             this.txtPrimaryVnet.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPrimaryVnet.Location = new System.Drawing.Point(9, 139);
-            this.txtPrimaryVnet.Margin = new System.Windows.Forms.Padding(2);
+            this.txtPrimaryVnet.Location = new System.Drawing.Point(18, 267);
+            this.txtPrimaryVnet.Margin = new System.Windows.Forms.Padding(4);
             this.txtPrimaryVnet.Name = "txtPrimaryVnet";
-            this.txtPrimaryVnet.Size = new System.Drawing.Size(144, 18);
+            this.txtPrimaryVnet.Size = new System.Drawing.Size(284, 29);
             this.txtPrimaryVnet.TabIndex = 9;
             this.toolTip1.SetToolTip(this.txtPrimaryVnet, "vnet-prod-{region}");
             // 
@@ -175,10 +175,10 @@
             // 
             this.lblVnetName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblVnetName.ForeColor = System.Drawing.Color.Blue;
-            this.lblVnetName.Location = new System.Drawing.Point(157, 139);
-            this.lblVnetName.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblVnetName.Location = new System.Drawing.Point(314, 267);
+            this.lblVnetName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblVnetName.Name = "lblVnetName";
-            this.lblVnetName.Size = new System.Drawing.Size(152, 18);
+            this.lblVnetName.Size = new System.Drawing.Size(304, 35);
             this.lblVnetName.TabIndex = 57;
             this.lblVnetName.Text = "VNet Name";
             this.lblVnetName.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -186,10 +186,10 @@
             // txtSubscriptionID
             // 
             this.txtSubscriptionID.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSubscriptionID.Location = new System.Drawing.Point(128, 5);
-            this.txtSubscriptionID.Margin = new System.Windows.Forms.Padding(2);
+            this.txtSubscriptionID.Location = new System.Drawing.Point(256, 10);
+            this.txtSubscriptionID.Margin = new System.Windows.Forms.Padding(4);
             this.txtSubscriptionID.Name = "txtSubscriptionID";
-            this.txtSubscriptionID.Size = new System.Drawing.Size(329, 18);
+            this.txtSubscriptionID.Size = new System.Drawing.Size(654, 29);
             this.txtSubscriptionID.TabIndex = 0;
             this.toolTip1.SetToolTip(this.txtSubscriptionID, "{GUID-Subscription ID}");
             // 
@@ -197,10 +197,10 @@
             // 
             this.lblSubscriptionID.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSubscriptionID.ForeColor = System.Drawing.Color.Blue;
-            this.lblSubscriptionID.Location = new System.Drawing.Point(6, 5);
-            this.lblSubscriptionID.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblSubscriptionID.Location = new System.Drawing.Point(12, 10);
+            this.lblSubscriptionID.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblSubscriptionID.Name = "lblSubscriptionID";
-            this.lblSubscriptionID.Size = new System.Drawing.Size(118, 18);
+            this.lblSubscriptionID.Size = new System.Drawing.Size(236, 35);
             this.lblSubscriptionID.TabIndex = 50;
             this.lblSubscriptionID.Text = "Subscription ID";
             this.lblSubscriptionID.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -208,11 +208,11 @@
             // txtSubnetName0
             // 
             this.txtSubnetName0.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSubnetName0.Location = new System.Drawing.Point(163, 231);
-            this.txtSubnetName0.Margin = new System.Windows.Forms.Padding(2);
+            this.txtSubnetName0.Location = new System.Drawing.Point(326, 444);
+            this.txtSubnetName0.Margin = new System.Windows.Forms.Padding(4);
             this.txtSubnetName0.Name = "txtSubnetName0";
             this.txtSubnetName0.ReadOnly = true;
-            this.txtSubnetName0.Size = new System.Drawing.Size(141, 18);
+            this.txtSubnetName0.Size = new System.Drawing.Size(278, 29);
             this.txtSubnetName0.TabIndex = 34;
             // 
             // lblSubnet
@@ -220,10 +220,10 @@
             this.lblSubnet.BackColor = System.Drawing.SystemColors.ControlDark;
             this.lblSubnet.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSubnet.ForeColor = System.Drawing.Color.Blue;
-            this.lblSubnet.Location = new System.Drawing.Point(163, 214);
-            this.lblSubnet.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblSubnet.Location = new System.Drawing.Point(326, 412);
+            this.lblSubnet.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblSubnet.Name = "lblSubnet";
-            this.lblSubnet.Size = new System.Drawing.Size(141, 15);
+            this.lblSubnet.Size = new System.Drawing.Size(282, 29);
             this.lblSubnet.TabIndex = 61;
             this.lblSubnet.Text = "Subnet Name";
             this.lblSubnet.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -231,146 +231,146 @@
             // txtSecIP0
             // 
             this.txtSecIP0.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSecIP0.Location = new System.Drawing.Point(313, 231);
-            this.txtSecIP0.Margin = new System.Windows.Forms.Padding(2);
+            this.txtSecIP0.Location = new System.Drawing.Point(626, 444);
+            this.txtSecIP0.Margin = new System.Windows.Forms.Padding(4);
             this.txtSecIP0.Name = "txtSecIP0";
-            this.txtSecIP0.Size = new System.Drawing.Size(144, 18);
+            this.txtSecIP0.Size = new System.Drawing.Size(284, 29);
             this.txtSecIP0.TabIndex = 14;
             // 
             // txtSecIP1
             // 
             this.txtSecIP1.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSecIP1.Location = new System.Drawing.Point(313, 255);
-            this.txtSecIP1.Margin = new System.Windows.Forms.Padding(2);
+            this.txtSecIP1.Location = new System.Drawing.Point(626, 490);
+            this.txtSecIP1.Margin = new System.Windows.Forms.Padding(4);
             this.txtSecIP1.Name = "txtSecIP1";
-            this.txtSecIP1.Size = new System.Drawing.Size(144, 18);
+            this.txtSecIP1.Size = new System.Drawing.Size(284, 29);
             this.txtSecIP1.TabIndex = 16;
             // 
             // txtSubnetName1
             // 
             this.txtSubnetName1.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSubnetName1.Location = new System.Drawing.Point(163, 255);
-            this.txtSubnetName1.Margin = new System.Windows.Forms.Padding(2);
+            this.txtSubnetName1.Location = new System.Drawing.Point(326, 490);
+            this.txtSubnetName1.Margin = new System.Windows.Forms.Padding(4);
             this.txtSubnetName1.Name = "txtSubnetName1";
-            this.txtSubnetName1.Size = new System.Drawing.Size(141, 18);
+            this.txtSubnetName1.Size = new System.Drawing.Size(278, 29);
             this.txtSubnetName1.TabIndex = 35;
             // 
             // txtSecIP2
             // 
             this.txtSecIP2.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSecIP2.Location = new System.Drawing.Point(313, 279);
-            this.txtSecIP2.Margin = new System.Windows.Forms.Padding(2);
+            this.txtSecIP2.Location = new System.Drawing.Point(626, 537);
+            this.txtSecIP2.Margin = new System.Windows.Forms.Padding(4);
             this.txtSecIP2.Name = "txtSecIP2";
-            this.txtSecIP2.Size = new System.Drawing.Size(144, 18);
+            this.txtSecIP2.Size = new System.Drawing.Size(284, 29);
             this.txtSecIP2.TabIndex = 18;
             // 
             // txtSubnetName2
             // 
             this.txtSubnetName2.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSubnetName2.Location = new System.Drawing.Point(163, 279);
-            this.txtSubnetName2.Margin = new System.Windows.Forms.Padding(2);
+            this.txtSubnetName2.Location = new System.Drawing.Point(326, 537);
+            this.txtSubnetName2.Margin = new System.Windows.Forms.Padding(4);
             this.txtSubnetName2.Name = "txtSubnetName2";
-            this.txtSubnetName2.Size = new System.Drawing.Size(141, 18);
+            this.txtSubnetName2.Size = new System.Drawing.Size(278, 29);
             this.txtSubnetName2.TabIndex = 36;
             // 
             // txtSecIP3
             // 
             this.txtSecIP3.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSecIP3.Location = new System.Drawing.Point(313, 303);
-            this.txtSecIP3.Margin = new System.Windows.Forms.Padding(2);
+            this.txtSecIP3.Location = new System.Drawing.Point(626, 583);
+            this.txtSecIP3.Margin = new System.Windows.Forms.Padding(4);
             this.txtSecIP3.Name = "txtSecIP3";
-            this.txtSecIP3.Size = new System.Drawing.Size(144, 18);
+            this.txtSecIP3.Size = new System.Drawing.Size(284, 29);
             this.txtSecIP3.TabIndex = 20;
             // 
             // txtSubnetName3
             // 
             this.txtSubnetName3.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSubnetName3.Location = new System.Drawing.Point(162, 303);
-            this.txtSubnetName3.Margin = new System.Windows.Forms.Padding(2);
+            this.txtSubnetName3.Location = new System.Drawing.Point(324, 583);
+            this.txtSubnetName3.Margin = new System.Windows.Forms.Padding(4);
             this.txtSubnetName3.Name = "txtSubnetName3";
-            this.txtSubnetName3.Size = new System.Drawing.Size(141, 18);
+            this.txtSubnetName3.Size = new System.Drawing.Size(278, 29);
             this.txtSubnetName3.TabIndex = 37;
             // 
             // txtSecIP4
             // 
             this.txtSecIP4.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSecIP4.Location = new System.Drawing.Point(313, 327);
-            this.txtSecIP4.Margin = new System.Windows.Forms.Padding(2);
+            this.txtSecIP4.Location = new System.Drawing.Point(626, 629);
+            this.txtSecIP4.Margin = new System.Windows.Forms.Padding(4);
             this.txtSecIP4.Name = "txtSecIP4";
-            this.txtSecIP4.Size = new System.Drawing.Size(144, 18);
+            this.txtSecIP4.Size = new System.Drawing.Size(284, 29);
             this.txtSecIP4.TabIndex = 22;
             // 
             // txtSubnetName4
             // 
             this.txtSubnetName4.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSubnetName4.Location = new System.Drawing.Point(162, 327);
-            this.txtSubnetName4.Margin = new System.Windows.Forms.Padding(2);
+            this.txtSubnetName4.Location = new System.Drawing.Point(324, 629);
+            this.txtSubnetName4.Margin = new System.Windows.Forms.Padding(4);
             this.txtSubnetName4.Name = "txtSubnetName4";
-            this.txtSubnetName4.Size = new System.Drawing.Size(141, 18);
+            this.txtSubnetName4.Size = new System.Drawing.Size(278, 29);
             this.txtSubnetName4.TabIndex = 38;
             // 
             // txtSecIP5
             // 
             this.txtSecIP5.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSecIP5.Location = new System.Drawing.Point(313, 351);
-            this.txtSecIP5.Margin = new System.Windows.Forms.Padding(2);
+            this.txtSecIP5.Location = new System.Drawing.Point(626, 675);
+            this.txtSecIP5.Margin = new System.Windows.Forms.Padding(4);
             this.txtSecIP5.Name = "txtSecIP5";
-            this.txtSecIP5.Size = new System.Drawing.Size(144, 18);
+            this.txtSecIP5.Size = new System.Drawing.Size(284, 29);
             this.txtSecIP5.TabIndex = 24;
             // 
             // txtSubnetName5
             // 
             this.txtSubnetName5.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSubnetName5.Location = new System.Drawing.Point(162, 351);
-            this.txtSubnetName5.Margin = new System.Windows.Forms.Padding(2);
+            this.txtSubnetName5.Location = new System.Drawing.Point(324, 675);
+            this.txtSubnetName5.Margin = new System.Windows.Forms.Padding(4);
             this.txtSubnetName5.Name = "txtSubnetName5";
-            this.txtSubnetName5.Size = new System.Drawing.Size(141, 18);
+            this.txtSubnetName5.Size = new System.Drawing.Size(278, 29);
             this.txtSubnetName5.TabIndex = 39;
             // 
             // txtSecIP6
             // 
             this.txtSecIP6.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSecIP6.Location = new System.Drawing.Point(313, 375);
-            this.txtSecIP6.Margin = new System.Windows.Forms.Padding(2);
+            this.txtSecIP6.Location = new System.Drawing.Point(626, 721);
+            this.txtSecIP6.Margin = new System.Windows.Forms.Padding(4);
             this.txtSecIP6.Name = "txtSecIP6";
-            this.txtSecIP6.Size = new System.Drawing.Size(144, 18);
+            this.txtSecIP6.Size = new System.Drawing.Size(284, 29);
             this.txtSecIP6.TabIndex = 26;
             // 
             // txtSubnetName6
             // 
             this.txtSubnetName6.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSubnetName6.Location = new System.Drawing.Point(162, 375);
-            this.txtSubnetName6.Margin = new System.Windows.Forms.Padding(2);
+            this.txtSubnetName6.Location = new System.Drawing.Point(324, 721);
+            this.txtSubnetName6.Margin = new System.Windows.Forms.Padding(4);
             this.txtSubnetName6.Name = "txtSubnetName6";
-            this.txtSubnetName6.Size = new System.Drawing.Size(141, 18);
+            this.txtSubnetName6.Size = new System.Drawing.Size(278, 29);
             this.txtSubnetName6.TabIndex = 40;
             // 
             // txtSecIP7
             // 
             this.txtSecIP7.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSecIP7.Location = new System.Drawing.Point(312, 399);
-            this.txtSecIP7.Margin = new System.Windows.Forms.Padding(2);
+            this.txtSecIP7.Location = new System.Drawing.Point(624, 767);
+            this.txtSecIP7.Margin = new System.Windows.Forms.Padding(4);
             this.txtSecIP7.Name = "txtSecIP7";
-            this.txtSecIP7.Size = new System.Drawing.Size(144, 18);
+            this.txtSecIP7.Size = new System.Drawing.Size(284, 29);
             this.txtSecIP7.TabIndex = 28;
             // 
             // txtSubnetName7
             // 
             this.txtSubnetName7.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSubnetName7.Location = new System.Drawing.Point(162, 399);
-            this.txtSubnetName7.Margin = new System.Windows.Forms.Padding(2);
+            this.txtSubnetName7.Location = new System.Drawing.Point(324, 767);
+            this.txtSubnetName7.Margin = new System.Windows.Forms.Padding(4);
             this.txtSubnetName7.Name = "txtSubnetName7";
-            this.txtSubnetName7.Size = new System.Drawing.Size(141, 18);
+            this.txtSubnetName7.Size = new System.Drawing.Size(278, 29);
             this.txtSubnetName7.TabIndex = 41;
             // 
             // ckbAutoIP
             // 
             this.ckbAutoIP.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ckbAutoIP.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.ckbAutoIP.Location = new System.Drawing.Point(9, 188);
-            this.ckbAutoIP.Margin = new System.Windows.Forms.Padding(2);
+            this.ckbAutoIP.Location = new System.Drawing.Point(18, 362);
+            this.ckbAutoIP.Margin = new System.Windows.Forms.Padding(4);
             this.ckbAutoIP.Name = "ckbAutoIP";
-            this.ckbAutoIP.Size = new System.Drawing.Size(152, 23);
+            this.ckbAutoIP.Size = new System.Drawing.Size(304, 44);
             this.ckbAutoIP.TabIndex = 59;
             this.ckbAutoIP.Text = "Automatic IP Range";
             this.ckbAutoIP.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -384,20 +384,20 @@
             this.pnlDeployment.Controls.Add(this.label10);
             this.pnlDeployment.Controls.Add(this.radBoth);
             this.pnlDeployment.Controls.Add(this.radPrimary);
-            this.pnlDeployment.Location = new System.Drawing.Point(279, 29);
-            this.pnlDeployment.Margin = new System.Windows.Forms.Padding(2);
+            this.pnlDeployment.Location = new System.Drawing.Point(558, 56);
+            this.pnlDeployment.Margin = new System.Windows.Forms.Padding(4);
             this.pnlDeployment.Name = "pnlDeployment";
-            this.pnlDeployment.Size = new System.Drawing.Size(178, 38);
+            this.pnlDeployment.Size = new System.Drawing.Size(354, 71);
             this.pnlDeployment.TabIndex = 52;
             // 
             // label10
             // 
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label10.ForeColor = System.Drawing.Color.Blue;
-            this.label10.Location = new System.Drawing.Point(2, 2);
-            this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label10.Location = new System.Drawing.Point(4, 4);
+            this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(172, 14);
+            this.label10.Size = new System.Drawing.Size(344, 27);
             this.label10.TabIndex = 4;
             this.label10.Text = "Region Deployment";
             this.label10.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -406,10 +406,10 @@
             // 
             this.radBoth.AutoSize = true;
             this.radBoth.Checked = true;
-            this.radBoth.Location = new System.Drawing.Point(116, 18);
-            this.radBoth.Margin = new System.Windows.Forms.Padding(2);
+            this.radBoth.Location = new System.Drawing.Point(232, 35);
+            this.radBoth.Margin = new System.Windows.Forms.Padding(4);
             this.radBoth.Name = "radBoth";
-            this.radBoth.Size = new System.Drawing.Size(47, 17);
+            this.radBoth.Size = new System.Drawing.Size(87, 29);
             this.radBoth.TabIndex = 4;
             this.radBoth.TabStop = true;
             this.radBoth.Text = "Both";
@@ -420,10 +420,10 @@
             // radPrimary
             // 
             this.radPrimary.AutoSize = true;
-            this.radPrimary.Location = new System.Drawing.Point(17, 18);
-            this.radPrimary.Margin = new System.Windows.Forms.Padding(2);
+            this.radPrimary.Location = new System.Drawing.Point(34, 35);
+            this.radPrimary.Margin = new System.Windows.Forms.Padding(4);
             this.radPrimary.Name = "radPrimary";
-            this.radPrimary.Size = new System.Drawing.Size(83, 17);
+            this.radPrimary.Size = new System.Drawing.Size(166, 29);
             this.radPrimary.TabIndex = 3;
             this.radPrimary.TabStop = true;
             this.radPrimary.Text = "Primary Only";
@@ -434,10 +434,10 @@
             // txtSecondaryRG
             // 
             this.txtSecondaryRG.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSecondaryRG.Location = new System.Drawing.Point(313, 116);
-            this.txtSecondaryRG.Margin = new System.Windows.Forms.Padding(2);
+            this.txtSecondaryRG.Location = new System.Drawing.Point(626, 223);
+            this.txtSecondaryRG.Margin = new System.Windows.Forms.Padding(4);
             this.txtSecondaryRG.Name = "txtSecondaryRG";
-            this.txtSecondaryRG.Size = new System.Drawing.Size(144, 18);
+            this.txtSecondaryRG.Size = new System.Drawing.Size(284, 29);
             this.txtSecondaryRG.TabIndex = 8;
             this.toolTip1.SetToolTip(this.txtSecondaryRG, "rg-vnet-prod-{region}");
             // 
@@ -446,10 +446,10 @@
             this.cboPrimaryLocation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboPrimaryLocation.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboPrimaryLocation.FormattingEnabled = true;
-            this.cboPrimaryLocation.Location = new System.Drawing.Point(9, 90);
-            this.cboPrimaryLocation.Margin = new System.Windows.Forms.Padding(2);
+            this.cboPrimaryLocation.Location = new System.Drawing.Point(18, 173);
+            this.cboPrimaryLocation.Margin = new System.Windows.Forms.Padding(4);
             this.cboPrimaryLocation.Name = "cboPrimaryLocation";
-            this.cboPrimaryLocation.Size = new System.Drawing.Size(144, 19);
+            this.cboPrimaryLocation.Size = new System.Drawing.Size(284, 30);
             this.cboPrimaryLocation.TabIndex = 5;
             this.toolTip1.SetToolTip(this.cboPrimaryLocation, "Select the Primary Azure Region");
             this.cboPrimaryLocation.SelectedIndexChanged += new System.EventHandler(this.cboPrimaryLocation_SelectedIndexChanged);
@@ -459,10 +459,10 @@
             this.cboSecondaryLocation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboSecondaryLocation.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboSecondaryLocation.FormattingEnabled = true;
-            this.cboSecondaryLocation.Location = new System.Drawing.Point(313, 91);
-            this.cboSecondaryLocation.Margin = new System.Windows.Forms.Padding(2);
+            this.cboSecondaryLocation.Location = new System.Drawing.Point(626, 175);
+            this.cboSecondaryLocation.Margin = new System.Windows.Forms.Padding(4);
             this.cboSecondaryLocation.Name = "cboSecondaryLocation";
-            this.cboSecondaryLocation.Size = new System.Drawing.Size(144, 19);
+            this.cboSecondaryLocation.Size = new System.Drawing.Size(284, 30);
             this.cboSecondaryLocation.TabIndex = 6;
             this.toolTip1.SetToolTip(this.cboSecondaryLocation, "Select the Secondary Azure Region");
             this.cboSecondaryLocation.SelectedIndexChanged += new System.EventHandler(this.cboSecondaryLocation_SelectedIndexChanged);
@@ -470,20 +470,20 @@
             // txtSecondaryVnet
             // 
             this.txtSecondaryVnet.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSecondaryVnet.Location = new System.Drawing.Point(313, 140);
-            this.txtSecondaryVnet.Margin = new System.Windows.Forms.Padding(2);
+            this.txtSecondaryVnet.Location = new System.Drawing.Point(626, 269);
+            this.txtSecondaryVnet.Margin = new System.Windows.Forms.Padding(4);
             this.txtSecondaryVnet.Name = "txtSecondaryVnet";
-            this.txtSecondaryVnet.Size = new System.Drawing.Size(144, 18);
+            this.txtSecondaryVnet.Size = new System.Drawing.Size(284, 29);
             this.txtSecondaryVnet.TabIndex = 10;
             this.toolTip1.SetToolTip(this.txtSecondaryVnet, "vnet-prod-{region}");
             // 
             // txtSecondaryIP
             // 
             this.txtSecondaryIP.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSecondaryIP.Location = new System.Drawing.Point(313, 164);
-            this.txtSecondaryIP.Margin = new System.Windows.Forms.Padding(2);
+            this.txtSecondaryIP.Location = new System.Drawing.Point(626, 315);
+            this.txtSecondaryIP.Margin = new System.Windows.Forms.Padding(4);
             this.txtSecondaryIP.Name = "txtSecondaryIP";
-            this.txtSecondaryIP.Size = new System.Drawing.Size(144, 18);
+            this.txtSecondaryIP.Size = new System.Drawing.Size(284, 29);
             this.txtSecondaryIP.TabIndex = 12;
             this.toolTip1.SetToolTip(this.txtSecondaryIP, "10.128.8.0/21");
             // 
@@ -492,10 +492,10 @@
             this.lblPrimaryIP.BackColor = System.Drawing.SystemColors.ControlDark;
             this.lblPrimaryIP.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPrimaryIP.ForeColor = System.Drawing.Color.Blue;
-            this.lblPrimaryIP.Location = new System.Drawing.Point(9, 214);
-            this.lblPrimaryIP.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblPrimaryIP.Location = new System.Drawing.Point(18, 412);
+            this.lblPrimaryIP.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblPrimaryIP.Name = "lblPrimaryIP";
-            this.lblPrimaryIP.Size = new System.Drawing.Size(144, 15);
+            this.lblPrimaryIP.Size = new System.Drawing.Size(288, 29);
             this.lblPrimaryIP.TabIndex = 60;
             this.lblPrimaryIP.Text = "IP Segment";
             this.lblPrimaryIP.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -503,73 +503,73 @@
             // txtPriIP0
             // 
             this.txtPriIP0.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPriIP0.Location = new System.Drawing.Point(9, 231);
-            this.txtPriIP0.Margin = new System.Windows.Forms.Padding(2);
+            this.txtPriIP0.Location = new System.Drawing.Point(18, 444);
+            this.txtPriIP0.Margin = new System.Windows.Forms.Padding(4);
             this.txtPriIP0.Name = "txtPriIP0";
-            this.txtPriIP0.Size = new System.Drawing.Size(144, 18);
+            this.txtPriIP0.Size = new System.Drawing.Size(284, 29);
             this.txtPriIP0.TabIndex = 13;
             // 
             // txtPriIP1
             // 
             this.txtPriIP1.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPriIP1.Location = new System.Drawing.Point(9, 255);
-            this.txtPriIP1.Margin = new System.Windows.Forms.Padding(2);
+            this.txtPriIP1.Location = new System.Drawing.Point(18, 490);
+            this.txtPriIP1.Margin = new System.Windows.Forms.Padding(4);
             this.txtPriIP1.Name = "txtPriIP1";
-            this.txtPriIP1.Size = new System.Drawing.Size(144, 18);
+            this.txtPriIP1.Size = new System.Drawing.Size(284, 29);
             this.txtPriIP1.TabIndex = 15;
             // 
             // txtPriIP2
             // 
             this.txtPriIP2.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPriIP2.Location = new System.Drawing.Point(9, 279);
-            this.txtPriIP2.Margin = new System.Windows.Forms.Padding(2);
+            this.txtPriIP2.Location = new System.Drawing.Point(18, 537);
+            this.txtPriIP2.Margin = new System.Windows.Forms.Padding(4);
             this.txtPriIP2.Name = "txtPriIP2";
-            this.txtPriIP2.Size = new System.Drawing.Size(144, 18);
+            this.txtPriIP2.Size = new System.Drawing.Size(284, 29);
             this.txtPriIP2.TabIndex = 17;
             // 
             // txtPriIP3
             // 
             this.txtPriIP3.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPriIP3.Location = new System.Drawing.Point(9, 303);
-            this.txtPriIP3.Margin = new System.Windows.Forms.Padding(2);
+            this.txtPriIP3.Location = new System.Drawing.Point(18, 583);
+            this.txtPriIP3.Margin = new System.Windows.Forms.Padding(4);
             this.txtPriIP3.Name = "txtPriIP3";
-            this.txtPriIP3.Size = new System.Drawing.Size(144, 18);
+            this.txtPriIP3.Size = new System.Drawing.Size(284, 29);
             this.txtPriIP3.TabIndex = 19;
             // 
             // txtPriIP4
             // 
             this.txtPriIP4.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPriIP4.Location = new System.Drawing.Point(9, 327);
-            this.txtPriIP4.Margin = new System.Windows.Forms.Padding(2);
+            this.txtPriIP4.Location = new System.Drawing.Point(18, 629);
+            this.txtPriIP4.Margin = new System.Windows.Forms.Padding(4);
             this.txtPriIP4.Name = "txtPriIP4";
-            this.txtPriIP4.Size = new System.Drawing.Size(144, 18);
+            this.txtPriIP4.Size = new System.Drawing.Size(284, 29);
             this.txtPriIP4.TabIndex = 21;
             // 
             // txtPriIP5
             // 
             this.txtPriIP5.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPriIP5.Location = new System.Drawing.Point(9, 351);
-            this.txtPriIP5.Margin = new System.Windows.Forms.Padding(2);
+            this.txtPriIP5.Location = new System.Drawing.Point(18, 675);
+            this.txtPriIP5.Margin = new System.Windows.Forms.Padding(4);
             this.txtPriIP5.Name = "txtPriIP5";
-            this.txtPriIP5.Size = new System.Drawing.Size(144, 18);
+            this.txtPriIP5.Size = new System.Drawing.Size(284, 29);
             this.txtPriIP5.TabIndex = 23;
             // 
             // txtPriIP6
             // 
             this.txtPriIP6.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPriIP6.Location = new System.Drawing.Point(9, 375);
-            this.txtPriIP6.Margin = new System.Windows.Forms.Padding(2);
+            this.txtPriIP6.Location = new System.Drawing.Point(18, 721);
+            this.txtPriIP6.Margin = new System.Windows.Forms.Padding(4);
             this.txtPriIP6.Name = "txtPriIP6";
-            this.txtPriIP6.Size = new System.Drawing.Size(144, 18);
+            this.txtPriIP6.Size = new System.Drawing.Size(284, 29);
             this.txtPriIP6.TabIndex = 25;
             // 
             // txtPriIP7
             // 
             this.txtPriIP7.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPriIP7.Location = new System.Drawing.Point(9, 399);
-            this.txtPriIP7.Margin = new System.Windows.Forms.Padding(2);
+            this.txtPriIP7.Location = new System.Drawing.Point(18, 767);
+            this.txtPriIP7.Margin = new System.Windows.Forms.Padding(4);
             this.txtPriIP7.Name = "txtPriIP7";
-            this.txtPriIP7.Size = new System.Drawing.Size(144, 18);
+            this.txtPriIP7.Size = new System.Drawing.Size(284, 29);
             this.txtPriIP7.TabIndex = 27;
             // 
             // lblPrimary
@@ -577,9 +577,10 @@
             this.lblPrimary.BackColor = System.Drawing.SystemColors.ControlDark;
             this.lblPrimary.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPrimary.ForeColor = System.Drawing.Color.Blue;
-            this.lblPrimary.Location = new System.Drawing.Point(9, 70);
+            this.lblPrimary.Location = new System.Drawing.Point(18, 135);
+            this.lblPrimary.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblPrimary.Name = "lblPrimary";
-            this.lblPrimary.Size = new System.Drawing.Size(144, 18);
+            this.lblPrimary.Size = new System.Drawing.Size(288, 35);
             this.lblPrimary.TabIndex = 53;
             this.lblPrimary.Text = "PRIMARY";
             this.lblPrimary.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -589,9 +590,10 @@
             this.lblSecondary.BackColor = System.Drawing.SystemColors.ControlDark;
             this.lblSecondary.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSecondary.ForeColor = System.Drawing.Color.Blue;
-            this.lblSecondary.Location = new System.Drawing.Point(313, 70);
+            this.lblSecondary.Location = new System.Drawing.Point(626, 135);
+            this.lblSecondary.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblSecondary.Name = "lblSecondary";
-            this.lblSecondary.Size = new System.Drawing.Size(144, 18);
+            this.lblSecondary.Size = new System.Drawing.Size(288, 35);
             this.lblSecondary.TabIndex = 54;
             this.lblSecondary.Text = "SECONDARY";
             this.lblSecondary.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -601,10 +603,10 @@
             this.lblSecondaryIP.BackColor = System.Drawing.SystemColors.ControlDark;
             this.lblSecondaryIP.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSecondaryIP.ForeColor = System.Drawing.Color.Blue;
-            this.lblSecondaryIP.Location = new System.Drawing.Point(313, 214);
-            this.lblSecondaryIP.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblSecondaryIP.Location = new System.Drawing.Point(626, 412);
+            this.lblSecondaryIP.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblSecondaryIP.Name = "lblSecondaryIP";
-            this.lblSecondaryIP.Size = new System.Drawing.Size(144, 15);
+            this.lblSecondaryIP.Size = new System.Drawing.Size(288, 29);
             this.lblSecondaryIP.TabIndex = 62;
             this.lblSecondaryIP.Text = "IP Segment";
             this.lblSecondaryIP.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -612,9 +614,10 @@
             // ckbCreateGateway
             // 
             this.ckbCreateGateway.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ckbCreateGateway.Location = new System.Drawing.Point(166, 188);
+            this.ckbCreateGateway.Location = new System.Drawing.Point(332, 362);
+            this.ckbCreateGateway.Margin = new System.Windows.Forms.Padding(6);
             this.ckbCreateGateway.Name = "ckbCreateGateway";
-            this.ckbCreateGateway.Size = new System.Drawing.Size(137, 23);
+            this.ckbCreateGateway.Size = new System.Drawing.Size(274, 44);
             this.ckbCreateGateway.TabIndex = 29;
             this.ckbCreateGateway.Text = "Create Gateway(s)";
             this.toolTip1.SetToolTip(this.ckbCreateGateway, "Create VNet Gateways");
@@ -624,22 +627,25 @@
             // ckbCreateConnection
             // 
             this.ckbCreateConnection.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ckbCreateConnection.Location = new System.Drawing.Point(313, 188);
+            this.ckbCreateConnection.Location = new System.Drawing.Point(626, 362);
+            this.ckbCreateConnection.Margin = new System.Windows.Forms.Padding(6);
             this.ckbCreateConnection.Name = "ckbCreateConnection";
-            this.ckbCreateConnection.Size = new System.Drawing.Size(143, 23);
+            this.ckbCreateConnection.Size = new System.Drawing.Size(286, 44);
             this.ckbCreateConnection.TabIndex = 30;
             this.ckbCreateConnection.Text = "Create Connection(s)";
             this.toolTip1.SetToolTip(this.ckbCreateConnection, "Create VPN Connections");
             this.ckbCreateConnection.UseVisualStyleBackColor = true;
+            this.ckbCreateConnection.Visible = false;
             this.ckbCreateConnection.CheckedChanged += new System.EventHandler(this.ckbCreateConnection_CheckedChanged);
             // 
             // lblLocalGWName
             // 
             this.lblLocalGWName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblLocalGWName.ForeColor = System.Drawing.Color.Blue;
-            this.lblLocalGWName.Location = new System.Drawing.Point(16, 419);
+            this.lblLocalGWName.Location = new System.Drawing.Point(32, 806);
+            this.lblLocalGWName.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblLocalGWName.Name = "lblLocalGWName";
-            this.lblLocalGWName.Size = new System.Drawing.Size(137, 20);
+            this.lblLocalGWName.Size = new System.Drawing.Size(274, 38);
             this.lblLocalGWName.TabIndex = 63;
             this.lblLocalGWName.Text = "Local Gateway Name";
             this.lblLocalGWName.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -648,9 +654,10 @@
             // txtLocalGWName
             // 
             this.txtLocalGWName.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtLocalGWName.Location = new System.Drawing.Point(162, 422);
+            this.txtLocalGWName.Location = new System.Drawing.Point(324, 812);
+            this.txtLocalGWName.Margin = new System.Windows.Forms.Padding(6);
             this.txtLocalGWName.Name = "txtLocalGWName";
-            this.txtLocalGWName.Size = new System.Drawing.Size(213, 18);
+            this.txtLocalGWName.Size = new System.Drawing.Size(422, 29);
             this.txtLocalGWName.TabIndex = 31;
             this.toolTip1.SetToolTip(this.txtLocalGWName, "gw-local");
             this.txtLocalGWName.Visible = false;
@@ -659,9 +666,10 @@
             // 
             this.lblEdgeIP.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblEdgeIP.ForeColor = System.Drawing.Color.Blue;
-            this.lblEdgeIP.Location = new System.Drawing.Point(13, 443);
+            this.lblEdgeIP.Location = new System.Drawing.Point(26, 852);
+            this.lblEdgeIP.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblEdgeIP.Name = "lblEdgeIP";
-            this.lblEdgeIP.Size = new System.Drawing.Size(140, 20);
+            this.lblEdgeIP.Size = new System.Drawing.Size(280, 38);
             this.lblEdgeIP.TabIndex = 64;
             this.lblEdgeIP.Text = "On-Premises Edge IP";
             this.lblEdgeIP.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -670,9 +678,10 @@
             // txtEdgeIP
             // 
             this.txtEdgeIP.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtEdgeIP.Location = new System.Drawing.Point(163, 446);
+            this.txtEdgeIP.Location = new System.Drawing.Point(326, 858);
+            this.txtEdgeIP.Margin = new System.Windows.Forms.Padding(6);
             this.txtEdgeIP.Name = "txtEdgeIP";
-            this.txtEdgeIP.Size = new System.Drawing.Size(212, 18);
+            this.txtEdgeIP.Size = new System.Drawing.Size(420, 29);
             this.txtEdgeIP.TabIndex = 32;
             this.toolTip1.SetToolTip(this.txtEdgeIP, "61.72.83.94");
             this.txtEdgeIP.Visible = false;
@@ -680,9 +689,10 @@
             // btnSave
             // 
             this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSave.Location = new System.Drawing.Point(360, 550);
+            this.btnSave.Location = new System.Drawing.Point(720, 1058);
+            this.btnSave.Margin = new System.Windows.Forms.Padding(6);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(96, 39);
+            this.btnSave.Size = new System.Drawing.Size(192, 75);
             this.btnSave.TabIndex = 33;
             this.btnSave.Text = "SAVE";
             this.toolTip1.SetToolTip(this.btnSave, "Save Configuration and Create Script");
@@ -692,9 +702,10 @@
             // btnLoad
             // 
             this.btnLoad.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLoad.Location = new System.Drawing.Point(9, 550);
+            this.btnLoad.Location = new System.Drawing.Point(18, 1058);
+            this.btnLoad.Margin = new System.Windows.Forms.Padding(6);
             this.btnLoad.Name = "btnLoad";
-            this.btnLoad.Size = new System.Drawing.Size(96, 39);
+            this.btnLoad.Size = new System.Drawing.Size(192, 75);
             this.btnLoad.TabIndex = 80;
             this.btnLoad.Text = "LOAD";
             this.toolTip1.SetToolTip(this.btnLoad, "Load Existing Configuration");
@@ -707,19 +718,20 @@
             this.pnlEnvironment.Controls.Add(this.lblEnvironment);
             this.pnlEnvironment.Controls.Add(this.radMAG);
             this.pnlEnvironment.Controls.Add(this.radMAC);
-            this.pnlEnvironment.Location = new System.Drawing.Point(9, 29);
+            this.pnlEnvironment.Location = new System.Drawing.Point(18, 56);
+            this.pnlEnvironment.Margin = new System.Windows.Forms.Padding(6);
             this.pnlEnvironment.Name = "pnlEnvironment";
-            this.pnlEnvironment.Size = new System.Drawing.Size(178, 38);
+            this.pnlEnvironment.Size = new System.Drawing.Size(354, 71);
             this.pnlEnvironment.TabIndex = 51;
             // 
             // lblEnvironment
             // 
             this.lblEnvironment.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblEnvironment.ForeColor = System.Drawing.Color.Blue;
-            this.lblEnvironment.Location = new System.Drawing.Point(2, 2);
-            this.lblEnvironment.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblEnvironment.Location = new System.Drawing.Point(4, 4);
+            this.lblEnvironment.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblEnvironment.Name = "lblEnvironment";
-            this.lblEnvironment.Size = new System.Drawing.Size(172, 13);
+            this.lblEnvironment.Size = new System.Drawing.Size(344, 25);
             this.lblEnvironment.TabIndex = 7;
             this.lblEnvironment.Text = "Environment";
             this.lblEnvironment.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -727,10 +739,10 @@
             // radMAG
             // 
             this.radMAG.AutoSize = true;
-            this.radMAG.Location = new System.Drawing.Point(104, 17);
-            this.radMAG.Margin = new System.Windows.Forms.Padding(2);
+            this.radMAG.Location = new System.Drawing.Point(208, 33);
+            this.radMAG.Margin = new System.Windows.Forms.Padding(4);
             this.radMAG.Name = "radMAG";
-            this.radMAG.Size = new System.Drawing.Size(49, 17);
+            this.radMAG.Size = new System.Drawing.Size(91, 29);
             this.radMAG.TabIndex = 2;
             this.radMAG.Text = "MAG";
             this.toolTip1.SetToolTip(this.radMAG, "Microsoft Azure Government");
@@ -740,10 +752,10 @@
             // radMAC
             // 
             this.radMAC.AutoSize = true;
-            this.radMAC.Location = new System.Drawing.Point(25, 18);
-            this.radMAC.Margin = new System.Windows.Forms.Padding(2);
+            this.radMAC.Location = new System.Drawing.Point(50, 35);
+            this.radMAC.Margin = new System.Windows.Forms.Padding(4);
             this.radMAC.Name = "radMAC";
-            this.radMAC.Size = new System.Drawing.Size(48, 17);
+            this.radMAC.Size = new System.Drawing.Size(90, 29);
             this.radMAC.TabIndex = 1;
             this.radMAC.TabStop = true;
             this.radMAC.Text = "MAC";
@@ -755,26 +767,29 @@
             // 
             this.txtMessages.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtMessages.ForeColor = System.Drawing.Color.Blue;
-            this.txtMessages.Location = new System.Drawing.Point(10, 501);
+            this.txtMessages.Location = new System.Drawing.Point(20, 963);
+            this.txtMessages.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.txtMessages.Name = "txtMessages";
-            this.txtMessages.Size = new System.Drawing.Size(446, 46);
+            this.txtMessages.Size = new System.Drawing.Size(892, 88);
             this.txtMessages.TabIndex = 83;
             this.txtMessages.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblBuild
             // 
-            this.lblBuild.Location = new System.Drawing.Point(111, 550);
+            this.lblBuild.Location = new System.Drawing.Point(222, 1058);
+            this.lblBuild.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblBuild.Name = "lblBuild";
-            this.lblBuild.Size = new System.Drawing.Size(243, 39);
+            this.lblBuild.Size = new System.Drawing.Size(486, 75);
             this.lblBuild.TabIndex = 84;
             this.lblBuild.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // txtOPAddress
             // 
             this.txtOPAddress.Font = new System.Drawing.Font("Lucida Console", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtOPAddress.Location = new System.Drawing.Point(163, 470);
+            this.txtOPAddress.Location = new System.Drawing.Point(326, 904);
+            this.txtOPAddress.Margin = new System.Windows.Forms.Padding(6);
             this.txtOPAddress.Name = "txtOPAddress";
-            this.txtOPAddress.Size = new System.Drawing.Size(212, 18);
+            this.txtOPAddress.Size = new System.Drawing.Size(420, 29);
             this.txtOPAddress.TabIndex = 85;
             this.toolTip1.SetToolTip(this.txtOPAddress, "10.0.0.0/9");
             this.txtOPAddress.Visible = false;
@@ -783,9 +798,10 @@
             // 
             this.lblOPAddress.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblOPAddress.ForeColor = System.Drawing.Color.Blue;
-            this.lblOPAddress.Location = new System.Drawing.Point(10, 467);
+            this.lblOPAddress.Location = new System.Drawing.Point(20, 898);
+            this.lblOPAddress.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblOPAddress.Name = "lblOPAddress";
-            this.lblOPAddress.Size = new System.Drawing.Size(143, 20);
+            this.lblOPAddress.Size = new System.Drawing.Size(286, 38);
             this.lblOPAddress.TabIndex = 86;
             this.lblOPAddress.Text = "On-Premises IP Range";
             this.lblOPAddress.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -794,9 +810,10 @@
             // picAzure
             // 
             this.picAzure.Image = ((System.Drawing.Image)(resources.GetObject("picAzure.Image")));
-            this.picAzure.Location = new System.Drawing.Point(194, 28);
+            this.picAzure.Location = new System.Drawing.Point(388, 54);
+            this.picAzure.Margin = new System.Windows.Forms.Padding(6);
             this.picAzure.Name = "picAzure";
-            this.picAzure.Size = new System.Drawing.Size(78, 78);
+            this.picAzure.Size = new System.Drawing.Size(156, 150);
             this.picAzure.TabIndex = 87;
             this.picAzure.TabStop = false;
             this.picAzure.Click += new System.EventHandler(this.picAzure_Click);
@@ -804,9 +821,10 @@
             // ckbPS
             // 
             this.ckbPS.AutoSize = true;
-            this.ckbPS.Location = new System.Drawing.Point(410, 424);
+            this.ckbPS.Location = new System.Drawing.Point(820, 815);
+            this.ckbPS.Margin = new System.Windows.Forms.Padding(6);
             this.ckbPS.Name = "ckbPS";
-            this.ckbPS.Size = new System.Drawing.Size(15, 14);
+            this.ckbPS.Size = new System.Drawing.Size(28, 27);
             this.ckbPS.TabIndex = 88;
             this.toolTip1.SetToolTip(this.ckbPS, "Check to Create PowerShell Only");
             this.ckbPS.UseVisualStyleBackColor = true;
@@ -815,9 +833,10 @@
             // 
             // lblPS
             // 
-            this.lblPS.Location = new System.Drawing.Point(381, 441);
+            this.lblPS.Location = new System.Drawing.Point(762, 848);
+            this.lblPS.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lblPS.Name = "lblPS";
-            this.lblPS.Size = new System.Drawing.Size(75, 23);
+            this.lblPS.Size = new System.Drawing.Size(150, 44);
             this.lblPS.TabIndex = 89;
             this.lblPS.Text = "PowerShell";
             this.lblPS.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -825,9 +844,10 @@
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(464, 601);
+            this.AutoSize = true;
+            this.ClientSize = new System.Drawing.Size(931, 1156);
             this.Controls.Add(this.lblPS);
             this.Controls.Add(this.ckbPS);
             this.Controls.Add(this.picAzure);
@@ -889,7 +909,9 @@
             this.Controls.Add(this.lblResourceGrp);
             this.Controls.Add(this.txtPrimaryVnet);
             this.Controls.Add(this.lblVnetName);
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Margin = new System.Windows.Forms.Padding(4);
+            this.MaximizeBox = false;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Azure Foundations Editor";
