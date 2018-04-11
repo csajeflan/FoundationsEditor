@@ -27,10 +27,10 @@ namespace FoundationsEditor
             txtMessages.ForeColor = Color.Blue;
             txtMessages.BackColor = SystemColors.Control;
             txtMessages.Text = "Enter your Subscription ID or select LOAD to begin.";
-            lblBuild.Text = "Build: " + buildNumber + Environment.NewLine + "27-MAR-2018";
+            lblBuild.Text = "Build: " + buildNumber + Environment.NewLine + "11-APR-2018";
             this.Text = "Azure Foundations Editor - " + buildNumber;
         }
-        public static string buildNumber = "1.0.2.1";
+        public static string buildNumber = "1.0.2.2";
         public static Subscription currentSubscription = new Subscription();
         List<AzureSubnet> subnets = new List<AzureSubnet>();
         List<AzureLocation> locations = new List<AzureLocation>();
@@ -1012,7 +1012,7 @@ namespace FoundationsEditor
             armPS.Append("if($global:script_error) {Write-Host 'ERROR: An Error Has Occurred. Script Halted.' -ForegroundColor Red}" + cr);
             armPS.Append("else" + cr);
             armPS.Append("{" + cr);
-            armPS.Append("   Write-Host 'SUCCESS: Virtual Network Connections Created Sucessfully.' -ForegroundColor Green" + cr);
+            armPS.Append("   Write-Host 'SUCCESS: Virtual Network Components Created Sucessfully.' -ForegroundColor Green" + cr);
             armPS.Append("   Write-Host 'COMPLETE: All Foundations Resources Deployed.' -ForegroundColor Green" + cr);
             armPS.Append("}" + cr);
             psScript = armPS.ToString();
@@ -1473,9 +1473,9 @@ namespace FoundationsEditor
             }
             if (validateText == string.Empty)
             {
-                if (ckbCreateConnection.Checked)
+                if (ckbCreateGateway.Checked)
                 {
-                    if (txtLocalGWName.Text == string.Empty) { validateText = "Local Connection Name is blank"; }
+                    if (txtLocalGWName.Text == string.Empty) { validateText = "Local Gateway Name is blank"; }
                     if (validateText == string.Empty)
                     {
                         if (txtEdgeIP.Text == string.Empty) { validateText = "Edge IP Address is blank"; }
@@ -1558,85 +1558,94 @@ namespace FoundationsEditor
         }
         private void btnLoad_Click(object sender, EventArgs e)
         {
-            using (var selectFileDiaglog = new OpenFileDialog())
+            try
             {
-                selectFileDiaglog.DefaultExt = ".json";
-                selectFileDiaglog.Filter = "JSON files|*foundationseditor.json";
-                if (selectFileDiaglog.ShowDialog() == DialogResult.OK)
+                using (var selectFileDiaglog = new OpenFileDialog())
                 {
-                    currentSubscription.fileName = selectFileDiaglog.FileName;
+                    selectFileDiaglog.DefaultExt = ".json";
+                    selectFileDiaglog.Filter = "JSON files|*foundationseditor.json";
+                    if (selectFileDiaglog.ShowDialog() == DialogResult.OK)
+                    {
+                        currentSubscription.fileName = selectFileDiaglog.FileName;
+                    }
                 }
-            }
-            using (StreamReader r = new StreamReader(currentSubscription.fileName))
-            {
-                string jsonIn = r.ReadToEnd();
-                currentSubscription = JsonConvert.DeserializeObject<Subscription>(jsonIn);
-            }
-            txtSubscriptionID.Text = currentSubscription.subscriptionID;
-            if (currentSubscription.environment == "AzureCloud") { radMAC.Checked = true; }
-            else { radMAG.Checked = true; }
-            if (currentSubscription.primaryOnly) { radPrimary.Checked = true; }
-            else { radBoth.Checked = true; }
-            if (currentSubscription.generatePS) { ckbPS.Checked = true; }
-            else { ckbPS.Checked = false; }
-            var priLoc = locations.Find(l => l.location == currentSubscription.primaryLocation);
-            cboPrimaryLocation.SelectedIndex = cboPrimaryLocation.FindStringExact(priLoc.displayName);
-            txtPrimaryRG.Text = currentSubscription.primaryResourceGroup;
-            txtPrimaryVnet.Text = currentSubscription.primaryVnetName;
-            txtPrimaryIP.Text = currentSubscription.primaryIPSegment;
-            List<AzureSubnet> priSubs = new List<AzureSubnet>();
-            for (int ctr = 0; ctr < 8; ctr++)
-            {
-                AzureSubnet Psub = (AzureSubnet)currentSubscription.primarySubnets[ctr];
-                priSubs.Add(Psub);
-            }
-            txtPriIP0.Text = priSubs[0].ipSegment;
-            txtPriIP1.Text = priSubs[1].ipSegment;
-            txtPriIP2.Text = priSubs[2].ipSegment;
-            txtPriIP3.Text = priSubs[3].ipSegment;
-            txtPriIP4.Text = priSubs[4].ipSegment;
-            txtPriIP5.Text = priSubs[5].ipSegment;
-            txtPriIP6.Text = priSubs[6].ipSegment;
-            txtPriIP7.Text = priSubs[7].ipSegment;
-            txtSubnetName0.Text = priSubs[0].name;
-            txtSubnetName1.Text = priSubs[1].name;
-            txtSubnetName2.Text = priSubs[2].name;
-            txtSubnetName3.Text = priSubs[3].name;
-            txtSubnetName4.Text = priSubs[4].name;
-            txtSubnetName5.Text = priSubs[5].name;
-            txtSubnetName6.Text = priSubs[6].name;
-            txtSubnetName7.Text = priSubs[7].name;
-            if (currentSubscription.primaryOnly == false)
-            {
-                var secLoc = locations.Find(l => l.location == currentSubscription.secondaryLocation);
-                cboSecondaryLocation.SelectedIndex = cboSecondaryLocation.FindStringExact(secLoc.displayName);
-                txtSecondaryRG.Text = currentSubscription.secondaryResourceGroup;
-                txtSecondaryVnet.Text = currentSubscription.secondaryVnetName;
-                txtSecondaryIP.Text = currentSubscription.secondaryIPSegment;
-                List<AzureSubnet> secSubs = new List<AzureSubnet>();
+                using (StreamReader r = new StreamReader(currentSubscription.fileName))
+                {
+                    string jsonIn = r.ReadToEnd();
+                    currentSubscription = JsonConvert.DeserializeObject<Subscription>(jsonIn);
+                }
+                txtSubscriptionID.Text = currentSubscription.subscriptionID;
+                if (currentSubscription.environment == "AzureCloud") { radMAC.Checked = true; }
+                else { radMAG.Checked = true; }
+                if (currentSubscription.primaryOnly) { radPrimary.Checked = true; }
+                else { radBoth.Checked = true; }
+                if (currentSubscription.generatePS) { ckbPS.Checked = true; }
+                else { ckbPS.Checked = false; }
+                var priLoc = locations.Find(l => l.location == currentSubscription.primaryLocation);
+                cboPrimaryLocation.SelectedIndex = cboPrimaryLocation.FindStringExact(priLoc.displayName);
+                txtPrimaryRG.Text = currentSubscription.primaryResourceGroup;
+                txtPrimaryVnet.Text = currentSubscription.primaryVnetName;
+                txtPrimaryIP.Text = currentSubscription.primaryIPSegment;
+                List<AzureSubnet> priSubs = new List<AzureSubnet>();
                 for (int ctr = 0; ctr < 8; ctr++)
                 {
-                    AzureSubnet Ssub = (AzureSubnet)currentSubscription.secondarySubnets[ctr];
-                    secSubs.Add(Ssub);
+                    AzureSubnet Psub = (AzureSubnet)currentSubscription.primarySubnets[ctr];
+                    priSubs.Add(Psub);
                 }
-                txtSecIP0.Text = secSubs[0].ipSegment;
-                txtSecIP1.Text = secSubs[1].ipSegment;
-                txtSecIP2.Text = secSubs[2].ipSegment;
-                txtSecIP3.Text = secSubs[3].ipSegment;
-                txtSecIP4.Text = secSubs[4].ipSegment;
-                txtSecIP5.Text = secSubs[5].ipSegment;
-                txtSecIP6.Text = secSubs[6].ipSegment;
-                txtSecIP7.Text = secSubs[7].ipSegment;
+                txtPriIP0.Text = priSubs[0].ipSegment;
+                txtPriIP1.Text = priSubs[1].ipSegment;
+                txtPriIP2.Text = priSubs[2].ipSegment;
+                txtPriIP3.Text = priSubs[3].ipSegment;
+                txtPriIP4.Text = priSubs[4].ipSegment;
+                txtPriIP5.Text = priSubs[5].ipSegment;
+                txtPriIP6.Text = priSubs[6].ipSegment;
+                txtPriIP7.Text = priSubs[7].ipSegment;
+                txtSubnetName0.Text = priSubs[0].name;
+                txtSubnetName1.Text = priSubs[1].name;
+                txtSubnetName2.Text = priSubs[2].name;
+                txtSubnetName3.Text = priSubs[3].name;
+                txtSubnetName4.Text = priSubs[4].name;
+                txtSubnetName5.Text = priSubs[5].name;
+                txtSubnetName6.Text = priSubs[6].name;
+                txtSubnetName7.Text = priSubs[7].name;
+                if (currentSubscription.primaryOnly == false)
+                {
+                    var secLoc = locations.Find(l => l.location == currentSubscription.secondaryLocation);
+                    cboSecondaryLocation.SelectedIndex = cboSecondaryLocation.FindStringExact(secLoc.displayName);
+                    txtSecondaryRG.Text = currentSubscription.secondaryResourceGroup;
+                    txtSecondaryVnet.Text = currentSubscription.secondaryVnetName;
+                    txtSecondaryIP.Text = currentSubscription.secondaryIPSegment;
+                    List<AzureSubnet> secSubs = new List<AzureSubnet>();
+                    for (int ctr = 0; ctr < 8; ctr++)
+                    {
+                        AzureSubnet Ssub = (AzureSubnet)currentSubscription.secondarySubnets[ctr];
+                        secSubs.Add(Ssub);
+                    }
+                    txtSecIP0.Text = secSubs[0].ipSegment;
+                    txtSecIP1.Text = secSubs[1].ipSegment;
+                    txtSecIP2.Text = secSubs[2].ipSegment;
+                    txtSecIP3.Text = secSubs[3].ipSegment;
+                    txtSecIP4.Text = secSubs[4].ipSegment;
+                    txtSecIP5.Text = secSubs[5].ipSegment;
+                    txtSecIP6.Text = secSubs[6].ipSegment;
+                    txtSecIP7.Text = secSubs[7].ipSegment;
+                }
+                //if(currentSubscription.autoIPRange == true) { ckbAutoIP.Checked = true; }
+                if (currentSubscription.createGateway) { ckbCreateGateway.Checked = true; }
+                else { ckbCreateGateway.Checked = false; }
+                if (currentSubscription.createConnection) { ckbCreateConnection.Checked = true; }
+                else { ckbCreateConnection.Checked = false; }
+                txtLocalGWName.Text = currentSubscription.localGatewayName;
+                txtEdgeIP.Text = currentSubscription.edgeIP;
+                txtOPAddress.Text = currentSubscription.localAddressSpace;
+                txtMessages.Text = "Sucessfully Loaded Existing File";
             }
-            //if(currentSubscription.autoIPRange == true) { ckbAutoIP.Checked = true; }
-            if(currentSubscription.createGateway) { ckbCreateGateway.Checked = true; }
-            else { ckbCreateGateway.Checked = false; }
-            if (currentSubscription.createConnection) { ckbCreateConnection.Checked = true; }
-            else { ckbCreateConnection.Checked = false; }
-            txtLocalGWName.Text = currentSubscription.localGatewayName;
-            txtEdgeIP.Text = currentSubscription.edgeIP;
-            txtOPAddress.Text = currentSubscription.localAddressSpace;
-            txtMessages.Text = "Sucessfully Loaded Existing File";
+            catch (Exception ex)
+            {
+                string cpt = "File Load Error";
+                string msg = "A error occurred while attempting to load the selected file." + Environment.NewLine + ex;
+                var result = MessageBox.Show(msg, cpt, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         private void btnSave_Click(object sender, EventArgs e)
         {
@@ -1743,8 +1752,11 @@ namespace FoundationsEditor
                     txtMessages.BackColor = SystemColors.Control;
                     txtMessages.Text = "Files Saved Sucessfully";
                 }
-                catch
+                catch (Exception ex)
                 {
+                    string cpt = "File Save Error";
+                    string msg = "A error occurred while attempting to save the files." + Environment.NewLine + ex;
+                    var result = MessageBox.Show(msg, cpt, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     txtMessages.ForeColor = Color.Red;
                     txtMessages.BackColor = Color.Black;
                     txtMessages.Text = "Files Were Not Saved";
@@ -1765,57 +1777,146 @@ namespace FoundationsEditor
             byte tempForParsing;
             return splitValues.All(r => byte.TryParse(r, out tempForParsing));
         }
-        private void parseCIDR(string _cidr)
+        private bool parseCIDR(string _cidr)
         {
+            bool _CIDR = true;
             string[] ipCidr = _cidr.Split('/');
             if (ValidateIPv4(ipCidr[0]))
             {
                 primaryIP.ipSegment = ipCidr[0].Trim();
-                primaryIP.cidr = "/" + ipCidr[1];
-                if (primaryIP.cidr == "/20") { currentSubscription.ipSeparation = 32; }
-                else { currentSubscription.ipSeparation = 16; }
+                primaryIP.cidr = ("/" + ipCidr[1]).Trim();
                 string[] segments = primaryIP.ipSegment.Split('.');
                 primaryIP.segment0 = Convert.ToInt16(segments[0]);
                 primaryIP.segment1 = Convert.ToInt16(segments[1]);
                 primaryIP.segment2 = Convert.ToInt16(segments[2]);
-                primaryIP.segment3 = Convert.ToInt16(segments[3]);
-                if (radBoth.Checked)
+                primaryIP.segment3 = 0;
+                switch (primaryIP.cidr)
                 {
-                    if (primaryIP.cidr == "/21")
-                    {
-                        secondaryIP.segment0 = primaryIP.segment0;
-                        secondaryIP.segment1 = primaryIP.segment1;
-                        secondaryIP.segment2 = primaryIP.segment2 + currentSubscription.ipSeparation;
-                        secondaryIP.segment3 = primaryIP.segment3;
-                        secondaryIP.ipSegment = secondaryIP.segment0.ToString() + "." + secondaryIP.segment1.ToString() + "." + secondaryIP.segment2.ToString() + "." + secondaryIP.segment3.ToString();
-                        secondaryIP.cidr = "/21";
-                        txtSecondaryIP.Text = secondaryIP.ipSegment + secondaryIP.cidr;
-                        txtMessages.Text = "IP Automatic Ranging Enabled";
-                    }
-                    else if (primaryIP.cidr == "/20")
-                    {
-                        secondaryIP.segment0 = primaryIP.segment0;
-                        secondaryIP.segment1 = primaryIP.segment1;
-                        secondaryIP.segment2 = primaryIP.segment2 + currentSubscription.ipSeparation;
-                        secondaryIP.segment3 = primaryIP.segment3;
-                        secondaryIP.ipSegment = secondaryIP.segment0.ToString() + "." + secondaryIP.segment1.ToString() + "." + secondaryIP.segment2.ToString() + "." + secondaryIP.segment3.ToString();
-                        secondaryIP.cidr = "/20";
-                        txtSecondaryIP.Text = secondaryIP.ipSegment + secondaryIP.cidr;
-                        txtMessages.Text = "IP Automatic Ranging Enabled";
-                    }
-                    else
-                    {
+                    case "/20":
+                        if ((primaryIP.segment2 > 0) && (primaryIP.segment2 % 16 != 0))
+                        {
+                            _CIDR = false;
+                            txtMessages.ForeColor = Color.Red;
+                            txtMessages.Text = "Third octect is invalid (must be a multiple of 16)";
+                            ckbAutoIP.Checked = false;
+                        }
+                        if ((primaryIP.segment2 > 192) && (radBoth.Checked))
+                        {
+                            _CIDR = false;
+                            txtMessages.ForeColor = Color.Red;
+                            txtMessages.Text = "Third octect of IP range is too large to allow adequate separation";
+                            ckbAutoIP.Checked = false;
+                        }
+                        if (_CIDR)
+                        {
+                            currentSubscription.ipSeparation = 32;
+                            txtMessages.ForeColor = Color.Blue;
+                            txtMessages.Text = "IP Automatic Ranging Enabled";
+                        }
+                        break;
+                    case "/21":
+                        if ((primaryIP.segment2 > 0) && (primaryIP.segment2 % 8 != 0))
+                        {
+                            _CIDR = false;
+                            txtMessages.ForeColor = Color.Red;
+                            txtMessages.Text = "Third octect is invalid (must be a multiple of 8)";
+                            ckbAutoIP.Checked = false;
+
+                        }
+                        if ((primaryIP.segment2 > 224) && (radBoth.Checked))
+                        {
+                            _CIDR = false;
+                            txtMessages.ForeColor = Color.Red;
+                            txtMessages.Text = "Third octect of IP range is too large to allow adequate separation";
+                            ckbAutoIP.Checked = false;
+                        }
+                        if (_CIDR)
+                        {
+                            currentSubscription.ipSeparation = 16;
+                            txtMessages.ForeColor = Color.Blue;
+                            txtMessages.Text = "IP Automatic Ranging Enabled";
+                        }
+                        break;
+                    default:
+                        currentSubscription.ipSeparation = 0;
                         txtMessages.ForeColor = Color.Blue;
                         txtMessages.Text = "IP Ranges Entered Manually if Not /21 or /20";
                         ckbAutoIP.Checked = false;
-                    }
+                        _CIDR = false;
+                        break;
                 }
+                if (radBoth.Checked)
+                {
+                    secondaryIP.segment0 = primaryIP.segment0;
+                    secondaryIP.segment1 = primaryIP.segment1;
+                    secondaryIP.segment2 = primaryIP.segment2 + currentSubscription.ipSeparation;
+                    secondaryIP.segment3 = primaryIP.segment3;
+                    secondaryIP.ipSegment = secondaryIP.segment0.ToString() + "." + secondaryIP.segment1.ToString() + "." + secondaryIP.segment2.ToString() + "." + secondaryIP.segment3.ToString();
+                    secondaryIP.cidr = primaryIP.cidr;
+                    txtSecondaryIP.Text = secondaryIP.ipSegment + secondaryIP.cidr;
+                }
+                //if (primaryIP.cidr == "/20") { currentSubscription.ipSeparation = 32; }
+                //else { currentSubscription.ipSeparation = 16; }
+                //string[] segments = primaryIP.ipSegment.Split('.');
+                //primaryIP.segment0 = Convert.ToInt16(segments[0]);
+                //primaryIP.segment1 = Convert.ToInt16(segments[1]);
+                //primaryIP.segment2 = Convert.ToInt16(segments[2]);
+                //primaryIP.segment3 = 0;
+                //if ((primaryIP.cidr == "/20") && (primaryIP.segment2 % 16 == 0))
+                //{
+
+                //}
+                //if (radBoth.Checked)
+                //{
+                //    if ((primaryIP.cidr == "/20" && primaryIP.segment2 > 192) || (primaryIP.cidr == "/21" && primaryIP.segment2 > 224))
+                //    {
+                //        txtMessages.ForeColor = Color.Red;
+                //        txtMessages.Text = "Third octect of IP range is too large";
+                //        ckbAutoIP.Checked = false;
+                //        ClearSubnets();
+                //    }
+                //    else
+                //    { 
+                //        if (primaryIP.cidr == "/21")
+                //        {
+                //            secondaryIP.segment0 = primaryIP.segment0;
+                //            secondaryIP.segment1 = primaryIP.segment1;
+                //            secondaryIP.segment2 = primaryIP.segment2 + currentSubscription.ipSeparation;
+                //            secondaryIP.segment3 = primaryIP.segment3;
+                //            secondaryIP.ipSegment = secondaryIP.segment0.ToString() + "." + secondaryIP.segment1.ToString() + "." + secondaryIP.segment2.ToString() + "." + secondaryIP.segment3.ToString();
+                //            secondaryIP.cidr = "/21";
+                //            txtSecondaryIP.Text = secondaryIP.ipSegment + secondaryIP.cidr;
+                //            txtMessages.ForeColor = Color.Blue;
+                //            txtMessages.Text = "IP Automatic Ranging Enabled";
+                //        }
+                //        else if (primaryIP.cidr == "/20")
+                //        {
+                //            secondaryIP.segment0 = primaryIP.segment0;
+                //            secondaryIP.segment1 = primaryIP.segment1;
+                //            secondaryIP.segment2 = primaryIP.segment2 + currentSubscription.ipSeparation;
+                //            secondaryIP.segment3 = primaryIP.segment3;
+                //            secondaryIP.ipSegment = secondaryIP.segment0.ToString() + "." + secondaryIP.segment1.ToString() + "." + secondaryIP.segment2.ToString() + "." + secondaryIP.segment3.ToString();
+                //            secondaryIP.cidr = "/20";
+                //            txtSecondaryIP.Text = secondaryIP.ipSegment + secondaryIP.cidr;
+                //            txtMessages.ForeColor = Color.Blue;
+                //            txtMessages.Text = "IP Automatic Ranging Enabled";
+                //        }
+                //        else
+                //        {
+                //            txtMessages.ForeColor = Color.Blue;
+                //            txtMessages.Text = "IP Ranges Entered Manually if Not /21 or /20";
+                //            ckbAutoIP.Checked = false;
+                //            ClearSubnets();
+                //        }
+                //    }
+                //}
             }
             else
             {
                 txtMessages.ForeColor = Color.Red;
                 txtMessages.Text = "Invalid IP Range Entered";
             }
+            return _CIDR;
         }
         private void CreateSubnets()
         {
@@ -1927,81 +2028,88 @@ namespace FoundationsEditor
         {
             if (ckbAutoIP.Checked)
             {
-                parseCIDR(txtPrimaryIP.Text);
-                if(primaryIP.cidr == "/21")
+                bool goodIP = parseCIDR(txtPrimaryIP.Text);
+                if (goodIP)
                 {
-                    currentSubscription.autoIPRange = true;
-                    txtPriIP0.Text = primaryIP.segment0.ToString() + "." + primaryIP.segment1.ToString() + ".0.224/27";
-                    txtPriIP1.Text= primaryIP.segment0.ToString() + "." + primaryIP.segment1.ToString() + ".0.0/25";
-                    txtPriIP2.Text = primaryIP.segment0.ToString() + "." + primaryIP.segment1.ToString() + ".0.128/26";
-                    txtPriIP3.Text = primaryIP.segment0.ToString() + "." + primaryIP.segment1.ToString() + ".0.192/27";
-                    txtPriIP4.Text = primaryIP.segment0.ToString() + "." + primaryIP.segment1.ToString() + ".1.0/25";
-                    txtPriIP5.Text = primaryIP.segment0.ToString() + "." + primaryIP.segment1.ToString() + ".2.0/23";
-                    txtPriIP6.Text = primaryIP.segment0.ToString() + "." + primaryIP.segment1.ToString() + ".4.0/23";
-                    txtPriIP7.Text = primaryIP.segment0.ToString() + "." + primaryIP.segment1.ToString() + ".6.0/23";
-                    if (radBoth.Checked)
+                    if (primaryIP.cidr == "/21")
                     {
-                        txtSecIP0.Text = secondaryIP.segment0.ToString() + "." + secondaryIP.segment1.ToString() + "." + secondaryIP.segment2.ToString() + ".224/27";
-                        txtSecIP1.Text = secondaryIP.segment0.ToString() + "." + secondaryIP.segment1.ToString() + "." + secondaryIP.segment2.ToString() + ".0/25";
-                        txtSecIP2.Text = secondaryIP.segment0.ToString() + "." + secondaryIP.segment1.ToString() + "." + secondaryIP.segment2.ToString() + ".128/26";
-                        txtSecIP3.Text = secondaryIP.segment0.ToString() + "." + secondaryIP.segment1.ToString() + "." + secondaryIP.segment2.ToString() + ".192/27";
-                        txtSecIP4.Text = secondaryIP.segment0.ToString() + "." + secondaryIP.segment1.ToString() + "." + (secondaryIP.segment2 + 1).ToString() + ".0/25";
-                        txtSecIP5.Text = secondaryIP.segment0.ToString() + "." + secondaryIP.segment1.ToString() + "." + (secondaryIP.segment2 + 2).ToString() + ".0/23";
-                        txtSecIP6.Text = secondaryIP.segment0.ToString() + "." + secondaryIP.segment1.ToString() + "." + (secondaryIP.segment2 + 4).ToString() + ".0/23";
-                        txtSecIP7.Text = secondaryIP.segment0.ToString() + "." + secondaryIP.segment1.ToString() + "." + (secondaryIP.segment2 + 6).ToString() + ".0/23";
+                        currentSubscription.autoIPRange = true;
+                        txtPriIP0.Text = primaryIP.segment0.ToString() + "." + primaryIP.segment1.ToString() + "." + primaryIP.segment2.ToString() + ".224/27";
+                        txtPriIP1.Text = primaryIP.segment0.ToString() + "." + primaryIP.segment1.ToString() + "." + primaryIP.segment2.ToString() + ".0/25";
+                        txtPriIP2.Text = primaryIP.segment0.ToString() + "." + primaryIP.segment1.ToString() + "." + primaryIP.segment2.ToString() + ".192/27";
+                        txtPriIP3.Text = primaryIP.segment0.ToString() + "." + primaryIP.segment1.ToString() + "." + primaryIP.segment2.ToString() + ".128/26";
+                        txtPriIP4.Text = primaryIP.segment0.ToString() + "." + primaryIP.segment1.ToString() + "." + (primaryIP.segment2 + 1).ToString() + ".0/25";
+                        txtPriIP5.Text = primaryIP.segment0.ToString() + "." + primaryIP.segment1.ToString() + "." + (primaryIP.segment3 + 2).ToString() + ".0/23";
+                        txtPriIP6.Text = primaryIP.segment0.ToString() + "." + primaryIP.segment1.ToString() + "." + (primaryIP.segment3 + 4).ToString() + ".0/23";
+                        txtPriIP7.Text = primaryIP.segment0.ToString() + "." + primaryIP.segment1.ToString() + "." + (primaryIP.segment3 + 6).ToString() + ".0/23";
+                        if (radBoth.Checked)
+                        {
+                            txtSecIP0.Text = secondaryIP.segment0.ToString() + "." + secondaryIP.segment1.ToString() + "." + secondaryIP.segment2.ToString() + ".224/27";
+                            txtSecIP1.Text = secondaryIP.segment0.ToString() + "." + secondaryIP.segment1.ToString() + "." + secondaryIP.segment2.ToString() + ".0/25";
+                            txtSecIP2.Text = secondaryIP.segment0.ToString() + "." + secondaryIP.segment1.ToString() + "." + secondaryIP.segment2.ToString() + ".192/27";
+                            txtSecIP3.Text = secondaryIP.segment0.ToString() + "." + secondaryIP.segment1.ToString() + "." + secondaryIP.segment2.ToString() + ".128/26";
+                            txtSecIP4.Text = secondaryIP.segment0.ToString() + "." + secondaryIP.segment1.ToString() + "." + (secondaryIP.segment2 + 1).ToString() + ".0/25";
+                            txtSecIP5.Text = secondaryIP.segment0.ToString() + "." + secondaryIP.segment1.ToString() + "." + (secondaryIP.segment2 + 2).ToString() + ".0/23";
+                            txtSecIP6.Text = secondaryIP.segment0.ToString() + "." + secondaryIP.segment1.ToString() + "." + (secondaryIP.segment2 + 4).ToString() + ".0/23";
+                            txtSecIP7.Text = secondaryIP.segment0.ToString() + "." + secondaryIP.segment1.ToString() + "." + (secondaryIP.segment2 + 6).ToString() + ".0/23";
+                        }
+                    }
+                    else if (primaryIP.cidr == "/20")
+                    {
+                        currentSubscription.autoIPRange = true;
+                        txtPriIP0.Text = primaryIP.segment0.ToString() + "." + primaryIP.segment1.ToString() + "." + primaryIP.segment2.ToString() + ".0/25";
+                        txtPriIP1.Text = primaryIP.segment0.ToString() + "." + primaryIP.segment1.ToString() + "." + (primaryIP.segment2 + 1).ToString() + ".0/24";
+                        txtPriIP2.Text = primaryIP.segment0.ToString() + "." + primaryIP.segment1.ToString() + "." + (primaryIP.segment2 + 2).ToString() + ".0/25";
+                        txtPriIP3.Text = primaryIP.segment0.ToString() + "." + primaryIP.segment1.ToString() + "." + (primaryIP.segment2 + 2).ToString() + ".128/25";
+                        txtPriIP4.Text = primaryIP.segment0.ToString() + "." + primaryIP.segment1.ToString() + "." + (primaryIP.segment2 + 3).ToString() + ".0/25";
+                        txtPriIP5.Text = primaryIP.segment0.ToString() + "." + primaryIP.segment1.ToString() + "." + (primaryIP.segment2 + 4).ToString() + ".0/22";
+                        txtPriIP6.Text = primaryIP.segment0.ToString() + "." + primaryIP.segment1.ToString() + "." + (primaryIP.segment2 + 8).ToString() + ".0/22";
+                        txtPriIP7.Text = primaryIP.segment0.ToString() + "." + primaryIP.segment1.ToString() + "." + (primaryIP.segment2 + 12).ToString() + ".0/22";
+                        if (radBoth.Checked)
+                        {
+                            txtSecIP0.Text = secondaryIP.segment0.ToString() + "." + secondaryIP.segment1.ToString() + "." + secondaryIP.segment2.ToString() + ".0/25";
+                            txtSecIP1.Text = secondaryIP.segment0.ToString() + "." + secondaryIP.segment1.ToString() + "." + (secondaryIP.segment2 + 1).ToString() + ".0/24";
+                            txtSecIP2.Text = secondaryIP.segment0.ToString() + "." + secondaryIP.segment1.ToString() + "." + (secondaryIP.segment2 + 2).ToString() + ".0/25";
+                            txtSecIP3.Text = secondaryIP.segment0.ToString() + "." + secondaryIP.segment1.ToString() + "." + (secondaryIP.segment2 + 2).ToString() + ".128/25";
+                            txtSecIP4.Text = secondaryIP.segment0.ToString() + "." + secondaryIP.segment1.ToString() + "." + (secondaryIP.segment2 + 3).ToString() + ".0/25";
+                            txtSecIP5.Text = secondaryIP.segment0.ToString() + "." + secondaryIP.segment1.ToString() + "." + (secondaryIP.segment2 + 4).ToString() + ".0/22";
+                            txtSecIP6.Text = secondaryIP.segment0.ToString() + "." + secondaryIP.segment1.ToString() + "." + (secondaryIP.segment2 + 8).ToString() + ".0/22";
+                            txtSecIP7.Text = secondaryIP.segment0.ToString() + "." + secondaryIP.segment1.ToString() + "." + (secondaryIP.segment2 + 12).ToString() + ".0/22";
+                        }
+                    }
+                    else
+                    {
+                        currentSubscription.autoIPRange = false;
+                        //txtMessages.ForeColor = Color.Blue;
+                        //txtMessages.BackColor = SystemColors.Control;
+                        //txtMessages.Text = "IP Ranges Entered Manually if Not /21 or /20";
+                        ClearSubnets();
                     }
                 }
-                else if (primaryIP.cidr == "/20")
-                {
-                    currentSubscription.autoIPRange = true;
-                    txtPriIP0.Text = primaryIP.segment0.ToString() + "." + primaryIP.segment1.ToString() + ".0.0/25";
-                    txtPriIP1.Text = primaryIP.segment0.ToString() + "." + primaryIP.segment1.ToString() + ".1.0/24";
-                    txtPriIP2.Text = primaryIP.segment0.ToString() + "." + primaryIP.segment1.ToString() + ".2.0/25";
-                    txtPriIP3.Text = primaryIP.segment0.ToString() + "." + primaryIP.segment1.ToString() + ".2.128/25";
-                    txtPriIP4.Text = primaryIP.segment0.ToString() + "." + primaryIP.segment1.ToString() + ".3.0/25";
-                    txtPriIP5.Text = primaryIP.segment0.ToString() + "." + primaryIP.segment1.ToString() + ".4.0/22";
-                    txtPriIP6.Text = primaryIP.segment0.ToString() + "." + primaryIP.segment1.ToString() + ".8.0/22";
-                    txtPriIP7.Text = primaryIP.segment0.ToString() + "." + primaryIP.segment1.ToString() + ".12.0/22";
-                    if (radBoth.Checked)
-                    {
-                        txtSecIP0.Text = secondaryIP.segment0.ToString() + "." + secondaryIP.segment1.ToString() + "." + secondaryIP.segment2.ToString() + ".0/25";
-                        txtSecIP1.Text = secondaryIP.segment0.ToString() + "." + secondaryIP.segment1.ToString() + "." + (secondaryIP.segment2 + 1).ToString() + ".0/24";
-                        txtSecIP2.Text = secondaryIP.segment0.ToString() + "." + secondaryIP.segment1.ToString() + "." + (secondaryIP.segment2 + 2).ToString() + ".0/25";
-                        txtSecIP3.Text = secondaryIP.segment0.ToString() + "." + secondaryIP.segment1.ToString() + "." + (secondaryIP.segment2 + 2).ToString() + ".128/25";
-                        txtSecIP4.Text = secondaryIP.segment0.ToString() + "." + secondaryIP.segment1.ToString() + "." + (secondaryIP.segment2 + 3).ToString() + ".0/25";
-                        txtSecIP5.Text = secondaryIP.segment0.ToString() + "." + secondaryIP.segment1.ToString() + "." + (secondaryIP.segment2 + 4).ToString() + ".0/22";
-                        txtSecIP6.Text = secondaryIP.segment0.ToString() + "." + secondaryIP.segment1.ToString() + "." + (secondaryIP.segment2 + 8).ToString() + ".0/22";
-                        txtSecIP7.Text = secondaryIP.segment0.ToString() + "." + secondaryIP.segment1.ToString() + "." + (secondaryIP.segment2 + 12).ToString() + ".0/22";
-                    }
-                }
-                else
-                {
-                    currentSubscription.autoIPRange = false;
-                    txtMessages.ForeColor = Color.Blue;
-                    txtMessages.BackColor = SystemColors.Control;
-                    txtMessages.Text = "IP Ranges Entered Manually if Not /21 or /20";
-                    txtPriIP0.Text = string.Empty;
-                    txtPriIP1.Text = string.Empty;
-                    txtPriIP2.Text = string.Empty;
-                    txtPriIP3.Text = string.Empty;
-                    txtPriIP4.Text = string.Empty;
-                    txtPriIP5.Text = string.Empty;
-                    txtPriIP6.Text = string.Empty;
-                    txtPriIP7.Text = string.Empty;
-                    txtSecIP0.Text = string.Empty;
-                    txtSecIP1.Text = string.Empty;
-                    txtSecIP2.Text = string.Empty;
-                    txtSecIP3.Text = string.Empty;
-                    txtSecIP4.Text = string.Empty;
-                    txtSecIP5.Text = string.Empty;
-                    txtSecIP6.Text = string.Empty;
-                    txtSecIP7.Text = string.Empty;
-                    txtSecondaryIP.Text = string.Empty;
-                    ckbAutoIP.Checked = false;
-                }
+                else { ClearSubnets(); }
             }
         }
-
+        private void ClearSubnets()
+        {
+            txtPriIP0.Text = string.Empty;
+            txtPriIP1.Text = string.Empty;
+            txtPriIP2.Text = string.Empty;
+            txtPriIP3.Text = string.Empty;
+            txtPriIP4.Text = string.Empty;
+            txtPriIP5.Text = string.Empty;
+            txtPriIP6.Text = string.Empty;
+            txtPriIP7.Text = string.Empty;
+            txtSecIP0.Text = string.Empty;
+            txtSecIP1.Text = string.Empty;
+            txtSecIP2.Text = string.Empty;
+            txtSecIP3.Text = string.Empty;
+            txtSecIP4.Text = string.Empty;
+            txtSecIP5.Text = string.Empty;
+            txtSecIP6.Text = string.Empty;
+            txtSecIP7.Text = string.Empty;
+            txtSecondaryIP.Text = string.Empty;
+            ckbAutoIP.Checked = false;
+        }
         private void cboPrimaryLocation_SelectedIndexChanged(object sender, EventArgs e)
         {
             var loc = locations.FirstOrDefault(l => l.displayName == cboPrimaryLocation.Text);
