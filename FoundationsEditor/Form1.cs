@@ -27,10 +27,10 @@ namespace FoundationsEditor
             txtMessages.ForeColor = Color.Blue;
             txtMessages.BackColor = SystemColors.Control;
             txtMessages.Text = "Enter your Subscription ID or select LOAD to begin.";
-            lblBuild.Text = "Build: " + buildNumber + Environment.NewLine + "11-APR-2018";
+            lblBuild.Text = "Build: " + buildNumber + Environment.NewLine + "13-APR-2018";
             this.Text = "Azure Foundations Editor - " + buildNumber;
         }
-        public static string buildNumber = "1.0.2.2";
+        public static string buildNumber = "1.0.2.3";
         public static Subscription currentSubscription = new Subscription();
         List<AzureSubnet> subnets = new List<AzureSubnet>();
         List<AzureLocation> locations = new List<AzureLocation>();
@@ -1855,61 +1855,6 @@ namespace FoundationsEditor
                     secondaryIP.cidr = primaryIP.cidr;
                     txtSecondaryIP.Text = secondaryIP.ipSegment + secondaryIP.cidr;
                 }
-                //if (primaryIP.cidr == "/20") { currentSubscription.ipSeparation = 32; }
-                //else { currentSubscription.ipSeparation = 16; }
-                //string[] segments = primaryIP.ipSegment.Split('.');
-                //primaryIP.segment0 = Convert.ToInt16(segments[0]);
-                //primaryIP.segment1 = Convert.ToInt16(segments[1]);
-                //primaryIP.segment2 = Convert.ToInt16(segments[2]);
-                //primaryIP.segment3 = 0;
-                //if ((primaryIP.cidr == "/20") && (primaryIP.segment2 % 16 == 0))
-                //{
-
-                //}
-                //if (radBoth.Checked)
-                //{
-                //    if ((primaryIP.cidr == "/20" && primaryIP.segment2 > 192) || (primaryIP.cidr == "/21" && primaryIP.segment2 > 224))
-                //    {
-                //        txtMessages.ForeColor = Color.Red;
-                //        txtMessages.Text = "Third octect of IP range is too large";
-                //        ckbAutoIP.Checked = false;
-                //        ClearSubnets();
-                //    }
-                //    else
-                //    { 
-                //        if (primaryIP.cidr == "/21")
-                //        {
-                //            secondaryIP.segment0 = primaryIP.segment0;
-                //            secondaryIP.segment1 = primaryIP.segment1;
-                //            secondaryIP.segment2 = primaryIP.segment2 + currentSubscription.ipSeparation;
-                //            secondaryIP.segment3 = primaryIP.segment3;
-                //            secondaryIP.ipSegment = secondaryIP.segment0.ToString() + "." + secondaryIP.segment1.ToString() + "." + secondaryIP.segment2.ToString() + "." + secondaryIP.segment3.ToString();
-                //            secondaryIP.cidr = "/21";
-                //            txtSecondaryIP.Text = secondaryIP.ipSegment + secondaryIP.cidr;
-                //            txtMessages.ForeColor = Color.Blue;
-                //            txtMessages.Text = "IP Automatic Ranging Enabled";
-                //        }
-                //        else if (primaryIP.cidr == "/20")
-                //        {
-                //            secondaryIP.segment0 = primaryIP.segment0;
-                //            secondaryIP.segment1 = primaryIP.segment1;
-                //            secondaryIP.segment2 = primaryIP.segment2 + currentSubscription.ipSeparation;
-                //            secondaryIP.segment3 = primaryIP.segment3;
-                //            secondaryIP.ipSegment = secondaryIP.segment0.ToString() + "." + secondaryIP.segment1.ToString() + "." + secondaryIP.segment2.ToString() + "." + secondaryIP.segment3.ToString();
-                //            secondaryIP.cidr = "/20";
-                //            txtSecondaryIP.Text = secondaryIP.ipSegment + secondaryIP.cidr;
-                //            txtMessages.ForeColor = Color.Blue;
-                //            txtMessages.Text = "IP Automatic Ranging Enabled";
-                //        }
-                //        else
-                //        {
-                //            txtMessages.ForeColor = Color.Blue;
-                //            txtMessages.Text = "IP Ranges Entered Manually if Not /21 or /20";
-                //            ckbAutoIP.Checked = false;
-                //            ClearSubnets();
-                //        }
-                //    }
-                //}
             }
             else
             {
@@ -2039,9 +1984,9 @@ namespace FoundationsEditor
                         txtPriIP2.Text = primaryIP.segment0.ToString() + "." + primaryIP.segment1.ToString() + "." + primaryIP.segment2.ToString() + ".192/27";
                         txtPriIP3.Text = primaryIP.segment0.ToString() + "." + primaryIP.segment1.ToString() + "." + primaryIP.segment2.ToString() + ".128/26";
                         txtPriIP4.Text = primaryIP.segment0.ToString() + "." + primaryIP.segment1.ToString() + "." + (primaryIP.segment2 + 1).ToString() + ".0/25";
-                        txtPriIP5.Text = primaryIP.segment0.ToString() + "." + primaryIP.segment1.ToString() + "." + (primaryIP.segment3 + 2).ToString() + ".0/23";
-                        txtPriIP6.Text = primaryIP.segment0.ToString() + "." + primaryIP.segment1.ToString() + "." + (primaryIP.segment3 + 4).ToString() + ".0/23";
-                        txtPriIP7.Text = primaryIP.segment0.ToString() + "." + primaryIP.segment1.ToString() + "." + (primaryIP.segment3 + 6).ToString() + ".0/23";
+                        txtPriIP5.Text = primaryIP.segment0.ToString() + "." + primaryIP.segment1.ToString() + "." + (primaryIP.segment2 + 2).ToString() + ".0/23";
+                        txtPriIP6.Text = primaryIP.segment0.ToString() + "." + primaryIP.segment1.ToString() + "." + (primaryIP.segment2 + 4).ToString() + ".0/23";
+                        txtPriIP7.Text = primaryIP.segment0.ToString() + "." + primaryIP.segment1.ToString() + "." + (primaryIP.segment2 + 6).ToString() + ".0/23";
                         if (radBoth.Checked)
                         {
                             txtSecIP0.Text = secondaryIP.segment0.ToString() + "." + secondaryIP.segment1.ToString() + "." + secondaryIP.segment2.ToString() + ".224/27";
@@ -2080,9 +2025,6 @@ namespace FoundationsEditor
                     else
                     {
                         currentSubscription.autoIPRange = false;
-                        //txtMessages.ForeColor = Color.Blue;
-                        //txtMessages.BackColor = SystemColors.Control;
-                        //txtMessages.Text = "IP Ranges Entered Manually if Not /21 or /20";
                         ClearSubnets();
                     }
                 }
